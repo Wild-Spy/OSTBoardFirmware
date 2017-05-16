@@ -4,9 +4,21 @@
 
 #include "DateTime.h"
 
+#ifdef TESTING
+    #define mk_gmtime mk_gmtime_test
+    #define gmtime gmtime_test
+    #define week_of_month week_of_month_test
+    #define gmtime_r gmtime_r_test
+    #define isotime_r isotime_r_test
+    #define isotime1 isotime_test
+    #define difftime difftime_test
+#else
+#define isotime1 isotime
+#endif
+
 DateTime::DateTime(uint16_t year, uint8_t month, uint8_t day,
                    uint8_t hour, uint8_t minute, uint8_t second) {
-    struct tm time_ptr;
+    dt_tm time_ptr;
     time_ptr.tm_sec = second;
     time_ptr.tm_min = minute;
     time_ptr.tm_hour = hour;
@@ -17,19 +29,19 @@ DateTime::DateTime(uint16_t year, uint8_t month, uint8_t day,
     constructFromTmPtr(&time_ptr);
 }
 
-DateTime::DateTime(struct tm *time_ptr) {
+DateTime::DateTime(dt_tm *time_ptr) {
     constructFromTmPtr(time_ptr);
 }
 
-void DateTime::constructFromTmPtr(struct tm *time_ptr) {
+void DateTime::constructFromTmPtr(dt_tm *time_ptr) {
     time_ =  mk_gmtime(time_ptr);
 }
 
-//struct tm *DateTime::toLocaltime() {
+//dt_tm *DateTime::toLocaltime() {
 //    return localtime(&time_);
 //}
 
-struct tm *DateTime::toGmtime() const {
+dt_tm *DateTime::toGmtime() const {
     return gmtime(&time_);
 }
 
@@ -39,42 +51,42 @@ uint16_t DateTime::getYear() const {
 }
 
 uint8_t DateTime::getWeekOfMonth() const {
-    struct tm* timeptr = toGmtime();
+    dt_tm* timeptr = toGmtime();
     return week_of_month(timeptr, START_DAY_OF_WEEK);
 }
 
 void DateTime::setSecondOfMinute(int8_t second_of_minute) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_sec = second_of_minute;
     constructFromTmPtr(time_ptr);
 }
 
 void DateTime::setMinuteOfHour(int8_t minute) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_min = minute;
     constructFromTmPtr(time_ptr);
 }
 
 void DateTime::setHourOfDay(int8_t hour) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_hour = hour;
     constructFromTmPtr(time_ptr);
 }
 
 void DateTime::setDayOfMonth(int8_t day) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_mday = day;
     constructFromTmPtr(time_ptr);
 }
 
 void DateTime::setMonthOfYear(int8_t month) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_mon = month;
     constructFromTmPtr(time_ptr);
 }
 
 void DateTime::setYear(int16_t year) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     time_ptr->tm_year = year - 1900;
     constructFromTmPtr(time_ptr);
 }
@@ -99,13 +111,13 @@ void DateTime::addDays(int32_t days) {
  * Helper function
  * Sets the tm_year value in a tm struct, caps the year to 'valid' values of
  * 0 and 236.
- * @param time_ptr              the struct tm* to modify
+ * @param time_ptr              the struct dt_tm* to modify
  * @param new_years_after_1900  the value to set tm_year in the tm struct to
  *                              for example, pass 100 to set the year to 2000
  */
-void setTimePtrYears(struct tm* time_ptr, int16_t new_years_after_1900) {
+void setTimePtrYears(dt_tm* time_ptr, int16_t new_years_after_1900) {
     // Add years with cap (INT16_MAX).
-    // We can't represent after Tue Feb 7 2136 with time_t (uint32_t).
+    // We can't represent after Tue Feb 7 2136 with dt_time_t (uint32_t).
     // tm_year is years since 1900 so max tm_year is 236.
     //TODO: consider what we should do here more carefully
     if (new_years_after_1900 >= 236) {
@@ -118,7 +130,7 @@ void setTimePtrYears(struct tm* time_ptr, int16_t new_years_after_1900) {
 }
 
 void DateTime::addMonths(int16_t months_to_add) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
 
     //if months > 12 then add a year (for each 12 months)
     int32_t years_to_add = months_to_add / 12;
@@ -132,7 +144,7 @@ void DateTime::addMonths(int16_t months_to_add) {
 }
 
 void DateTime::addYears(int16_t years) {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
 
     setTimePtrYears(time_ptr, time_ptr->tm_year + years);
 
@@ -149,11 +161,11 @@ int32_t operator-(const DateTime &lhs, const DateTime &rhs) {
 }
 
 uint32_t DateTime::getSecondOfDay() const {
-    struct tm* time_ptr = toGmtime();
+    dt_tm* time_ptr = toGmtime();
     return (uint32_t)time_ptr->tm_hour * ONE_HOUR + (uint32_t)time_ptr->tm_min * 60 + (uint32_t)time_ptr->tm_sec;
 }
 
-void DateTime::toGmtimeR(struct tm *time_ptr) const {
+void DateTime::toGmtimeR(dt_tm *time_ptr) const {
     gmtime_r(&time_, time_ptr);
 }
 
@@ -166,5 +178,5 @@ void DateTime::isotime(char *s) {
 }
 //
 char* DateTime::isotime() {
-    return ::isotime(toGmtime());
+    return ::isotime1(toGmtime());
 }

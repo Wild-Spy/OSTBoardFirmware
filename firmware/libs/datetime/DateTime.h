@@ -6,13 +6,26 @@
 #define WS_OST_DATETIME_H
 
 extern "C" {
-#include <time.h>
+#ifdef TESTING
+    #include <time_test.h>
+#else
+    #include <time.h>
+#endif
 //daylight savings.....
 //#include <util/usa_dst.h>
 };
 
+// Names below renamed so they can be mocked in testing
+#ifdef TESTING
+    typedef time_t_test dt_time_t;
+    typedef struct tm_test dt_tm;
+#else
+    typedef time_t dt_time_t;
+    typedef struct tm dt_tm;
+#endif
+
 #include <stdint.h>
-#include <stdint-gcc.h>
+//#include <stdint-gcc.h>
 
 #define EMPTY_TIME          0xFFFFFFFF
 #define START_DAY_OF_WEEK   MONDAY
@@ -23,14 +36,14 @@ public:
             : time_(EMPTY_TIME)
     {};
 
-    DateTime(time_t time)
+    DateTime(dt_time_t time)
             : time_(time)
     {};
 
     DateTime(uint16_t year, uint8_t month, uint8_t day,
              uint8_t hour, uint8_t minute, uint8_t second);
 
-    DateTime(struct tm* time_ptr);
+    DateTime(dt_tm* time_ptr);
 
     static DateTime Empty() { return DateTime(); };
 
@@ -110,17 +123,15 @@ public:
     void isotime(char* s);
     char* isotime();
 
-    struct tm* toGmtime() const;
-    void toGmtimeR(struct tm* time_ptr) const;
-//    struct tm* toLocaltime();
-    time_t toTimet() { return time_; };
+    dt_tm* toGmtime() const;
+    void toGmtimeR(dt_tm* time_ptr) const;
+//    dt_tm* toLocaltime();
+    dt_time_t toTimet() { return time_; };
 private:
-    void constructFromTmPtr(struct tm *time_ptr);
+    void constructFromTmPtr(dt_tm *time_ptr);
 
 private:
-    time_t time_;
-
-
+    dt_time_t time_;
 };
 
 
