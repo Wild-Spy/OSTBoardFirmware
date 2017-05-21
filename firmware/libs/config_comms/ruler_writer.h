@@ -2,8 +2,8 @@
 // Created by mcochrane on 1/04/17.
 //
 
-#ifndef WS_OST_RULER_WRITER_CPP_H
-#define WS_OST_RULER_WRITER_CPP_H
+#ifndef WS_OST_RULER_WRITER_H
+#define WS_OST_RULER_WRITER_H
 
 #include <stdint.h>
 
@@ -147,4 +147,4 @@ EXTERNC void RuleWriter_GetRuleData(uint8_t rule_id, uint8_t* data, uint8_t* len
 
 #undef EXTERNC
 
-#endif //WS_OST_RULER_WRITER_CPP_H
+#endif //WS_OST_RULER_WRITER_H

@@ -24,7 +24,21 @@ public:
         return PeriodInterval(data, byte_count);
     }
 
-    Interval toInterval(DateTime start_time_instant);
+    Interval toInterval(DateTime start_time_instant) const;
+
+    bool isEmpty() const { return (start_.isEmpty() && end_.isEmpty()); };
+
+    static PeriodInterval Empty() {
+        return PeriodInterval();
+    }
+
+    Period getStart() const {
+        return start_;
+    }
+
+    Period getEnd() const {
+        return end_;
+    }
 
 private:
     PeriodInterval(uint8_t* data, uint8_t* byte_count);

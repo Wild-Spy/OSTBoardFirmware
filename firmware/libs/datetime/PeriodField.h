@@ -6,6 +6,7 @@
 #define WS_OST_PERIODFIELD_H
 
 #include "min/encode_decode.h"
+#include "exception/ExceptionValues.h"
 
 typedef enum PeriodFieldType_enum {
     PERIODFIELD_YEARS = 0,
@@ -58,6 +59,7 @@ public:
     //data points to the start of the PeriodField
     PeriodField(uint8_t* data, uint8_t* bytes_consumed) {
         type_ = (PeriodFieldType_t)data[0];
+        if (type_ > 7 && type_ != PERIODFIELD_NONE) Throw(EX_INVALID_INPUT_VALUE);
         value_ = decode_32(data+1);
         *bytes_consumed = 5;
     };
@@ -66,8 +68,17 @@ public:
         return PeriodField(data, bytes_consumed);
     };
 
-    uint32_t get_std_length_sec() {
-        return value_*get_std_period_type_length_secs(type_);
+    uint32_t get_std_length_sec() const {
+        return value_ * get_std_period_type_length_secs(type_);
+    }
+
+    bool operator==(const PeriodField& rhs) const {
+        return (this->type_ == rhs.type_ &&
+                this->value_ == rhs.value_);
+    }
+
+    bool operator!=(const PeriodField& rhs) const {
+        return !(*this == rhs);
     }
 
     PeriodFieldType_t getType() const { return type_; };

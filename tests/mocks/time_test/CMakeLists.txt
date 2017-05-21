@@ -46,7 +46,7 @@ set(SOURCE_FILES
         tm_store.c
         utc_offset.c
         week_of_month.c
-        week_of_year.c)
+        week_of_year.c ../avr/mockio.h)
 
 include_directories(../)
 

@@ -5,7 +5,6 @@
 #ifndef WS_OST_TDLRULE_H
 #define WS_OST_TDLRULE_H
 
-
 #include <datetime/PeriodInterval.h>
 #include <datetime/Period.h>
 #include <datetime/DateTime.h>

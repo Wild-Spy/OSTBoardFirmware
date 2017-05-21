@@ -9,7 +9,7 @@
 #include <TimerDescriptionLanguage/TdlRules.h>
 #include <avr/interrupt.h>
 #include "min_transmit_cmds.h"
-#include "config_comms/ruler_writer_cpp.h"
+#include "config_comms/ruler_writer.h"
 /* Functions called by the application to report information via MIN frames */
 
 extern "C" {

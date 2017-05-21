@@ -3,7 +3,7 @@
 //
 
 #include <min/min_transmit_cmds.h>
-#include "ruler_writer_cpp.h"
+#include "ruler_writer.h"
 
 extern "C" {
 #include "eeprom_driver.h"
@@ -14,8 +14,6 @@ extern "C" {
 #define RULE_ZERO_EEPROM_ADDRESS  1
 
 static RuleWriter ruleWriter = RuleWriter();
-
-
 
 /*
  * RuleWriterRule functions

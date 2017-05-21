@@ -5,10 +5,17 @@
 #ifndef WS_OST_TDLACTIVATOR_H
 #define WS_OST_TDLACTIVATOR_H
 
-#include <datetime/DateTime.h>
+
 #include "TdlActivatorState.h"
+
+#ifdef TESTING
+#include "TdlChannelMock.h"
+#include <DateTimeSimpleMock.h>
+#else
 #include "TdlChannel.h"
-//#include "TdlRule.h"
+#include <datetime/DateTime.h>
+#endif
+
 
 class TdlRule;
 
@@ -39,6 +46,8 @@ public:
         currentState_ = TDLACTIVATORSTATE_DISABLED;
         target_ = NULL;
     };
+
+    bool isEmpty() { return target_ == NULL; };
 
     /**
      * Enables the rule or channel (ie on)
@@ -76,6 +85,8 @@ public:
 
     TdlActivatorType_t getActivatorType() { return act_type_; };
 
+    bool operator==(const TdlActivator& rhs) const;
+
 private:
     TdlActivatorState_t defaultState_;
     TdlActivatorState_t currentState_;
@@ -83,6 +94,10 @@ private:
     void* target_;
 };
 
+#ifdef TESTING
+#include "TdlRuleMock.h"
+#else
 #include "TdlRule.h"
+#endif
 
 #endif //WS_OST_TDLACTIVATOR_H

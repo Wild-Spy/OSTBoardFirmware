@@ -44,7 +44,8 @@ typedef enum EXCEPTION_VALUES_enum {
 #ifdef __cplusplus
 }
 #endif
-#if defined(TEST)
+
+#if defined(TESTING)
 void ExceptionValues_InitMsgStrings(void);
 char* GetExceptionMessage(CEXCEPTION_T exception_id);
 

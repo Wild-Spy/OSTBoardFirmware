@@ -63,9 +63,31 @@ public:
     bool isInfinite() const { return getYears() == INFINITE_PERIOD_YEARS; };
     bool isEmpty() const { return field_count_ == 0; };
 
-    PeriodFieldType_t getLongestFieldType();
+    uint8_t getFieldCount() { return field_count_; };
+
+//    PeriodFieldType_t getLongestFieldType();
 
     friend DateTime operator+(const DateTime& lhs, const Period& rhs);
+
+    static Period Empty() {
+        return Period();
+    }
+
+    static Period Infinite() {
+        return Period::MakeCustomPeriod(INFINITE_PERIOD_YEARS, PERIODFIELD_YEARS);
+    }
+
+    bool operator==(const Period& rhs) const {
+        if (rhs.field_count_ != this->field_count_) return false;
+        for (uint8_t i = 0; i < rhs.field_count_; i++) {
+            if (this->fields_[i] != rhs.fields_[i]) return false;
+        }
+        return true;
+    }
+
+    bool operator!=(const Period& rhs) const {
+        return !(*this == rhs);
+    }
 
 protected:
     PeriodField* findFieldWithType(PeriodFieldType_t p_type);

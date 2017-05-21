@@ -3,11 +3,12 @@
 //
 
 #include "TdlChannel.h"
-#include <asf.h>
+//#include <asf.h>
 #include <min/min_transmit_cmds.h>
 
 void TdlChannel::disable() {
-    port_->OUTCLR = (uint8_t)(1<<pin_);
+//    port_->OUTCLR = (uint8_t)(1<<pin_);
+    pin_->setOutputLow();
     state_ = TDLCHANNELSTATE_DISABLED;
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
     report_printf_P(PSTR("Chan %u OFF"), id_);
@@ -15,7 +16,8 @@ void TdlChannel::disable() {
 }
 
 void TdlChannel::enable() {
-    port_->OUTSET = (uint8_t)(1<<pin_);
+//    port_->OUTSET = (uint8_t)(1<<pin_);
+    pin_->setOutputHigh();
     state_ = TDLCHANNELSTATE_ENABLED;
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
     report_printf_P(PSTR("Chan %u ON"), id_);

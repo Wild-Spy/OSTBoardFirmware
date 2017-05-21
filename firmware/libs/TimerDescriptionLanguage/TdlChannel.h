@@ -5,7 +5,12 @@
 #ifndef WS_OST_TDLCHANNEL_H
 #define WS_OST_TDLCHANNEL_H
 
-#include <avr/io.h>
+#ifdef TESTING
+#include "PinMock.h"
+#else
+#include "hal/Pin.h"
+#endif
+
 #include <stddef.h>
 #include "TdlChannelState.h"
 
@@ -18,19 +23,31 @@ public:
             : id_(TDLCHANNEL_ID_NULL),
               state_(TDLCHANNELSTATE_DISABLED),
               initial_state_(TDLCHANNELSTATE_DISABLED),
-              port_(NULL),
-              pin_(0)
+//              port_(NULL),
+              pin_(NULL)
     {};
 
-    TdlChannel(int id, TdlChannelState_t initial_state, PORT_t* port, uint8_t pin)
+//    TdlChannel(int id, TdlChannelState_t initial_state, PORT_t* port, uint8_t pin)
+//            : id_(id),
+//              initial_state_(initial_state),
+//              state_(initial_state),
+//              port_(port),
+//              pin_(pin)
+//    {
+//        //Set up the pin as an output and put it in the correct state
+//        port_->DIRSET = (uint8_t)(1<<pin_);
+//        setState(initial_state);
+//    };
+
+    TdlChannel(int id, TdlChannelState_t initial_state, Pin* pin)
             : id_(id),
               initial_state_(initial_state),
               state_(initial_state),
-              port_(port),
               pin_(pin)
     {
         //Set up the pin as an output and put it in the correct state
-        port_->DIRSET = (uint8_t)(1<<pin_);
+//        port_->DIRSET = (uint8_t)(1<<pin_);
+        pin_->setDirOutput();
         setState(initial_state);
     };
 
@@ -61,12 +78,15 @@ public:
 
     int getId() { return id_; }
 
+    bool isEmpty() { return pin_ == NULL; };
+
 private:
     int id_;
     TdlChannelState_t state_;
     TdlChannelState_t initial_state_;
-    PORT_t* port_;
-    uint8_t pin_;
+//    PORT_t* port_;
+//    uint8_t pin_;
+    Pin* pin_;
 };
 
 

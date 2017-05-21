@@ -108,7 +108,7 @@ iso_week_date_r_test(int y, int yday, struct week_date_test * iso)
     */
     if (weeknum == 0) {
         y = y - 1;
-        iso_week_date_r_test(y, 364 + is_leap_year(y), iso);
+        iso_week_date_r_test(y, 364 + is_leap_year_test(y), iso);
         iso->day = wday;
     }
 }

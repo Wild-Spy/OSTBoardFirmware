@@ -33,8 +33,42 @@ DateTime::DateTime(dt_tm *time_ptr) {
     constructFromTmPtr(time_ptr);
 }
 
+//bool isTmValid(dt_tm* tmptr) {
+//    if (tmptr->tm_year+1900 < 2136) return true;
+//    else if (tmptr->tm_year+1900 > 2136) return false;
+//    else {
+//        if (tmptr->tm_mon+1 < 2) return true;
+//        else if (tmptr->tm_mon+1 > 2) return false;
+//        else {
+//            if (tmptr->tm_mday < 7) return true;
+//            else if (tmptr->tm_mday > 7) return false;
+//            else {
+//                if (tmptr->tm_hour < 6) return true;
+//                else if (tmptr->tm_hour > 6) return false;
+//                else {
+//                    if (tmptr->tm_min < 28) return true;
+//                    else if (tmptr->tm_min > 28) return false;
+//                    else {
+//                        if (tmptr->tm_sec < 16) return true;
+//                        else if (tmptr->tm_sec > 15) return false;
+//                        else {
+//                            //Here is == EMPTY... so false
+//                            return false;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
+
 void DateTime::constructFromTmPtr(dt_tm *time_ptr) {
-    time_ =  mk_gmtime(time_ptr);
+//    if (isTmValid(time_ptr)) {
+//        time_ = mk_gmtime(time_ptr);
+//    } else {
+//        time_ = EMPTY_TIME;
+//    }
+    time_ = mk_gmtime(time_ptr);
 }
 
 //dt_tm *DateTime::toLocaltime() {
@@ -81,7 +115,7 @@ void DateTime::setDayOfMonth(int8_t day) {
 
 void DateTime::setMonthOfYear(int8_t month) {
     dt_tm* time_ptr = toGmtime();
-    time_ptr->tm_mon = month;
+    time_ptr->tm_mon = month-1;
     constructFromTmPtr(time_ptr);
 }
 
@@ -91,20 +125,20 @@ void DateTime::setYear(int16_t year) {
     constructFromTmPtr(time_ptr);
 }
 
-void DateTime::addSeconds(int32_t seconds) {
-    time_ += seconds;
+DateTime DateTime::plusSeconds(int32_t seconds) const {
+    return DateTime(time_ + seconds);
 }
 
-void DateTime::addMinutes(int32_t minutes) {
-    time_ += (60 * minutes);
+DateTime DateTime::plusMinutes(int32_t minutes) const {
+    return DateTime(time_ + (60 * minutes));
 }
 
-void DateTime::addHours(int32_t hours) {
-    time_ += (ONE_HOUR * hours);
+DateTime DateTime::plusHours(int32_t hours) const {
+    return DateTime(time_ + (ONE_HOUR * hours));
 }
 
-void DateTime::addDays(int32_t days) {
-    time_ += (ONE_DAY * days);
+DateTime DateTime::plusDays(int32_t days) const {
+    return DateTime(time_ + (ONE_DAY * days));
 }
 
 /**
@@ -129,7 +163,11 @@ void setTimePtrYears(dt_tm* time_ptr, int16_t new_years_after_1900) {
     }
 }
 
-void DateTime::addMonths(int16_t months_to_add) {
+DateTime DateTime::plusWeeks(int16_t weeks) const {
+    return DateTime(time_ + (ONE_DAY * 7 * weeks));
+}
+
+DateTime DateTime::plusMonths(int16_t months_to_add) const {
     dt_tm* time_ptr = toGmtime();
 
     //if months > 12 then add a year (for each 12 months)
@@ -140,20 +178,17 @@ void DateTime::addMonths(int16_t months_to_add) {
     setTimePtrYears(time_ptr, time_ptr->tm_year + years_to_add);
 
     time_ptr->tm_mon += months_to_add;
-    constructFromTmPtr(time_ptr);
+    return DateTime(time_ptr);
 }
 
-void DateTime::addYears(int16_t years) {
+DateTime DateTime::plusYears(int16_t years) const {
     dt_tm* time_ptr = toGmtime();
 
     setTimePtrYears(time_ptr, time_ptr->tm_year + years);
 
-    constructFromTmPtr(time_ptr);
+    return DateTime(time_ptr);
 }
 
-void DateTime::addWeeks(int16_t weeks) {
-    time_ += (ONE_DAY * 7 * weeks);
-}
 
 int32_t operator-(const DateTime &lhs, const DateTime &rhs) {
     return difftime(lhs.time_, rhs.time_);

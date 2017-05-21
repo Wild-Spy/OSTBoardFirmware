@@ -1,9 +1,15 @@
 #ifndef _CEXCEPTION_H
 #define _CEXCEPTION_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <avr/pgmspace.h>
 #include <setjmp.h>
 #include <stdint.h>
+#ifdef __cplusplus
+}
+#endif
 
 //To Use CException, you have a number of options:
 //1. Just include it and run with the defaults

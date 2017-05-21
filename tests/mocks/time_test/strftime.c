@@ -248,7 +248,7 @@ strftime_test(char *buffer, size_t limit, const char *pattern, const struct tm_t
                 break;
 
             case ('U'):
-                length = sprintf(_store, "%.2u", week_of_year(timeptr, 0));
+                length = sprintf(_store, "%.2u", week_of_year_test(timeptr, 0));
                 break;
 
 			case ('V'):

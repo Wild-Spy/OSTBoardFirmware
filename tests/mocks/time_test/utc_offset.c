@@ -32,4 +32,6 @@
 	UTC offset in seconds East
 */
 
-long            __utc_offset;
+#include "stdint.h"
+
+int32_t            __utc_offset;

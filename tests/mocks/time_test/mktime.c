@@ -35,7 +35,7 @@
 
 #include <time_test.h>
 
-extern long     __utc_offset;
+extern int32_t     __utc_offset;
 
 extern int      (*__dst_ptr) (const time_t_test *, int32_t *);
 

@@ -9,7 +9,7 @@
 #include <TimerDescriptionLanguage/TdlChannels.h>
 #include "min_received_cmds.h"
 #include "min_transmit_cmds.h"
-#include "config_comms/ruler_writer_cpp.h"
+#include "config_comms/ruler_writer.h"
 #include "exception/ExceptionValues.h"
 
 extern "C" {

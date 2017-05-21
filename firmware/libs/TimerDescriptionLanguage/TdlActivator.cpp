@@ -36,3 +36,10 @@ int TdlActivator::getTargetId() {
         getRule()->getId();
     }
 }
+
+bool TdlActivator::operator==(const TdlActivator &rhs) const {
+    return (defaultState_ == rhs.defaultState_ &&
+            currentState_ == rhs.currentState_ &&
+            act_type_ == rhs.act_type_ &&
+            target_ == rhs.target_);
+}

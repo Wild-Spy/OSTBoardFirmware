@@ -7,6 +7,15 @@
 
 #include <stddef.h>
 
+
+//#ifdef TESTING
+//#include "avr/mockio.h"
+//#else
+//extern "C" {
+//#include <avr/io.h>
+//};
+//#endif
+
 extern "C" {
 #include <avr/io.h>
 };

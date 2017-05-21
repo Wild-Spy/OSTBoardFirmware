@@ -65,7 +65,6 @@ void Pin::setPinCtrlReg(uint8_t value) {
     PORTCFG.MPCMASK = pin_mask_;
     // only sets the pins specified in pin_mask, pin0 is not necessarily modified..
     port_->PIN0CTRL = pin_ctrl_reg_;
-
 }
 
 void Pin::setInverted(bool inverted) {

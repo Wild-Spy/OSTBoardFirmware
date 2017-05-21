@@ -160,7 +160,7 @@ extern          "C" {
        result in little or no run-time overhead compared with a constant.  */
     typedef unsigned long clock_t_test;
     extern char *_CLOCKS_PER_SEC_;
-#define CLOCKS_PER_SEC ((clock_t_test) _CLOCKS_PER_SEC_)
+#define CLOCKS_PER_SEC_TEST ((clock_t_test) _CLOCKS_PER_SEC_)
     extern clock_t_test clock_test(void);
 #endif	/* !__DOXYGEN__ */
 

@@ -26,6 +26,10 @@ public:
         return start_.isEmpty() && end_.isEmpty();
     }
 
+    int32_t getDurationSeconds() {
+        return end_ - start_;
+    }
+
     static Interval Empty() {
         return Interval();
     }

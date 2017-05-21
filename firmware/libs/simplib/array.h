@@ -6,9 +6,7 @@
 #define WS_OST_ARRAY_H
 
 #include <stddef.h>
-extern "C" {
-    #include <exception/ExceptionValues.h>
-};
+#include <exception/ExceptionValues.h>
 
 namespace  sl {
 

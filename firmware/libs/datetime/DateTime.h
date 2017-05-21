@@ -30,6 +30,17 @@ extern "C" {
 #define EMPTY_TIME          0xFFFFFFFF
 #define START_DAY_OF_WEEK   MONDAY
 
+/**
+ * DateTime class which represents a date and time
+ * NOTE: This class is not checked for overflow or underflow!
+ *       If DateTime is initialised with a date/time before
+ *       MINIMUM TIME: Jan 1 2000 00:00:00
+ *       or after
+ *       MAXIMUM TIME: Feb 7 2136 06:28:14
+ *       then it's behaviour is undefined.
+ *       This also applies to any addition or subtraction which leads to
+ *       a datetime outside of this range.
+ */
 class DateTime {
 public:
     DateTime()
@@ -101,16 +112,19 @@ public:
     void setMinuteOfHour(int8_t minute);
     void setHourOfDay(int8_t hour);
     void setDayOfMonth(int8_t day);
+    /**
+     * @param month where 1 = JAN, 2 = FEB, etc.
+     */
     void setMonthOfYear(int8_t month);
     void setYear(int16_t year);
 
-    void addSeconds(int32_t seconds);
-    void addMinutes(int32_t minutes);
-    void addHours(int32_t hours);
-    void addDays(int32_t days);
-    void addWeeks(int16_t weeks);
-    void addMonths(int16_t months_to_add);
-    void addYears(int16_t years);
+    DateTime plusSeconds(int32_t seconds) const;
+    DateTime plusMinutes(int32_t minutes) const;
+    DateTime plusHours(int32_t hours) const;
+    DateTime plusDays(int32_t days) const;
+    DateTime plusWeeks(int16_t weeks) const;
+    DateTime plusMonths(int16_t months_to_add) const;
+    DateTime plusYears(int16_t years) const;
 
 //    size_t strftime(char* s, size_t maxsize, const char* format);
 

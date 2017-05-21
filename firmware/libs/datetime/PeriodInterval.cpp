@@ -13,6 +13,6 @@ PeriodInterval::PeriodInterval(uint8_t *data, uint8_t *byte_count) {
     *byte_count = (start_byte_count + end_byte_count);
 }
 
-Interval PeriodInterval::toInterval(DateTime start_time_instant) {
+Interval PeriodInterval::toInterval(DateTime start_time_instant) const {
     return Interval(start_time_instant + start_, start_time_instant + end_);
 }
