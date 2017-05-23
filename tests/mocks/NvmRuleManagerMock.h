@@ -6,21 +6,21 @@
 #define WS_OST_RULER_WRITER_H
 
 #include <gmock/gmock.h>
-#include <exception/ExceptionValues.h>
+#include <exception/CException.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
-//class RuleWriter;
+//class NvmRuleManager;
 
 //class RuleWriterRuleInterface {
 //public:
 //    /**
 //     *
-//     * @param   writer the RuleWriter object
+//     * @param   writer the NvmRuleManager object
 //     * @param   id the id of the rule to read
 //     * @throws  EX_OUT_OF_RANGE
 //     */
-//    RuleWriterRule(RuleWriter& writer, uint8_t id);
+//    NvmRuleLoader(NvmRuleManager& writer, uint8_t id);
 //
 //    /**
 //     * Gets the next rule.
@@ -58,16 +58,16 @@
 //
 //private:
 //    bool have_read_data_;
-//    uint8_t id_;
+//    uint8_t rule_id;
 //    uint8_t length_;
-//    RuleWriter& writer_;
+//    NvmRuleManager& writer_;
 //    uint8_t data_[128];
-//    uint16_t eeprom_address_;
+//    uint16_t nvm_address_;
 //};
 
-class RuleWriterInterface {
+class NvmRuleManagerMockInterface {
 public:
-    RuleWriterInterface() {};
+    NvmRuleManagerMockInterface() {};
 
     /**
      * Initialises the rule writer.  Gets the rule count from EEPROM, etc.
@@ -116,20 +116,21 @@ public:
     void saveRuleCountToEeprom();
 };
 
-class RuleWriter : public RuleWriterInterface {
+class NvmRuleManager : public NvmRuleManagerMockInterface {
 public:
-    RuleWriter() {};
+    NvmRuleManager() {};
 
     MOCK_METHOD0(getRuleCount, uint8_t(void));
     MOCK_METHOD2(addNewRule, uint8_t(uint8_t* buf, uint8_t length));
     MOCK_METHOD3(getRuleData, void(uint8_t id, uint8_t* data, uint8_t* length));
     MOCK_METHOD0(clearRules, void(void));
-    MOCK_METHOD0(saveRuleCountToEeprom, void(void));
+
+    MOCK_METHOD0(saveRuleCountToNvm, void(void));
     MOCK_METHOD0(initialise, void(void));
     MOCK_METHOD0(initialised, bool(void));
 };
 
-RuleWriter& RuleWriter_GetRuleWriter();
+NvmRuleManager& NvmRuleManager_Get();
 
 #endif
 
@@ -140,14 +141,14 @@ RuleWriter& RuleWriter_GetRuleWriter();
 #endif
 
 
-EXTERNC void RuleWriter_Init();
-EXTERNC uint8_t RuleWriter_GetRuleCount();
-EXTERNC uint8_t RuleWriter_AddNewRule(uint8_t *buf, uint8_t length);
-EXTERNC void RuleWriter_ClearRules();
-EXTERNC void RuleWriter_SaveRuleCount();
+EXTERNC void NvmRuleManager_Init();
+EXTERNC uint8_t NvmRuleManager_GetRuleCount();
+EXTERNC uint8_t NvmRuleManager_AddNewRule(uint8_t *buf, uint8_t length);
+EXTERNC void NvmRuleManager_ClearRules();
+EXTERNC void NvmRuleManager_SaveRuleCount();
 
-// Not available in the real RuleWriter, only for testing
-EXTERNC void RuleWriter_Destroy();
+// Not available in the real NvmRuleManager, only for testing
+EXTERNC void NvmRuleManager_Destroy();
 
 /**
  *
@@ -156,7 +157,7 @@ EXTERNC void RuleWriter_Destroy();
  * @param length
  * @throws EX_OUT_OF_RANGE
  */
-EXTERNC void RuleWriter_GetRuleData(uint8_t rule_id, uint8_t* data, uint8_t* length);
+EXTERNC void NvmRuleManager_GetRuleData(uint8_t rule_id, uint8_t *data, uint8_t *length);
 
 #undef EXTERNC
 

@@ -4,6 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <simplib/array.h>
+#include <stdint.h>
 
 typedef sl::Array<uint16_t, 10> U16Ary10;
 

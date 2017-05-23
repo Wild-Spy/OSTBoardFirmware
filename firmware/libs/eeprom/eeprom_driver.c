@@ -58,42 +58,6 @@
 
 #include "eeprom_driver.h"
 
-//Written by Matthew Cochrane on 9/11/10
-void ReadEEPROM(uint8_t* Data, uint8_t Length, uint16_t Address) {
-    for (uint8_t i = 0; i < Length; i++) {
-        *Data++ = EEPROM_ReadByte((uint8_t)(Address>>5), (uint8_t)(Address&0x1F));
-        //		  EEPROM_ReadByte(         Page        ,         Byte          );
-        Address++;
-    }
-}
-
-//Written by Matthew Cochrane on 9/11/10
-void WriteEEPROM(uint8_t* Data, uint8_t Length, uint16_t Address) {
-    uint8_t byte, page;
-
-    byte = (uint8_t)(Address&0x1F);
-    page = (uint8_t)(Address>>5);
-
-    EEPROM_FlushBuffer();
-
-    for (uint8_t i = 0; i < Length; i++) {
-        EEPROM_LoadByte(byte,*Data++);
-        byte++;
-        //If we go beyond the end of the page:
-        //set the byte back to 0 and increment page number
-        //Also Write the page to the EEPROM
-        if (byte >= EEPROM_PAGESIZE) {
-            byte = 0;
-            EEPROM_AtomicWritePage(page);
-            page++;
-            EEPROM_FlushBuffer();
-        }
-    }
-    //Write the last page
-    EEPROM_AtomicWritePage(page);
-
-}
-
 /*! \brief Write one byte to EEPROM using IO mapping.
  *
  *  This function writes one byte to EEPROM using IO-mapped access.

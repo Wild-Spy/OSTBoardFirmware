@@ -75,28 +75,28 @@ class TdlRulesDefaultInitTestFixture : public ::testing::Test {
 protected:
     virtual void SetUp() {
         Sequence seq;
-        RuleWriter_Init();
+        NvmRuleManager_Init();
 
-        EXPECT_CALL(RuleWriter_GetRuleWriter(), getRuleCount())
+        EXPECT_CALL(NvmRuleManager_Get(), getRuleCount())
                 .InSequence(seq)
                 .WillOnce(Return(3));
 
         uint8_t data0[2] = {0, (uint8_t)false};  // id = 0, enabled on startup = false
-        EXPECT_CALL(RuleWriter_GetRuleWriter(), getRuleData(0, _, _))
+        EXPECT_CALL(NvmRuleManager_Get(), getRuleData(0, _, _))
                 .InSequence(seq)
                 .WillOnce(DoAll(SetArrayArgument<1>(data0, data0+2), SetArgPointee<2>(2)));
 
         uint8_t data1[2] = {1, (uint8_t)true};  // id = 1, enabled on startup = true
-        EXPECT_CALL(RuleWriter_GetRuleWriter(), getRuleData(1, _, _))
+        EXPECT_CALL(NvmRuleManager_Get(), getRuleData(1, _, _))
                 .InSequence(seq)
                 .WillOnce(DoAll(SetArrayArgument<1>(data1, data1+2), SetArgPointee<2>(2)));
 
         uint8_t data2[2] = {2, (uint8_t)true};  // id = 2, enabled on startup = true
-        EXPECT_CALL(RuleWriter_GetRuleWriter(), getRuleData(2, _, _))
+        EXPECT_CALL(NvmRuleManager_Get(), getRuleData(2, _, _))
                 .InSequence(seq)
                 .WillOnce(DoAll(SetArrayArgument<1>(data2, data2+2), SetArgPointee<2>(2)));
 
-        TdlRules_Init(10, RuleWriter_GetRuleWriter());
+        TdlRules_Init(10, NvmRuleManager_Get());
     }
 
     virtual void TearDown() {

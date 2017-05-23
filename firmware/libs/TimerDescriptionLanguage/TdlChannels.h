@@ -11,7 +11,7 @@
 #include "TdlChannel.h"
 #endif
 
-#include "exception/ExceptionValues.h"
+#include "exception/CException.h"
 
 #define CHANNEL_COUNT_MAX   4
 #define CHANNEL_DEFAULT_STATE   TDLCHANNELSTATE_DISABLED

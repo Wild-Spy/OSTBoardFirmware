@@ -30,7 +30,7 @@ add_executable(runTdlTests
         ../mocks/TdlChannelMock.cpp
         ../mocks/TdlRuleMock.cpp
         ../mocks/delayMock.cpp
-        ../mocks/RuleWriterMock.cpp
+        ../mocks/NvmRuleManagerMock.cpp
 
         # Tests
         tdl_channel_tests.cpp

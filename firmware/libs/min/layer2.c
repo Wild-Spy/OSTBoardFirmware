@@ -9,7 +9,7 @@
  */
 
 #include <string.h>
-//#include <config_comms/rule_writer.h>
+//#include <nvm/rule_writer.h>
 #include "serial/usb_serial.h"
 #include "min/min.h"
 #include "layer2.h"

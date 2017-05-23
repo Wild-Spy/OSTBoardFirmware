@@ -28,7 +28,7 @@ public:
     {};
 
 //    TdlChannel(int id, TdlChannelState_t initial_state, PORT_t* port, uint8_t pin)
-//            : id_(id),
+//            : rule_id(id),
 //              initial_state_(initial_state),
 //              state_(initial_state),
 //              port_(port),

@@ -7,6 +7,7 @@ extern "C" {
 #include <avr/pgmspace.h>
 #include <setjmp.h>
 #include <stdint.h>
+#include "ExceptionValues.h"
 #ifdef __cplusplus
 }
 #endif
@@ -45,7 +46,7 @@ extern "C" {
 
 // Declare below to get variables in your catch for the file and line number where
 // the exception was thrown
-#define SAVE_FILE_AND_LINE
+//#define SAVE_FILE_AND_LINE
 
 #ifdef __cplusplus
 extern "C" {

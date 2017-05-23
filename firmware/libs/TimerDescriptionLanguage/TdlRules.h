@@ -7,20 +7,20 @@
 
 #ifdef TESTING
 #include "TdlRuleMock.h"
-#include "RuleWriterMock.h"
+#include "NvmRuleManagerMock.h"
 #else
 #include "TdlRule.h"
 #include "config_comms/RuleWriter.h"
 #endif
 
 #include <helpers/compile_time_sizeof.h>
-#include "exception/ExceptionValues.h"
+#include "exception/CException.h"
 
 #define MAX_RULES   2
 
 class TdlRules {
 public:
-    TdlRules(uint8_t max_rules, RuleWriter& ruleWriter);
+    TdlRules(uint8_t max_rules, NvmRuleManager& ruleWriter);
 
 //    void disableAll();
 
@@ -47,7 +47,7 @@ private:
     uint8_t max_rules_;
     uint8_t rule_count_;
     TdlRule* rules_;//[MAX_RULES];
-    RuleWriter& rule_writer_;
+    NvmRuleManager& rule_writer_;
 };
 
 //COMPILE_TIME_SIZEOF(TdlRule);
@@ -59,7 +59,7 @@ private:
 #define EXTERNC
 #endif
 
-EXTERNC void TdlRules_Init(uint8_t max_rules, RuleWriter& ruleWriter);
+EXTERNC void TdlRules_Init(uint8_t max_rules, NvmRuleManager& ruleWriter);
 EXTERNC TdlRules& TdlRules_GetInstance();
 
 #ifdef TESTING

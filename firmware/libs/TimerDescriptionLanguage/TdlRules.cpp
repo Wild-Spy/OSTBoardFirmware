@@ -11,14 +11,14 @@
 //#include <avr/interrupt.h>
 //#endif
 
-#include <config_comms/ruler_writer.h>
+#include <nvm/NvmRuleManager.h>
 #include <min/min_transmit_cmds.h>
 
 #include "TdlRules.h"
 
 static TdlRules* tdl_rules = NULL;
 
-TdlRules::TdlRules(uint8_t max_rules, RuleWriter& ruleWriter)
+TdlRules::TdlRules(uint8_t max_rules, NvmRuleManager& ruleWriter)
     : max_rules_(max_rules),
       rule_count_(0),
       rule_writer_(ruleWriter)
@@ -42,7 +42,7 @@ TdlRule& TdlRules::get(int index) {
 TdlRules::TdlRules(TdlRule rules[], uint8_t count)
         : max_rules_(count),
           rule_count_(count),
-          rule_writer_(*(RuleWriter*)0)
+          rule_writer_(*(NvmRuleManager*)0)
 {
     if (rule_count_ == 0) return;
     rules_ = rules;
@@ -57,18 +57,19 @@ TdlRules::~TdlRules() {
 #endif
 
 void TdlRules::loadFromEeprom() {
-    rule_count_ = RuleWriter_GetRuleCount();
+    rule_count_ = NvmRuleManager_GetRuleCount();
     if (rule_count_ == 0) return;
 
     uint8_t data[256];
     uint8_t length = 0;
 
     for (uint8_t i = 0; i < rule_count_; i++) {
-        RuleWriter_GetRuleData(i, data, &length);
+        NvmRuleManager_GetRuleData(i, data, &length);
         TdlRule::Decompile(data, length, (rules_ + i));
+//        new (rules_ + i) TdlRule(data[0], (bool)data[1]);
     }
 
-//    RuleWriterRule ruleWriterRule = RuleWriter_GetRuleWriter().GetRule(0);
+//    NvmRuleLoader ruleWriterRule = NvmRuleManager_Get().GetRule(0);
 //    for (uint8_t i = 0; i < rule_count_; i++) {
 //        rules_[i] = TdlRule::Decompile(ruleWriterRule.GetData(), ruleWriterRule.GetLength());
 //
@@ -87,7 +88,7 @@ TdlRules& TdlRules_GetInstance() {
  * @param max_rules     number of rules to allocate on the heap
  * @param ruleWriter    the rule writer from which we will retrieve rules
  */
-void TdlRules_Init(uint8_t max_rules, RuleWriter& ruleWriter) {
+void TdlRules_Init(uint8_t max_rules, NvmRuleManager& ruleWriter) {
     tdl_rules = new TdlRules(max_rules, ruleWriter);
     TdlRules_GetInstance().loadFromEeprom();
 }
