@@ -6,7 +6,7 @@
 #define WS_OST_PERIODFIELD_H
 
 #include "min/encode_decode.h"
-#include "exception/ExceptionValues.h"
+#include "exception/CException.h"
 
 typedef enum PeriodFieldType_enum {
     PERIODFIELD_YEARS = 0,

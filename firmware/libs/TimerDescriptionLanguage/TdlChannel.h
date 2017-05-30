@@ -41,8 +41,8 @@ public:
 
     TdlChannel(int id, TdlChannelState_t initial_state, Pin* pin)
             : id_(id),
-              initial_state_(initial_state),
               state_(initial_state),
+              initial_state_(initial_state),
               pin_(pin)
     {
         //Set up the pin as an output and put it in the correct state

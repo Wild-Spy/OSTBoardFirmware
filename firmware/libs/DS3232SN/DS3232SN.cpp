@@ -2,74 +2,84 @@
 // Created by mcochrane on 8/04/17.
 //
 
-extern "C" {
-#include <parts.h>
-#include <time.h>
-#include <util/delay.h>
-#include <avr/io.h>
-}
-#include <TimerDescriptionLanguage/TdlChannels.h>
 #include "DS3232SN.h"
+#include <delay.h>
+#include <libs/exception/ExceptionValues.h>
+#include <libs/exception/CException.h>
+#include <libs/hw/hal_gpio.h>
+
+//extern "C" {
+//#include <parts.h>
+//#include <time.h>
+////#include <util/delay.h>
+////#include <avr/io.h>
+//}
+//#include <TimerDescriptionLanguage/TdlChannels.h>
+//#include <libs/hal/i2c.h>
+
 #include "min/min_transmit_cmds.h"
 
 
-DS3232SN rtc;
+DS3232SN* rtc = NULL;
 
-DS3232SN::DS3232SN(TWI_t *twi, PORT_t *nreset_port, uint8_t nreset_pin, PORT_t* npen_port, uint8_t npen_pin)
-        : nreset_pin_(nreset_port, nreset_pin),
-          npen_pin_(npen_port, npen_pin),
-          power_enabled_(true)
-{
-    i2cCreate(&i2c_, twi);
-}
+//DS3232SN::DS3232SN(I2c& i2c, uint8_t nreset_port, uint8_t nreset_pin, uint8_t npen_port, uint8_t npen_pin)
+//        : nreset_pin_(nreset_port, nreset_pin),
+//          npen_pin_(npen_port, npen_pin),
+//          power_enabled_(true),
+//          i2c_(i2c)
+//{
+//
+////    i2cCreate(&i2c_, twi);
+//}
 
 
-DS3232SN::DS3232SN(TWI_t *twi, PORT_t *nreset_port, uint8_t nreset_pin, PORT_t *npen_port, uint8_t npen_pin,
-                   PORT_t *ninterrupt_port, uint8_t ninterrupt_pin)
-    : nreset_pin_(nreset_port, nreset_pin),
+DS3232SN::DS3232SN(I2c& i2c,
+                   uint8_t npen_port, uint8_t npen_pin,
+                   uint8_t ninterrupt_port, uint8_t ninterrupt_pin,
+                   extint_callback_t int_callback)
+    : i2c_(i2c),
       npen_pin_(npen_port, npen_pin),
       nint_pin_(ninterrupt_port, ninterrupt_pin),
-      power_enabled_(true)
+      power_enabled_(true),
+      int_callback_(int_callback)
 {
-    i2cCreate(&i2c_, twi);
+//    i2cCreate(&i2c_, twi);
 
-#if XMEGA_C4
-    if (twi == &TWIE) {
-        twi_sda_pin_ = Pin(&PORTE, 0);
-        twi_scl_pin_ = Pin(&PORTE, 1);
-    } else if (twi == &TWIC) {
-        twi_sda_pin_ = Pin(&PORTC, 0);
-        twi_scl_pin_ = Pin(&PORTC, 1);
-    } else {
-        Throw(EX_OUT_OF_RANGE);
-    }
-#else
-    #error Please define TWI Pins for your MCU
-#endif
+//#if XMEGA_C4
+//    if (twi == &TWIE) {
+//        twi_sda_pin_ = Pin(&PORTE, 0);
+//        twi_scl_pin_ = Pin(&PORTE, 1);
+//    } else if (twi == &TWIC) {
+//        twi_sda_pin_ = Pin(&PORTC, 0);
+//        twi_scl_pin_ = Pin(&PORTC, 1);
+//    } else {
+//        Throw(EX_OUT_OF_RANGE);
+//    }
+//#else
+//    #error Please define TWI Pins for your MCU
+//#endif
 
 }
 
 void DS3232SN::init() {
-    nreset_pin_.setDirInput();
+//    nreset_pin_.setDirInput();
     npen_pin_.setDirOutput();
 
     npen_pin_.setOutputLow(); // power is enabled
 //    nreset_pin_.setOutputHigh(); //not being reset
 
     nint_pin_.setDirInput();
-    nint_pin_.setOutputPullConfiguration(PORT_OPC_PULLUP_gc);
-    nint_pin_.setInputSenseConfiguration(PORT_ISC_LEVEL_gc);
-//    nint_pin_.setInputSenseConfiguration(PORT_ISC_RISING_gc);
+    nint_pin_.setupInterrupt(EXTINT_DETECT_LOW, EXTINT_PULL_UP, true, false);
 
-    twi_sda_pin_.setDirInput();
-    twi_scl_pin_.setDirInput();
+//    twi_sda_pin_.setDirInput();
+//    twi_scl_pin_.setDirInput();
 
-    _delay_ms(200);
+    delay_ms(200);
+
     reset();
-    i2cBegin(&i2c_, 10000);
+    i2c_.enable();
 
-    nint_pin_.enableInterrupt(0);
-    nint_pin_.setInterruptLevel(0, PORT_INT0LVL_MED_gc);
+    enablePinInterrupt();
 }
 
 void DS3232SN::reset() {
@@ -79,41 +89,40 @@ void DS3232SN::reset() {
 }
 
 DateTime DS3232SN::get(void) {
-    struct tm tm;
+    dt_tm tm;
 
     readTime(&tm);
     return DateTime(&tm);
 }
 
-uint8_t DS3232SN::readTime(struct tm *dt) {
-    i2cStartWrite(&i2c_, DSRTC_ADDR);
-    i2cPut(&i2c_, (uint8_t)DSRTC_SECONDS);
-    //i2cStop(&i2c_);  //no, we need a repeated start bit
-    i2cStartRead(&i2c_, DSRTC_ADDR);
-    dt->tm_sec = bcd2dec((uint8_t)i2cGet(&i2c_) & ~(1<<DS1307_CH));
-    dt->tm_min = bcd2dec((uint8_t)i2cGet(&i2c_));
-    dt->tm_hour = bcd2dec((uint8_t)i2cGet(&i2c_) & ~(1<<HR1224)); //assumes 24h clock
-    dt->tm_wday = (uint8_t)i2cGet(&i2c_);
-    dt->tm_mday = bcd2dec((uint8_t)i2cGet(&i2c_));
-    dt->tm_mon = bcd2dec((uint8_t)i2cGet(&i2c_) & ~(1<<CENTURY))-1; //don't use the century bit
-    dt->tm_year = bcd2dec((uint8_t)i2cGet(&i2c_)) + 2000 - 1900;
-    i2cStop(&i2c_);
+uint8_t DS3232SN::readTime(dt_tm *dt) {
+    uint8_t buf[7];
+    i2c_.readBytes(DSRTC_ADDR, DSRTC_SECONDS, 7, buf);
+
+    dt->tm_sec = bcd2dec((uint8_t) (buf[0] & ~(1 << DS1307_CH)));
+    dt->tm_min = bcd2dec(buf[1]);
+    dt->tm_hour = bcd2dec((uint8_t) (buf[2] & ~(1 << HR1224))); //assumes 24h clock
+    dt->tm_wday = buf[3];
+    dt->tm_mday = bcd2dec(buf[4]);
+    dt->tm_mon = bcd2dec((uint8_t) (buf[5] & ~(1<<CENTURY))) - 1; //don't use the century bit
+    dt->tm_year = bcd2dec(buf[6]) + 2000 - 1900;
+
+    report_printf("time");
+    report_printf("ymdhms: %d-%d-%d %d:%d:%d", dt->tm_year, dt->tm_mon, dt->tm_mday, dt->tm_hour, dt->tm_min, dt->tm_sec);
+
     return 0;
 }
 
 
 DateTime DS3232SN::readAlarm() {
-    struct tm dt;
+    dt_tm dt;
+    uint8_t buf[4];
+    i2c_.readBytes(DSRTC_ADDR, DSALM1_SECONDS, 4, buf);
 
-    i2cStartWrite(&i2c_, DSRTC_ADDR);
-    i2cPut(&i2c_, (uint8_t)DSALM1_SECONDS);
-    //i2cStop(&i2c_);  //no, we need a repeated start bit
-    i2cStartRead(&i2c_, DSRTC_ADDR);
-    dt.tm_sec = bcd2dec((uint8_t)i2cGet(&i2c_));
-    dt.tm_min = bcd2dec((uint8_t)i2cGet(&i2c_));
-    dt.tm_hour = bcd2dec((uint8_t)i2cGet(&i2c_));
-    dt.tm_mday = bcd2dec((uint8_t)i2cGet(&i2c_));
-    i2cStop(&i2c_);
+    dt.tm_sec = bcd2dec((uint8_t)buf[0]);
+    dt.tm_min = bcd2dec((uint8_t)buf[1]);
+    dt.tm_hour = bcd2dec((uint8_t)buf[2]);
+    dt.tm_mday = bcd2dec((uint8_t)buf[3]);
 
     dt.tm_mon = 0;
     dt.tm_year = 2000 - 1900;
@@ -122,10 +131,18 @@ DateTime DS3232SN::readAlarm() {
 }
 
 void DS3232SN::dumpRTC(uint8_t startAddr, uint8_t len) {
-    while (len--){
-        uint8_t b = i2cReadByte(startAddr++);
-        report_printf_P(PSTR("read[%02X]: %02X"), startAddr-1, b);
+    uint8_t alen = len;
+    uint8_t sa = startAddr;
+    while (alen--){
+        uint8_t b = i2cReadByte(sa++);
+        report_printf("read[%02X]: %02X", sa-1, b);
     }
+    uint8_t data[len];
+    i2c_.readBytes(DSRTC_ADDR, startAddr, len, data);
+    for (uint8_t i = 0; i < len; i++) {
+        report_printf("read[%02X]: %02X", startAddr+i, data[i]);
+    }
+
 }
 
 uint8_t __attribute__((noinline)) DS3232SN::bcd2dec(uint8_t n) {
@@ -138,12 +155,9 @@ uint8_t __attribute__((noinline)) DS3232SN::bcd2dec(uint8_t n) {
  * @param data          data to write to address
  */
 void DS3232SN::i2cWriteByte(uint8_t subAddress, uint8_t data) {
-    cli();
-    i2cStartWrite(&i2c_, DSRTC_ADDR);
-    i2cPut(&i2c_, subAddress);
-    i2cPut(&i2c_, data);
-    i2cStop(&i2c_);
-    sei();
+    cpu_irq_disable();
+    i2c_.writeByte(DSRTC_ADDR, subAddress, data);
+    cpu_irq_enable();
 }
 
 /**
@@ -154,15 +168,9 @@ void DS3232SN::i2cWriteByte(uint8_t subAddress, uint8_t data) {
  */
 //void DS3232SN::i2cWriteBytes(uint8_t subAddress, uint8_t* data, uint8_t count)
 //{
-//    cli();
-//    i2cStartWrite(&i2c_, DSRTC_ADDR);
-//    i2cPut(&i2c_, (subAddress | 0x80));
-//    for (uint8_t i = 0; i < count; ++i)
-//    {
-//        i2cPut(&i2c_, (char) data[i]);
-//    }
-//    i2cStop(&i2c_);
-//    sei();
+//    cpu_irq_disable();
+//    i2c_.writeBytes(DSRTC_ADDR, subAddress, data, count);
+//    cpu_irq_enable();
 //}
 
 /**
@@ -173,13 +181,9 @@ void DS3232SN::i2cWriteByte(uint8_t subAddress, uint8_t data) {
 uint8_t DS3232SN::i2cReadByte(uint8_t subAddress)
 {
     uint8_t data; // `data` will store the register data
-    cli();
-    i2cStartWrite(&i2c_, DSRTC_ADDR);
-    i2cPut(&i2c_, (char)subAddress);
-    i2cStartRead(&i2c_, DSRTC_ADDR);
-    data = (uint8_t)i2cGet(&i2c_);
-    i2cStop(&i2c_);
-    sei();
+    cpu_irq_enter_critical();
+    data = i2c_.readByte(DSRTC_ADDR, subAddress);
+    cpu_irq_leave_critical();
     return data;                             // Return data read from slave register
 }
 
@@ -208,26 +212,33 @@ uint8_t DS3232SN::i2cReadByte(uint8_t subAddress)
 //    return i2cReadByte(DSRTC_STATUS);
 //}
 
-uint8_t DS3232SN::writeTime(struct tm *tm) {
-    cli();
-    i2cStartWrite(&i2c_, DSRTC_ADDR);
-    i2cPut(&i2c_, (uint8_t)DSRTC_SECONDS);
-    i2cPut(&i2c_, dec2bcd(tm->tm_sec));
-    i2cPut(&i2c_, dec2bcd(tm->tm_min));
-    i2cPut(&i2c_, dec2bcd(tm->tm_hour));        //sets 24 hour format (Bit 6 == 0)
-    i2cPut(&i2c_, tm->tm_wday);
-    i2cPut(&i2c_, dec2bcd(tm->tm_mday));
-    i2cPut(&i2c_, dec2bcd(tm->tm_mon+1));
-    i2cPut(&i2c_, dec2bcd((int16_t) tm->tm_year + 1900 - 2000));
-    i2cStop(&i2c_);
+uint8_t DS3232SN::writeTime(dt_tm *tm) {
+    cpu_irq_enter_critical();
+    uint8_t buf[7];
+
+//    for (uint8_t i = 0; i < 7; i++) buf[i] = 0;
+
+    buf[0] = dec2bcd(tm->tm_sec);
+    buf[1] = dec2bcd(tm->tm_min);
+    buf[2] = dec2bcd(tm->tm_hour);        //sets 24 hour format (Bit 6 == 0)
+    buf[3] = tm->tm_wday;
+    buf[4] = dec2bcd(tm->tm_mday);
+    buf[5] = dec2bcd(tm->tm_mon+1);
+    buf[6] = dec2bcd((int16_t) tm->tm_year + 1900 - 2000);
+
+//    report_printf("wt buf %02X, %02X, %02X, %02X, %02X, %02X, %02X", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]);
+
+    i2c_.writeBytes(DSRTC_ADDR, DSRTC_SECONDS, 7, buf);
+
     uint8_t s = i2cReadByte(DSRTC_STATUS);          //read the status register
     i2cWriteByte( DSRTC_STATUS, s & ~((1<<OSF)));   //clear the Oscillator Stop Flag
-    sei();
+
+    cpu_irq_leave_critical();
     return 0;
 }
 
 void DS3232SN::set(DateTime dt) {
-    struct tm* tm = dt.toGmtime();
+    dt_tm* tm = dt.toGmtime();
     writeTime(tm);
 }
 
@@ -375,7 +386,7 @@ float DS3232SN::temperature() {
 }
 
 void DS3232SN::setAlarm(ALARM_TYPES_t alarm_type, DateTime date_time) {
-    struct tm time_ptr;
+    dt_tm time_ptr;
 
     next_alarm_ = date_time;
 
@@ -393,38 +404,42 @@ void DS3232SN::setAlarm(ALARM_TYPES_t alarm_type, DateTime date_time) {
 void DS3232SN::enablePower() {
     npen_pin_.setOutputLow(); // power is enabled
 
-    twi_sda_pin_.setDirInput();
-    twi_scl_pin_.setDirInput();
+    //TODO: Should set pins to regular mode?
+//    twi_sda_pin_.setDirInput();
+//    twi_scl_pin_.setDirInput();
 
-    i2cBegin(&i2c_, 10000);
+    i2c_.enable();
     power_enabled_ = true;
 }
 
 void DS3232SN::disablePower() {
-    i2cEnd(&i2c_);
+    i2c_.disable();
 
-    twi_sda_pin_.setDirOutput();
-    twi_sda_pin_.setOutputLow();
-    twi_scl_pin_.setDirOutput();
-    twi_scl_pin_.setOutputLow();
+    //TODO: Should set pins to low power mode?
+//    twi_sda_pin_.setDirOutput();
+//    twi_sda_pin_.setOutputLow();
+//    twi_scl_pin_.setDirOutput();
+//    twi_scl_pin_.setOutputLow();
 
     npen_pin_.setOutputHigh(); // power is disabled
     power_enabled_ = false;
 }
 
-void initRtc() {
-    rtc = DS3232SN(&TWIE, &PORTD, 0, &PORTE, 3, &PORTE, 2);
-    rtc.init();
+void initRtc(I2c& i2c, extint_callback_t interruptCallback) {
+    rtc = new DS3232SN(i2c, HAL_GPIO_PORTA, 19, HAL_GPIO_PORTA, 6, interruptCallback);
+
+    getRtc().init();
     // disable interrupts
-    rtc.alarmInterrupt(1, false);
-    rtc.alarmInterrupt(2, false);
+    getRtc().alarmInterrupt(1, false);
+    getRtc().alarmInterrupt(2, false);
     // reset alarm flags
-    rtc.alarm(1);
-    rtc.alarm(2);
+    getRtc().alarm(1);
+    getRtc().alarm(2);
 }
 
 DS3232SN &getRtc() {
-    return rtc;
+    if (rtc == NULL) Throw(EX_NULL_POINTER);
+    return *rtc;
 }
 
 DateTime getNow() {

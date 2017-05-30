@@ -16,9 +16,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <time.h>
 #include <stdint.h>
-
+#include <time_avr.h>
 #ifdef __cplusplus
 }
 #endif
@@ -43,7 +42,7 @@ EXTERNC void report_motor(uint8_t status, uint32_t position);
 EXTERNC void report_deadbeef(uint32_t deadbeef);
 EXTERNC void report_receive_rule_response();
 EXTERNC void report_rule_count();
-EXTERNC void report_rtc_time(time_t time);
+EXTERNC void report_rtc_time(time_t_avr time);
 EXTERNC void report_response_ack();
 EXTERNC void report_response_nak();
 
@@ -54,7 +53,7 @@ EXTERNC void report_end_print();
 EXTERNC void report_printl(const char* data, uint16_t len);
 EXTERNC void report_prints(const char* data); //null terminated string
 EXTERNC void report_printf(const char* data, ...);
-EXTERNC void report_printf_P(const char *data, ...);
+//EXTERNC void report_printf_P(const char *data, ...);
 
 #undef EXTERNC
 #endif //WS_OST_MIN_TRANSMIT_CMDS_H

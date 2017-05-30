@@ -42,7 +42,7 @@ extern uint8_t motor_requested;
 extern uint32_t motor_position_request;
 extern uint16_t motor_speed_request;
 
-EXTERNC void handle_print_eeprom(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
+EXTERNC void handle_print_nvm(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_ping(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_get_rule_count(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_rx_rule_start(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);

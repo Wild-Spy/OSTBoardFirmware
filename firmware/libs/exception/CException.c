@@ -11,9 +11,11 @@ volatile CEXCEPTION_FRAME_T CExceptionFrames[CEXCEPTION_NUM_ID];
 void ThrowFunc(CEXCEPTION_T ExceptionID, const char* File, uint16_t Line )
 {
     unsigned int MY_ID = CEXCEPTION_GET_ID;
+
+//    while(1) {};
+
     CExceptionFrames[MY_ID].Exception = ExceptionID;
 
-//    strcpy_P(CExceptionFrames[MY_ID].File, File);
     strcpy(CExceptionFrames[MY_ID].File, File);
     CExceptionFrames[MY_ID].Line = Line;
     longjmp(*CExceptionFrames[MY_ID].pFrame, 1);

@@ -4,6 +4,7 @@
 
 #ifndef WS_OST_CPPNEWDELETEOPS_H
 #define WS_OST_CPPNEWDELETEOPS_H
+#include <stddef.h>
 
 void* operator new(size_t objsize);
 //void operator delete(void* obj);

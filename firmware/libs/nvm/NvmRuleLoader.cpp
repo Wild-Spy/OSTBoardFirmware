@@ -4,28 +4,23 @@
 
 #include "NvmRuleLoader.h"
 
-#ifdef TESTING
-#include "NvmDriverMock.h"
-#else
-extern "C" {
-#include "eeprom_driver/eeprom_driver.h"
-}
-#endif
-
 /*
  * NvmRuleLoader functions
  */
 
 NvmRuleLoader::NvmRuleLoader(nvm_address_t nvm_start_address, nvm_address_t nvm_end_address, NvmDriverInterface *driver)
-        : nvm_start_address_(nvm_start_address),
+        : initialised_(false),
+          nvm_start_address_(nvm_start_address),
           nvm_end_address_(nvm_end_address),
-          driver_(driver),
-          initialised_(false)
+          driver_(driver)
 {
 }
 
 NvmRuleLoader::NvmRuleLoader(uint8_t id, nvm_address_t nvm_start_address, nvm_address_t nvm_end_address, NvmDriverInterface* driver)
-    : NvmRuleLoader(nvm_start_address, nvm_end_address, driver)
+        : initialised_(false),
+          nvm_start_address_(nvm_start_address),
+          nvm_end_address_(nvm_end_address),
+          driver_(driver)
 {
     getRule(id);
 }

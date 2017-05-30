@@ -10,9 +10,14 @@
 #ifndef MIN_H_
 #define MIN_H_
 
-#include <stdint.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#define MAX_FRAME_PAYLOAD_SIZE		(15U)
+#include <stdint.h>
+#include "layer2.h"
+
+#define MAX_FRAME_PAYLOAD_SIZE        (15U)
 
 /* Initialize Layer 1 */
 void min_init_layer1(void);
@@ -33,5 +38,9 @@ void min_frame_received(uint8_t buf[], uint8_t control, uint8_t id);
 uint8_t min_tx_space(void);
 
 uint8_t min_frame_length(uint8_t control_byte);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MIN_H_ */

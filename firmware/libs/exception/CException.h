@@ -4,7 +4,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include <avr/pgmspace.h>
+
+//#include <avr/pgmspace.h>
 #include <setjmp.h>
 #include <stdint.h>
 #include "ExceptionValues.h"

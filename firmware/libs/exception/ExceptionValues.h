@@ -29,17 +29,18 @@ typedef enum EXCEPTION_VALUES_enum {
 	EX_TIMEOUT,                 // 13
 	EX_INVALID_INPUT_VALUE,     // 14
 	EX_INVALID_CHECKSUM,        // 15
-	EX_WRITE_ERROR,             // 16
-	EX_FLASH_READ_ERROR,        // 17
-	EX_FLASH_WRITE_ERROR,       // 18
-	EX_FLASH_OPERATION_FAIL,    // 19
-	EX_GPS_ABORT_FIX,           // 20
-	EX_INVALID_BAUDRATE,        // 21
-	EX_OUT_OF_RANGE,            // 22
-    EX_NOT_IMPLEMENTED,         // 23
-    EX_NVM_READ_ERROR,          // 24
-    EX_NVM_WRITE_ERROR,         // 25
-    EX_NVM_HARDWARE_ERROR,      // 26
+	EX_READ_ERROR,              // 16
+	EX_WRITE_ERROR,             // 17
+	EX_FLASH_READ_ERROR,        // 18
+	EX_FLASH_WRITE_ERROR,       // 19
+	EX_FLASH_OPERATION_FAIL,    // 20
+	EX_GPS_ABORT_FIX,           // 21
+	EX_INVALID_BAUDRATE,        // 22
+	EX_OUT_OF_RANGE,            // 23
+    EX_NOT_IMPLEMENTED,         // 24
+    EX_NVM_READ_ERROR,          // 25
+    EX_NVM_WRITE_ERROR,         // 26
+    EX_NVM_HARDWARE_ERROR,      // 27
 
 	EX_EXCEPTIONS_COUNT
 } EXCEPTION_VALUE_t;

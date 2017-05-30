@@ -12,7 +12,7 @@
 /*///////////////////
 //TEST ONLY DEFINES//
 ///////////////////*/
-#if defined(TEST)
+#if defined(TESTING) | defined(MCU_TESTING)
 #define MAX_ALLOCS	10
 
 typedef struct memInfo {
@@ -62,7 +62,7 @@ uint16_t MemoryWrapper_GetHeapSize() {
 /*/////////////////////
 //TEST ONLY FUNCTIONS//
 /////////////////////*/
-#if defined(TEST)
+#if defined(TESTING) | defined(MCU_TESTING)
 void MemoryWrapper_TEST_SetHeapSize(uint16_t val)
 {
 	heap_size = val;

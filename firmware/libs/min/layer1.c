@@ -5,8 +5,9 @@
  * Licensed under MIT License.
  */
 
-#include <avr/io.h>
-#include <avr/interrupt.h>
+//#include <avr/io.h>
+//#include <avr/interrupt.h>
+#include <interrupt.h>
 #include "min.h"
 #include "min_transmit_cmds.h"
 
@@ -94,9 +95,11 @@ void min_rx_byte(uint8_t byte)
      *
      * Two in a row in over the frame means to expect a stuff byte.
      */
-    if(rx_header_bytes_seen == 2) {
+    if (rx_header_bytes_seen == 2) {
+//        PORT->Group[0].OUTSET.reg = (1 << 27);
+
         rx_header_bytes_seen = 0;
-        if(byte == HEADER_BYTE) {
+        if (byte == HEADER_BYTE) {
             rx_frame_state = RECEIVING_ID;
             return;
         }
@@ -111,10 +114,11 @@ void min_rx_byte(uint8_t byte)
         }
     }
 
-    if(byte == HEADER_BYTE) {
+    if (byte == HEADER_BYTE) {
+//        PORT->Group[0].OUTSET.reg = (1 << 27);
         rx_header_bytes_seen++;
-    }
-    else {
+    } else {
+//        PORT->Group[0].OUTSET.reg = (1 << 27);
         rx_header_bytes_seen = 0;
     }
 
@@ -234,7 +238,7 @@ static void stuffed_tx_byte(uint8_t byte)
  */
 void min_tx_frame(uint8_t id, uint8_t payload[], uint8_t control)
 {
-    cli();
+    cpu_irq_disable();
     uint8_t n, i;
     uint16_t checksum;
     uint8_t length = control & FRAME_LENGTH_MASK;
@@ -272,7 +276,7 @@ void min_tx_frame(uint8_t id, uint8_t payload[], uint8_t control)
 
     /* Ensure end-of-frame doesn't contain 0xaa and confuse search for start-of-frame */
     min_tx_byte(EOF_BYTE);
-    sei();
+    cpu_irq_enable();
 }
 
 uint8_t min_frame_length(uint8_t control_byte) {

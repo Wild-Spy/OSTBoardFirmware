@@ -4,19 +4,16 @@
 
 #include <datetime/DateTime.h>
 #include <string.h>
-#include <avr/io.h>
-#include <stdio.h>
-#include <TimerDescriptionLanguage/TdlRules.h>
-#include <avr/interrupt.h>
+//#include <TimerDescriptionLanguage/TdlRules.h>
+#include <interrupt.h>
 #include "min_transmit_cmds.h"
-#include "config_comms/ruler_writer.h"
+#include <nvm/NvmRuleManager.h>
+#include <cstdarg>
 /* Functions called by the application to report information via MIN frames */
 
-extern "C" {
 #include "layer2_helper.h"
 #include "min.h"
-#include <util/delay.h>
-}
+//#include <util/delay.h>
 
 /* Report the current state of the environment */
 void report_environment(uint16_t temperature, uint16_t humidity)
@@ -52,10 +49,9 @@ void report_deadbeef(uint32_t deadbeef)
 
 void report_rule_count()
 {
-    DECLARE_BUF(1);
-//    PACK8(RuleWriter_GetRuleCount());
-    PACK8(TdlRules_GetInstance().getCount());
-    SEND_FRAME(MIN_ID_RESPONSE_GET_RULE_COUNT);
+//    DECLARE_BUF(1);
+//    PACK8(TdlRules_GetInstance().getCount());
+//    SEND_FRAME(MIN_ID_RESPONSE_GET_RULE_COUNT);
 }
 
 void report_response_ack() {
@@ -74,7 +70,7 @@ void report_receive_rule_response() {
 
 }
 
-void report_rtc_time(time_t time) {
+void report_rtc_time(time_t_avr time) {
     DECLARE_BUF(4);
     PACK32((uint32_t)time);
     SEND_FRAME(MIN_ID_RESPONSE_GET_RTC_TIME);
@@ -118,7 +114,7 @@ void report_prints(const char *data) {
 }
 
 void report_printf(const char *data, ...) {
-    cli();
+    cpu_irq_disable();
     char buf[128];
     va_list argptr;
     va_start(argptr, data);
@@ -126,17 +122,17 @@ void report_printf(const char *data, ...) {
     va_end(argptr);
 
     report_prints(buf);
-    sei();
+    cpu_irq_enable();
 }
 
-void report_printf_P(const char *data, ...) {
-    cli();
-    char buf[128];
-    va_list argptr;
-    va_start(argptr, data);
-    vsprintf_P(buf, data, argptr);
-    va_end(argptr);
-
-    report_prints(buf);
-    sei();
-}
+//void report_printf_P(const char *data, ...) {
+//    cpu_irq_disable();
+//    char buf[128];
+//    va_list argptr;
+//    va_start(argptr, data);
+//    vsprintf_P(buf, data, argptr);
+//    va_end(argptr);
+//
+//    report_prints(buf);
+//    cpu_irq_enable();
+//}

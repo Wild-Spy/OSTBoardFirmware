@@ -9,6 +9,7 @@
 
 #include <udi_cdc.h>
 #include "usb_serial.h"
+#include <min/min_transmit_cmds.h>
 
 /* Sending process:
  * - A FIFO for sending
@@ -82,16 +83,16 @@ static struct fifo rx_fifo;
 static uint8_t tx_buf[TX_FIFO_MAXSIZE];
 static uint8_t rx_buf[RX_FIFO_MAXSIZE];
 
-#define LOCK_INTERRUPTS(i)		    		{(i) = SREG; cli();}			/* NB: SIDE-EFFECT MACRO! */
-#define UNLOCK_INTERRUPTS(i)				{SREG = i;}
+#define LOCK_INTERRUPTS()		    		{cpu_irq_disable();}			/* NB: SIDE-EFFECT MACRO! */
+#define UNLOCK_INTERRUPTS()				    {cpu_irq_enable();}
 
 /* Main setup of ATmega640 USART
  *
  * Hardwired to asynchronous and not using clock doubler so will do 16 samples on receive (better for noise tolerance).
  * The baud parameter will be written straight into the baud rate register.
  */
-//void init_uart(uint16_t baud)
-void init_uart(uint8_t port, usb_cdc_line_coding_t * cfg)
+//void init_serial(uint16_t baud)
+void init_serial()
 {
     /* Initialize FIFOs for UART */
     fifo_init(&tx_fifo, tx_buf, TX_FIFO_MAXSIZE);
@@ -100,7 +101,7 @@ void init_uart(uint8_t port, usb_cdc_line_coding_t * cfg)
 
 /* Handle interrupt generated when the transmit buffer is free to write to.
  */
-int8_t uart_isend(uint8_t port)
+int8_t serial_isend(uint8_t port)
 {
     uint8_t used = tx_fifo.used;
     /* Called when the transmit buffer can be filled */
@@ -138,33 +139,38 @@ int8_t uart_isend(uint8_t port)
  *
  * The CPU must handle the received bytes as fast as they come in (on average): there is no flow control.
  */
-int8_t uart_ireceive(uint8_t port)
-{
+int8_t serial_ireceive(uint8_t port) {
     int val;
     /* TODO handle the error flags (DORn should be logged - it indicates the interrupt handling isn't fast enough; parity error frames should be discarded) */
 
+//    report_printf("rx..");
     if (!udi_cdc_is_rx_ready()) return -1;
-    /* This read also clears down the interrupt */
-    val = udi_cdc_getc();
 
-    /* Write byte to FIFO; if there is no room in the FIFO the byte is discarded */
-    fifo_write(&rx_fifo, (uint8_t)val);
+    // Make sure we consume all bytes..
+    while (udi_cdc_is_rx_ready()) {
+        /* This read also clears down the interrupt */
+        val = udi_cdc_getc();
+
+        /* Write byte to FIFO; if there is no room in the FIFO the byte is discarded */
+        fifo_write(&rx_fifo, (uint8_t) val);
+
+//        report_printf("rx: %02X", (uint8_t) val);
+    }
 
     return 0;
 }
 
 /* Send n bytes to the given USART from the given source. Returns the number of bytes actually buffered. */
-uint8_t uart_send(uint8_t *src, uint8_t n)
+uint8_t serial_send(uint8_t *src, uint8_t n)
 {
     uint8_t written = 0;
-    uint8_t tmp;
 
     /* Interrupts are locked out only through the body of the loop so that transmission can
      * start as soon as there is data to send, which happens concurrently with filling the
      * FIFO
      */
     while (n--) {
-        LOCK_INTERRUPTS(tmp);
+        LOCK_INTERRUPTS();
         if (FIFO_FULL(&tx_fifo)) {
             n = 0;	/* No space left, terminate the sending early */
         }
@@ -173,23 +179,22 @@ uint8_t uart_send(uint8_t *src, uint8_t n)
             /* The FIFO is not empty so enable 'transmit buffer ready' interrupt
              * (may already be enabled but safe to re-enable it anyway).
              */
-            uart_isend(0);
+            serial_isend(0);
             written++;
         }
-        UNLOCK_INTERRUPTS(tmp);
+        UNLOCK_INTERRUPTS();
     }
 
     return written;
 }
 
 /* Read up to n bytes from the given USART into the given destination. Returns the number of bytes actually read. */
-uint8_t uart_receive(uint8_t *dest, uint8_t n)
+uint8_t serial_receive(uint8_t *dest, uint8_t n)
 {
-    uint8_t tmp;
     uint8_t read = 0;
 
     while (n--) {
-        LOCK_INTERRUPTS(tmp);
+        LOCK_INTERRUPTS();
         if (FIFO_EMPTY(&rx_fifo)) {
             n = 0;	/* Nothing left, terminate early */
         }
@@ -197,32 +202,30 @@ uint8_t uart_receive(uint8_t *dest, uint8_t n)
             *(dest++) = fifo_read(&rx_fifo);
             read++;
         }
-        UNLOCK_INTERRUPTS(tmp);
+        UNLOCK_INTERRUPTS();
     }
 
     return read;
 }
 
-uint8_t uart_send_space(void)
+uint8_t serial_send_space(void)
 {
-    uint8_t tmp;
     uint8_t ret;
 
-    LOCK_INTERRUPTS(tmp);
+    LOCK_INTERRUPTS();
     ret = tx_fifo.size - tx_fifo.used;
-    UNLOCK_INTERRUPTS(tmp);
+    UNLOCK_INTERRUPTS();
 
     return ret;
 }
 
-uint8_t uart_receive_ready(void)
+uint8_t serial_receive_ready(void)
 {
-    uint8_t tmp;
     uint8_t ret;
 
-    LOCK_INTERRUPTS(tmp);
+    LOCK_INTERRUPTS();
     ret = rx_fifo.used;
-    UNLOCK_INTERRUPTS(tmp);
+    UNLOCK_INTERRUPTS();
 
     return ret;
 }

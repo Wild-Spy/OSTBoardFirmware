@@ -11,7 +11,11 @@
 #ifndef LAYER2_H_
 #define LAYER2_H_
 
-#include <stdint-gcc.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <stdint.h>
 #include "min_received_cmds.h"
 #include "min_transmit_cmds.h"
 
@@ -23,5 +27,10 @@ void init_min(void);
 
 /* Poll the incoming uart to send bytes into MIN layer 1 */
 void poll_rx_bytes(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 
 #endif /* LAYER2_H_ */

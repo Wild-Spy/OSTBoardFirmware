@@ -10,7 +10,7 @@
 #include "NvmRuleManagerMock.h"
 #else
 #include "TdlRule.h"
-#include "config_comms/RuleWriter.h"
+#include "nvm/NvmRuleManager.h"
 #endif
 
 #include <helpers/compile_time_sizeof.h>

@@ -15,8 +15,11 @@ typedef uint32_t nvm_address_t;
 /**
  * This is the interface for a Non Volatile Memory driver.
  *
- * The implementation should map the NVM to a 32 bit address
- * space.
+ * The implementation defines it's own linear address space.
+ * The addresses passed to read and write should refer to this
+ * local address mapping.
+ * The address space starts at 0 and ends at nvm_region_size_
+ * in bytes.
  *
  * It should be assumed that the implementation uses
  * a buffer which must be flushed when writing is complete.
@@ -27,6 +30,11 @@ typedef uint32_t nvm_address_t;
  * @throws EX_NVM_HARDWARE_ERROR
  */
 class NvmDriverInterface {
+protected:
+    NvmDriverInterface(nvm_size_t nvm_region_size)
+            : nvm_region_size_(nvm_region_size)
+    {}
+
 public:
     /**
      * Read a number of bytes from NVM.
@@ -53,6 +61,11 @@ public:
      * all changes to the NVM.
      */
     virtual void flush() = 0;
+
+    nvm_size_t getRegionSize() { return nvm_region_size_; };
+
+protected:
+    nvm_size_t nvm_region_size_;
 };
 
 #endif //OSTBOARDFIRMWARE_NVMDRIVERINTERFACE_H

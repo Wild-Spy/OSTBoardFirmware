@@ -9,7 +9,7 @@ extern "C" {
 #ifdef TESTING
     #include <time_test.h>
 #else
-    #include <time.h>
+    #include <time_avr.h>
 #endif
 //daylight savings.....
 //#include <util/usa_dst.h>
@@ -20,12 +20,11 @@ extern "C" {
     typedef time_t_test dt_time_t;
     typedef struct tm_test dt_tm;
 #else
-    typedef time_t dt_time_t;
-    typedef struct tm dt_tm;
+    typedef time_t_avr dt_time_t;
+    typedef struct tm_avr dt_tm;
 #endif
 
 #include <stdint.h>
-//#include <stdint-gcc.h>
 
 #define EMPTY_TIME          0xFFFFFFFF
 #define START_DAY_OF_WEEK   MONDAY

@@ -211,7 +211,7 @@ void TdlRuleRunner::setRtcInterrupt() {
     //clear the alarm if it's active.
     uint8_t en = (uint8_t) rtc_->alarm(1);
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-    report_printf_P(PSTR("Set Interrupt: %u %s"), en, alarm_time.isotime());
+    report_printf("Set Interrupt: %u %s", en, alarm_time.isotime());
     #endif
     rtc_->setAlarm(ALM1_MATCH_DATE, alarm_time);
     rtc_->alarmInterrupt(1, true);
@@ -244,7 +244,7 @@ void TdlRuleRunner::mainLoopCallback() {
             update();
         } else {
             #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-            report_printf_P(PSTR("No Alarm"));
+            report_printf("No Alarm");
             #endif
         }
         rtc_->disablePower();

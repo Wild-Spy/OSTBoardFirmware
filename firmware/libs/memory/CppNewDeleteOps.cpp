@@ -2,9 +2,7 @@
 // Created by mcochrane on 27/12/16.
 //
 
-extern "C" {
 #include "MemoryWrapper.h"
-};
 #include "CppNewDeleteOps.h"
 
 void* operator new(size_t objsize) {

@@ -13,7 +13,13 @@
     #define isotime1 isotime_test
     #define difftime difftime_test
 #else
-#define isotime1 isotime
+    #define mk_gmtime mk_gmtime_avr
+    #define gmtime gmtime_avr
+    #define week_of_month week_of_month_avr
+    #define gmtime_r gmtime_r_avr
+    #define isotime_r isotime_r_avr
+    #define isotime1 isotime_avr
+    #define difftime difftime_avr
 #endif
 
 DateTime::DateTime(uint16_t year, uint8_t month, uint8_t day,

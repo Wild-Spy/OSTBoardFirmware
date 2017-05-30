@@ -5,13 +5,11 @@
 #ifndef WS_OST_DS3232SN_H
 #define WS_OST_DS3232SN_H
 
+#include <hal/I2c.h>
 #include <hal/Pin.h>
 #include <datetime/DateTime.h>
 #include "DS3232SN_defs.h"
 
-extern "C" {
-#include "hal/i2c.h"
-};
 
 //Alarm masks
 enum ALARM_TYPES_t {
@@ -33,15 +31,15 @@ enum SQWAVE_FREQS_t {SQWAVE_1_HZ, SQWAVE_1024_HZ, SQWAVE_4096_HZ, SQWAVE_8192_HZ
 
 class DS3232SN {
 public:
-    DS3232SN() {};
+//    DS3232SN(I2c& i2c,
+//             uint8_t nreset_port, uint8_t nreset_pin,
+//             uint8_t npen_port, uint8_t npen_pin);
 
-    DS3232SN(TWI_t* twi,
-             PORT_t* nreset_port, uint8_t nreset_pin,
-             PORT_t* npen_port, uint8_t npen_pin);
-    DS3232SN(TWI_t* twi,
-             PORT_t* nreset_port, uint8_t nreset_pin,
-             PORT_t* npen_port, uint8_t npen_pin,
-             PORT_t* ninterrupt_port, uint8_t ninterrupt_pin);
+    DS3232SN(I2c& i2c,
+//             uint8_t nreset_port, uint8_t nreset_pin,
+             uint8_t npen_port, uint8_t npen_pin,
+             uint8_t ninterrupt_port, uint8_t ninterrupt_pin,
+             extint_callback_t int_callback);
 
     void init();
     void reset();
@@ -75,12 +73,12 @@ public:
     /**
      * Disables the MCU interrupt on the nint pin
      */
-    void disablePinInterrupt() { nint_pin_.disableInterrupt(0); }
+    void disablePinInterrupt() { nint_pin_.unregisterCallback(); }
 
     /**
      * Enables the MCU interrupt on the nint pin
      */
-    void enablePinInterrupt() { nint_pin_.enableInterrupt(0); }
+    void enablePinInterrupt() { nint_pin_.registerCallback(int_callback_); }
 
 private:
     //uint8_t testi2c();
@@ -92,22 +90,23 @@ private:
 private:
     uint8_t dec2bcd(uint8_t n);
     static uint8_t bcd2dec(uint8_t n);
-    uint8_t readTime(struct tm *dt);
-    uint8_t writeTime(struct tm* tm);
+    uint8_t readTime(dt_tm* dt);
+    uint8_t writeTime(dt_tm* tm);
 
 private:
-    I2c i2c_;
-    Pin nreset_pin_;
+    I2c& i2c_;
+//    Pin nreset_pin_;
     Pin npen_pin_; //active low power_enable_pin
     Pin nint_pin_;  //active low interrupt pin
     DateTime next_alarm_;
 
-    Pin twi_sda_pin_;
-    Pin twi_scl_pin_;
+//    Pin twi_sda_pin_;
+//    Pin twi_scl_pin_;
     bool power_enabled_;
+    extint_callback_t int_callback_;
 };
 
-void initRtc();
+void initRtc(I2c& i2c, extint_callback_t interruptCallback);
 DS3232SN& getRtc();
 DateTime getNow();
 
