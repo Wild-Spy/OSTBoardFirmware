@@ -37,11 +37,6 @@ extern "C" {
 #define MIN_ID_SAVE_RULES               (0x0cu)
 #define MIN_ID_PRINT_EEPROM 			(0x0du)
 
-/* Motor control request from the host */
-extern uint8_t motor_requested;
-extern uint32_t motor_position_request;
-extern uint16_t motor_speed_request;
-
 EXTERNC void handle_print_nvm(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_ping(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_get_rule_count(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);

@@ -65,7 +65,7 @@ public:
 
     uint8_t getFieldCount() { return field_count_; };
 
-//    PeriodFieldType_t getLongestFieldType();
+    PeriodFieldType_t getLongestFieldType();
 
     friend DateTime operator+(const DateTime& lhs, const Period& rhs);
 

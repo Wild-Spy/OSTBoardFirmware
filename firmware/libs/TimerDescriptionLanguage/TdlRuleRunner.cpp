@@ -2,16 +2,14 @@
 // Created by mcochrane on 18/04/17.
 //
 
-extern "C" {
-#include <util/delay.h>
-}
+#include <delay.h>
 #include <DS3232SN/DS3232SN.h>
 #include <min/min_transmit_cmds.h>
 #include "TdlRuleRunner.h"
 #include "TdlRules.h"
 #include "TdlChannels.h"
 
-static TdlRuleRunner rule_runner;
+static TdlRuleRunner* rule_runner = NULL;
 
 void TdlRuleRunner::start(DateTime starting_time) {
     rtc_->enablePower();
@@ -140,13 +138,13 @@ DateTime TdlRuleRunner::getNow() {
 bool TdlRuleRunner::update() {
     current_time_ = getNow();
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-    report_printf_P(PSTR("Handle Interrupt %s"), current_time_.isotime());
+    report_printf("Handle Interrupt %s", current_time_.isotime());
     #endif
 
     //TODO: handle events! - how to do it?
     if (current_time_ < next_update_time_) {
         #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-        report_printf_P(PSTR("Not Time Yet!"));
+        report_printf("Not Time Yet!");
         #endif
         // Clear interrupt flag
 //        rtc_->alarm(1);
@@ -165,7 +163,7 @@ bool TdlRuleRunner::update() {
 //    for (uint8_t i = 0; i < TdlRules_GetInstance().getCount(); i++) {
     for (int16_t i = TdlRules_GetInstance().getCount()-1; i >= 0; i--) {
         #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1
-        report_printf_P(PSTR("urg: %u"), i);
+        report_printf("urg: %u", i);
         #endif
         TdlRule& rule = TdlRules_GetInstance().get(i);
         rule.update(current_time_);
@@ -200,14 +198,14 @@ void TdlRuleRunner::setRtcInterrupt() {
         alarm_time.setSecondOfMinute(0);
         alarm_time.setMinuteOfHour(0);
         alarm_time.setDayOfMonth(1);
-        alarm_time.addMonths(1);
+        alarm_time = alarm_time.plusMonths(1);
     }
 
     //If the RTC is busy, wait.
     //TODO: maybe actually test this..
     while(rtc_->busy());
 
-    cli();
+    cpu_irq_enter_critical();
     //clear the alarm if it's active.
     uint8_t en = (uint8_t) rtc_->alarm(1);
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
@@ -216,7 +214,7 @@ void TdlRuleRunner::setRtcInterrupt() {
     rtc_->setAlarm(ALM1_MATCH_DATE, alarm_time);
     rtc_->alarmInterrupt(1, true);
     rtc_->enablePinInterrupt();
-    sei();
+    cpu_irq_leave_critical();
 
 //    TdlChannels_GetInstance().get(0).disable();
 }
@@ -254,21 +252,27 @@ void TdlRuleRunner::mainLoopCallback() {
     pin_interrupt_triggered_ = false;
 }
 
+static void DS3232SNInterruptCallback(void) {
+TdlRuleRunner_GetInstance().interruptCallback();
+}
+
 /**
  * Initialises the RuleRunner along with it's dependencies
  * - Initial state is stopped.
  * - Initialises TdlRules (loads rules from eeprom here)
  * - Sets up and initialises RTC
  */
-void TdlRuleRunner_Init() {
-    initRtc();
+void TdlRuleRunner_Init(I2c& i2c, NvmRuleManager& ruleManager) {
+    initRtc(i2c, DS3232SNInterruptCallback);
     // clear oscillator stopped flag if it's set
     getRtc().oscStopped(true);
     getRtc().set(DateTime(2000, 1, 1, 0, 0, 0));
-    TdlRules_Init();
-    rule_runner = TdlRuleRunner(getRtc());
+    TdlRules_Init(MAX_RULES, ruleManager);
+    rule_runner = new TdlRuleRunner(getRtc());
+    getRtc().enablePinInterrupt();
 }
 
 TdlRuleRunner& TdlRuleRunner_GetInstance() {
-    return rule_runner;
+    if (rule_runner == NULL) Throw(EX_NULL_POINTER);
+    return *rule_runner;
 }

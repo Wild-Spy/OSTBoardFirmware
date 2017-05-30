@@ -47,13 +47,18 @@ void __libc_init_array(void);
 
 /* Default empty handler */
 void Dummy_Handler(void);
+void Dummy_Handler1(void);
+void Dummy_Handler2(void);
+void Dummy_Handler3(void);
+void Dummy_Handler4(void);
+void Dummy_Handler5(void);
 
 /* Cortex-M0+ core handlers */
-void NMI_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void HardFault_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void SVC_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void PendSV_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
-void SysTick_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
+void NMI_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler4")));
+void HardFault_Handler       ( void ) __attribute__ ((weak, alias("Dummy_Handler1")));
+void SVC_Handler             ( void ) __attribute__ ((weak, alias("Dummy_Handler2")));
+void PendSV_Handler          ( void ) __attribute__ ((weak, alias("Dummy_Handler3")));
+void SysTick_Handler         ( void ) __attribute__ ((weak, alias("Dummy_Handler5")));
 
 /* Peripherals handlers */
 void PM_Handler              ( void ) __attribute__ ((weak, alias("Dummy_Handler")));
@@ -248,6 +253,31 @@ void Reset_Handler(void)
  * \brief Default interrupt handler for unused IRQs.
  */
 void Dummy_Handler(void)
+{
+  while (1) {
+  }
+}
+void Dummy_Handler1(void)
+{
+  while (1) {
+  }
+}
+void Dummy_Handler2(void)
+{
+  while (1) {
+  }
+}
+void Dummy_Handler3(void)
+{
+  while (1) {
+  }
+}
+void Dummy_Handler4(void)
+{
+  while (1) {
+  }
+}
+void Dummy_Handler5(void)
 {
   while (1) {
   }

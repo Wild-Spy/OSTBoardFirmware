@@ -16,7 +16,6 @@
 #include <datetime/DateTime.h>
 #endif
 
-
 class TdlRule;
 
 typedef enum TdlActivatorType_enum {
@@ -97,7 +96,7 @@ private:
 #ifdef TESTING
 #include "TdlRuleMock.h"
 #else
-#include "TdlRule.h"
+//#include "TdlRule.h"
 #endif
 
 #endif //WS_OST_TDLACTIVATOR_H

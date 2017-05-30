@@ -7,6 +7,9 @@
 
 #include "DS3232SN/DS3232SN.h"
 #include <datetime/DateTime.h>
+#include <libs/nvm/NvmRuleManager.h>
+
+#define MAX_RULES   3
 
 class TdlRuleRunner {
 public:
@@ -106,7 +109,7 @@ private:
     bool pin_interrupt_triggered_;
 };
 
-void TdlRuleRunner_Init();
+void TdlRuleRunner_Init(I2c& i2c, NvmRuleManager& ruleManager);
 TdlRuleRunner& TdlRuleRunner_GetInstance();
 
 #endif //WS_OST_TDLRULERUNNER_H

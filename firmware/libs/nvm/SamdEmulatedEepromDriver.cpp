@@ -6,6 +6,8 @@
 #include <memory/MemoryWrapper.h>
 //#include <cmocka.h>
 #include <nvm.h>
+#include <libs/min/min_transmit_cmds.h>
+#include <cstring>
 
 SamdEmulatedEepromDriver::SamdEmulatedEepromDriver(enum nvm_eeprom_emulator_size eepromSize)
     : NvmDriverInterface(nvmEmulatorSizeToNvmSize(eepromSize)),
@@ -80,10 +82,23 @@ void SamdEmulatedEepromDriver::read(nvm_data_t *data, nvm_size_t length, nvm_add
 
         if (read_length == 0) break;
 
-        // Do the actual read
-        enum status_code result = nvm_read_buffer(read_start, data, read_length);
+
+        if (page == start_page) {
+            // If it's the first page then we will be reading from somewhere other than the start of the page.  But
+            // nvm_read_buffer requires the address to be aligned to the start of a page!
+            readPageIntoPageBuffer(page);
+            uint8_t add_in_page = getAddressInPage(address, NULL);
+            memcpy_ram2ram(data, page_buffer_+add_in_page, read_length);
+        } else {
+            // Do the actual read
+            enum status_code result = nvm_read_buffer(read_start, data, read_length);
 //        print_message("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
-        if (result != STATUS_OK) Throw(EX_NVM_READ_ERROR);
+            report_printf("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
+            if (result != STATUS_OK) Throw(EX_NVM_READ_ERROR);
+        }
+
+
+
 
         // Move local buffer pointer
         data += read_length;

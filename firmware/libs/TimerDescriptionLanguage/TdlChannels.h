@@ -19,7 +19,7 @@
 class TdlChannels {
 public:
 
-    TdlChannels(uint8_t channel_count, TdlChannelState_t default_state, Pin pinList[]);
+    TdlChannels(uint8_t channel_count, TdlChannelState_t default_state, Pin* pinList[]);
 
     void disableAll();
 
@@ -53,7 +53,7 @@ private:
 #endif
 
 EXTERNC TdlChannels& TdlChannels_GetInstance();
-EXTERNC void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin pins[]);
+EXTERNC void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin* pins[]);
 
 #ifdef TESTING
 EXTERNC void TdlChannels_Destroy();

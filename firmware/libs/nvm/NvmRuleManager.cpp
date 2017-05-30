@@ -70,7 +70,6 @@ uint8_t NvmRuleManager::getRuleCountFromNvm() {
 }
 
 void NvmRuleManager::getRuleData(uint8_t rule_id, uint8_t *data, uint8_t *length) {
-
     *length = getRuleInfo(rule_id).getLength();
     getRuleInfo(rule_id).getData(data);
 }

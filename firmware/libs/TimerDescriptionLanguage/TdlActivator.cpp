@@ -4,6 +4,7 @@
 
 #include <min/min_transmit_cmds.h>
 #include "TdlActivator.h"
+#include "TdlRule.h"
 
 void TdlActivator::disable() {
     currentState_ = TDLACTIVATORSTATE_DISABLED;

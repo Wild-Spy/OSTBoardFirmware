@@ -15,6 +15,8 @@
 
 #include <string.h>
 #include <libs/DS3232SN/DS3232SN.h>
+#include <libs/TimerDescriptionLanguage/TdlRuleRunner.h>
+#include <libs/TimerDescriptionLanguage/TdlChannels.h>
 #include "layer2_helper.h"
 #include "min.h"
 
@@ -61,10 +63,6 @@ void handle_ping(uint8_t m_id, uint8_t *m_buf, uint8_t m_control)
 }
 
 void handle_get_rule_count(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
-//    DECLARE_UNPACK();
-//    uint8_t id;
-//    UNPACK8(id);
-
     report_rule_count();
 }
 
@@ -108,25 +106,22 @@ void handle_rx_rule_end(uint8_t m_id, uint8_t *m_buf, uint8_t m_control)
 
     //TODO: send back the target ID that was just created?
 }
+
 void handle_save_rules(uint8_t m_id, uint8_t *m_buf, uint8_t m_control)
 {
-//    if (receiving_rule) {
-//        report_response_nak();
-//        return;
-//    }
-//
-//    TdlChannels_GetInstance().resetStates();
-//    NvmRuleManager_SaveRuleCount();
-//
-//    TdlRuleRunner_GetInstance().stop();
-//
-//    TdlRuleRunner_GetInstance().reloadRules();
-//
-//
-//    TdlRuleRunner_GetInstance().start();
-//
-//    report_response_ack();
-    report_response_nak();
+    if (receiving_rule) {
+        report_response_nak();
+        return;
+    }
+
+    TdlChannels_GetInstance().resetStates();
+    NvmRuleManager_SaveRuleCount();
+    TdlRuleRunner_GetInstance().stop();
+
+    TdlRuleRunner_GetInstance().reloadRules();
+    TdlRuleRunner_GetInstance().start();
+
+    report_response_ack();
 }
 
 void handle_erase_all_rules(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
@@ -146,7 +141,6 @@ void handle_erase_all_rules(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
 }
 
 void handle_get_rtc_time(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
-    getRtc().dumpRTC(0, 16);
     report_rtc_time(getNow().toTimet());
 }
 
@@ -156,21 +150,10 @@ void handle_set_rtc_time(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
     UNPACK32(time);
     DateTime dt = DateTime(time);
 
-    report_printf("setting time... %ld", time);
+    TdlChannels_GetInstance().resetStates();
 
-    getRtc().set(dt);
-
-    // TODO: update to old code below
-//
-//    TdlChannels_GetInstance().resetStates();
-//
-//    TdlRuleRunner_GetInstance().reloadRules();
-//    TdlRuleRunner_GetInstance().start(dt);
-
-
-
-
-
+    TdlRuleRunner_GetInstance().reloadRules();
+    TdlRuleRunner_GetInstance().start(dt);
 
     //Don't think we need this
 //    getRtc().set(dt);

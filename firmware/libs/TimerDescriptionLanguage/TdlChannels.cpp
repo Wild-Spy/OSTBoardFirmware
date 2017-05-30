@@ -3,6 +3,7 @@
 //
 
 #include "TdlChannels.h"
+#include <new>
 
 static TdlChannels* tdl_channels = NULL;
 
@@ -14,14 +15,14 @@ static TdlChannels* tdl_channels = NULL;
  * @param default_state     the default state of all channels
  * @param pinList           an array of Pins specifying the pin for each channel
  */
-TdlChannels::TdlChannels(uint8_t channel_count, TdlChannelState_t default_state, Pin pinList[])
+TdlChannels::TdlChannels(uint8_t channel_count, TdlChannelState_t default_state, Pin* pinList[])
         : channel_count_(channel_count)
 {
     channels_ = (TdlChannel*)malloc(sizeof(TdlChannel)*channel_count);
 
     for (uint8_t i = 0; i < channel_count_; i++) {
         // Creating these in-place with the placement new operator
-        new (channels_+i) TdlChannel(i, default_state, &pinList[i]);
+        new (channels_+i) TdlChannel(i, default_state, pinList[i]);
     }
 }
 
@@ -42,6 +43,7 @@ void TdlChannels::resetStates() {
     }
 }
 
+#if defined(TESTING)
 TdlChannels::~TdlChannels() {
     for (uint8_t i = 0; i < channel_count_; i++) {
         // These were created in-place with the placement new operator so
@@ -51,13 +53,14 @@ TdlChannels::~TdlChannels() {
     }
     free(channels_);
 }
+#endif
 
 TdlChannels& TdlChannels_GetInstance() {
     if (tdl_channels == NULL) Throw(EX_NULL_POINTER);
     return *tdl_channels;
 }
 
-void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin *pins) {
+void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin* pins[]) {
     if (channels > CHANNEL_COUNT_MAX) Throw(EX_DATA_OVERFLOW);
     tdl_channels = new TdlChannels(channels, default_state, pins);
 }

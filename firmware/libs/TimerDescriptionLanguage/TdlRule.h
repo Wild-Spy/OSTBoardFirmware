@@ -47,6 +47,7 @@ public:
     void setHasNotBeenRunThisStep() { has_been_run_this_step_ = false; };
 
     static TdlRule Decompile(uint8_t *data, uint8_t len);
+    static void Decompile(uint8_t *data, uint8_t len, TdlRule* addressToStoreAt);
 
 private:
     DateTime getLastStateChangeTimeNoEvents();

@@ -96,9 +96,11 @@ void Pin::setupInterrupt(enum extint_detect detection_criteria,
  * @param callback
  */
 void Pin::registerCallback(extint_callback_t callback) {
-    if (callback_ != NULL) Throw(EX_ALREADY_INITIALISED);
+    if (callback_ != NULL) {
+        unregisterCallback();
+    }; //Throw(EX_ALREADY_INITIALISED);
     callback_ = callback;
-    enum status_code result = extint_unregister_callback(callback_, pin_, EXTINT_CALLBACK_TYPE_DETECT);
+    enum status_code result = extint_register_callback(callback_, pin_, EXTINT_CALLBACK_TYPE_DETECT);
     if (result == STATUS_ERR_ALREADY_INITIALIZED) {
         Throw(EX_ALREADY_INITIALISED);
     }

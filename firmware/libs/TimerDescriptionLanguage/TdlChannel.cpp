@@ -11,7 +11,7 @@ void TdlChannel::disable() {
     pin_->setOutputLow();
     state_ = TDLCHANNELSTATE_DISABLED;
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-    report_printf_P(PSTR("Chan %u OFF"), rule_id);
+    report_printf("Chan %u OFF", id_);
     #endif
 }
 
@@ -20,7 +20,7 @@ void TdlChannel::enable() {
     pin_->setOutputHigh();
     state_ = TDLCHANNELSTATE_ENABLED;
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 0
-    report_printf_P(PSTR("Chan %u ON"), rule_id);
+    report_printf("Chan %u ON", id_);
     #endif
 }
 

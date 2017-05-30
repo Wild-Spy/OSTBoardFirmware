@@ -79,7 +79,7 @@ void DS3232SN::init() {
     reset();
     i2c_.enable();
 
-    enablePinInterrupt();
+//    enablePinInterrupt();
 }
 
 void DS3232SN::reset() {
@@ -106,9 +106,6 @@ uint8_t DS3232SN::readTime(dt_tm *dt) {
     dt->tm_mday = bcd2dec(buf[4]);
     dt->tm_mon = bcd2dec((uint8_t) (buf[5] & ~(1<<CENTURY))) - 1; //don't use the century bit
     dt->tm_year = bcd2dec(buf[6]) + 2000 - 1900;
-
-    report_printf("time");
-    report_printf("ymdhms: %d-%d-%d %d:%d:%d", dt->tm_year, dt->tm_mon, dt->tm_mday, dt->tm_hour, dt->tm_min, dt->tm_sec);
 
     return 0;
 }

@@ -8,11 +8,9 @@
 #include "TdlRule.h"
 #include "TdlRules.h"
 #include "TdlEvents.h"
-
-extern "C" {
-#include <util/delay.h>
-#include <exception/ExceptionValues.h>
-};
+#include <delay.h>
+#include <exception/CException.h>
+#include <memory/CppNewDeleteOps.h>
 
 void TdlRule::enable() {
     enabled_ = true;
@@ -30,11 +28,19 @@ void TdlRule::resetInternalTimeKeepingVariables() {
 }
 
 TdlRuleState_t TdlRule::getOutputState() {
-    return action_.getState();
+    if (action_.getState() == TDLACTIONSTATE_ACTIVE)
+        return TDLRULESTATE_ACTIVE;
+    else if (action_.getState() == TDLACTIONSTATE_INACTIVE)
+        return TDLRULESTATE_INACTIVE;
+    return TDLRULESTATE_INACTIVE;
 }
 
 TdlRule TdlRule::Decompile(uint8_t *data, uint8_t len) {
     return TdlRule(data, len);
+}
+
+void TdlRule::Decompile(uint8_t *data, uint8_t len, TdlRule *addressToStoreAt) {
+    new (addressToStoreAt) TdlRule(data, len);
 }
 
 TdlRule::TdlRule(uint8_t *data, uint8_t len) {
@@ -76,8 +82,14 @@ TdlRule::TdlRule(uint8_t *data, uint8_t len) {
     }
 
     // Decompile start of first period (datetime)
-    start_of_first_period_ = DateTime(*((time_t*)(data+len_so_far)));
-    len_so_far += sizeof(time_t);
+    dt_time_t t = 0;
+    t += *(data+len_so_far+0);
+    t += *(data+len_so_far+1)<<8;
+    t += *(data+len_so_far+2)<<16;
+    t += *(data+len_so_far+3)<<24;
+//    DateTime ddd(*((dt_time_t*)(data+len_so_far)));
+    start_of_first_period_ = DateTime(t);
+    len_so_far += sizeof(dt_time_t);
     if (len_so_far > len) Throw(EX_BUFFER_OVERRUN);
 
     // Decompile start of first period delay
@@ -378,7 +390,7 @@ void TdlRule::runParentRulesIfNecessary(DateTime now) {
     sl::Array<TdlRule*, 4> parent_rules;
     findParentRules(&parent_rules);
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2
-    report_printf_P(PSTR("Parent Rules(%u): %u"), this->id_, parent_rules.getCount());
+    report_printf("Parent Rules(%u): %u", this->id_, parent_rules.getCount());
     #endif
     for (uint8_t i = 0; i < parent_rules.getCount(); i++) {
         TdlRule& rule = *parent_rules.get(i);
@@ -388,7 +400,7 @@ void TdlRule::runParentRulesIfNecessary(DateTime now) {
 
 void TdlRule::update(DateTime now) {
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2
-    report_printf_P(PSTR("Update Rule %u (%senabled)"), this->id_, isEnabled()?"":"not ");
+    report_printf("Update Rule %u (%senabled)", this->id_, isEnabled()?"":"not ");
     #endif
     if (isEnabled() && !has_been_run_this_step_) {
         runParentRulesIfNecessary(now);
@@ -404,7 +416,7 @@ void TdlRule::updateThisRuleAndParentsIfNecessary(DateTime now) {
 void TdlRule::updateThisRuleOnly(DateTime now) {
     bool is_active = false;
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1
-    report_printf_P(PSTR("Run Rule %u"), this->id_);
+    report_printf("Run Rule %u", this->id_);
     #endif
 //    char nts[20];
 //    now.isotime(nts);
@@ -422,7 +434,7 @@ void TdlRule::updateThisRuleOnly(DateTime now) {
         }
     }
     #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1
-    report_printf_P(PSTR("Rule %u is %sactive."), id_, is_active?"":"not ");
+    report_printf("Rule %u is %sactive.", id_, is_active?"":"not ");
     #endif
     if (is_active) {
         action_.start(now);
@@ -475,3 +487,4 @@ DateTime TdlRule::getStartOfPreviousPeriodForEvent(DateTime now) {
     // 'simulated event list'.  Here they get generated asynchronously.
     return DateTime::Empty();
 }
+

@@ -202,12 +202,6 @@ SET(SOURCE_FILES
         libs/min/layer2.c
         libs/serial/usb_serial.c
 
-#        asf/common/boards/user_board/init.c
-#        asf/common/services/usb/class/cdc/device/udi_cdc_desc.c
-#        libs/min/layer1.c
-#        libs/min/layer2.c
-#        libs/serial/usb_serial.c
-#        libs/eeprom/eeprom_driver.c
         libs/exception/CException.c
         libs/memory/MemoryWrapper.c
 #
@@ -216,26 +210,22 @@ SET(SOURCE_FILES
         libs/nvm/NvmRuleLoader.cpp
         libs/min/min_received_cmds.cpp
         libs/min/min_transmit_cmds.cpp
-#        libs/min/layer2_helper.c
-#        libs/TimerDescriptionLanguage/TdlRule.cpp
-#        libs/TimerDescriptionLanguage/TdlAction.cpp
-#        libs/TimerDescriptionLanguage/TdlActivator.cpp
+        libs/TimerDescriptionLanguage/TdlRule.cpp
+        libs/TimerDescriptionLanguage/TdlAction.cpp
+        libs/TimerDescriptionLanguage/TdlActivator.cpp
         libs/datetime/DateTime.cpp
-#        libs/TimerDescriptionLanguage/TdlChannel.cpp
-#        libs/TimerDescriptionLanguage/TdlChannels.cpp
-#        libs/datetime/Period.cpp
-#        libs/datetime/PeriodInterval.cpp
-#        libs/datetime/Interval.cpp
-#        libs/simplib/array.cpp
-#        libs/TimerDescriptionLanguage/TdlEvent.cpp
-#        libs/TimerDescriptionLanguage/TdlRules.cpp
+        libs/TimerDescriptionLanguage/TdlChannel.cpp
+        libs/TimerDescriptionLanguage/TdlChannels.cpp
+        libs/datetime/Period.cpp
+        libs/datetime/PeriodInterval.cpp
+        libs/datetime/Interval.cpp
+        libs/simplib/array.cpp
+        libs/TimerDescriptionLanguage/TdlEvent.cpp
+        libs/TimerDescriptionLanguage/TdlRules.cpp
         libs/DS3232SN/DS3232SN.cpp
-#        libs/hal/Pin.cpp
-#        libs/hal/i2c.c
         libs/min/encode_decode.c
-#        libs/helpers/compile_time_sizeof.h
-#        libs/TimerDescriptionLanguage/TdlEvents.cpp
-#        libs/TimerDescriptionLanguage/TdlRuleRunner.cpp
+        libs/TimerDescriptionLanguage/TdlEvents.cpp
+        libs/TimerDescriptionLanguage/TdlRuleRunner.cpp
         system_samd21.c
         libs/usb/usb_handlers.cpp
         libs/nvm/SamdEmulatedEepromDriver.cpp

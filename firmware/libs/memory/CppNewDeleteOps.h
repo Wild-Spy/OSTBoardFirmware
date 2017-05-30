@@ -12,4 +12,11 @@ void* operator new(size_t objsize);
 void* operator new[](unsigned int x);
 //void operator delete[](void *);
 
+inline void* operator new(size_t, void* __p)
+{ return __p; }
+
+
+inline void* operator new[](size_t, void* __p)
+{ return __p; }
+
 #endif //WS_OST_CPPNEWDELETEOPS_H

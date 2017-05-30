@@ -85,24 +85,24 @@ int32_t Period::getMillis() const {
 //void add_to_tm_field()
 
 DateTime operator+(const DateTime &lhs, const Period &rhs) {
-    DateTime ret_time;
+    DateTime ret_time = lhs;
 
     for (uint8_t i = 0; i < rhs.field_count_; i++) {
         const PeriodField& field = rhs.fields_[i];
         if (field.getType() == PERIODFIELD_YEARS) {
-            ret_time = lhs.plusYears((int16_t) field.getValue());
+            ret_time = ret_time.plusYears((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_MONTHS) {
-            ret_time = lhs.plusMonths((int16_t) field.getValue());
+            ret_time = ret_time.plusMonths((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_WEEKS) {
-            ret_time = lhs.plusWeeks((int16_t) field.getValue());
+            ret_time = ret_time.plusWeeks((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_DAYS) {
-            ret_time = lhs.plusDays((int16_t) field.getValue());
+            ret_time = ret_time.plusDays((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_HOURS) {
-            ret_time = lhs.plusHours((int16_t) field.getValue());
+            ret_time = ret_time.plusHours((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_MINUTES) {
-            ret_time = lhs.plusMinutes((int16_t) field.getValue());
+            ret_time = ret_time.plusMinutes((int16_t) field.getValue());
         } else if (field.getType() == PERIODFIELD_SECONDS) {
-            ret_time = lhs.plusSeconds((int16_t) field.getValue());
+            ret_time = ret_time.plusSeconds((int16_t) field.getValue());
         }
     }
 
@@ -155,15 +155,15 @@ Period::Period(int32_t value, PeriodFieldType_t type)
  * returned.
  * @return
  */
-//PeriodFieldType_t Period::getLongestFieldType() {
-//    PeriodFieldType_t longest_field = PERIODFIELD_NONE;
-//    // The longest field is years with a value of 0,
-//    // the shortest field has the maximum value (ie value
-//    // of the uint8_t in the PeriodFieldType_t.
-//    for (uint8_t i = 0; i < field_count_; i++) {
-//        if (fields_[i].getType() < longest_field)
-//            longest_field = fields_[i].getType();
-//    }
-//
-//    return longest_field;
-//}
+PeriodFieldType_t Period::getLongestFieldType() {
+    PeriodFieldType_t longest_field = PERIODFIELD_NONE;
+    // The longest field is years with a value of 0,
+    // the shortest field has the maximum value (ie value
+    // of the uint8_t in the PeriodFieldType_t.
+    for (uint8_t i = 0; i < field_count_; i++) {
+        if (fields_[i].getType() < longest_field)
+            longest_field = fields_[i].getType();
+    }
+
+    return longest_field;
+}

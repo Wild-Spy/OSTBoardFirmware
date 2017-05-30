@@ -7,18 +7,13 @@
 #include "delayMock.h"
 #include "SimplePinMock.h"
 #else
-extern "C" {
-#include <util/delay.h>
-}
+#include <delay.h>
 #endif
 
 extern "C" {
 #include "min/encode_decode.h"
 }
 
-//#include <min/min_transmit_cmds.h>
-//#include "TdlRule.h"
-//#include "TdlActivator.h"
 #include "TdlChannels.h"
 #include "TdlRules.h"
 

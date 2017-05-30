@@ -4,16 +4,13 @@
 
 #include <datetime/DateTime.h>
 #include <string.h>
-//#include <TimerDescriptionLanguage/TdlRules.h>
 #include <interrupt.h>
 #include "min_transmit_cmds.h"
 #include <nvm/NvmRuleManager.h>
 #include <cstdarg>
-/* Functions called by the application to report information via MIN frames */
-
+#include <libs/TimerDescriptionLanguage/TdlRules.h>
 #include "layer2_helper.h"
 #include "min.h"
-//#include <util/delay.h>
 
 /* Report the current state of the environment */
 void report_environment(uint16_t temperature, uint16_t humidity)
@@ -49,9 +46,9 @@ void report_deadbeef(uint32_t deadbeef)
 
 void report_rule_count()
 {
-//    DECLARE_BUF(1);
-//    PACK8(TdlRules_GetInstance().getCount());
-//    SEND_FRAME(MIN_ID_RESPONSE_GET_RULE_COUNT);
+    DECLARE_BUF(1);
+    PACK8(TdlRules_GetInstance().getCount());
+    SEND_FRAME(MIN_ID_RESPONSE_GET_RULE_COUNT);
 }
 
 void report_response_ack() {
@@ -94,7 +91,6 @@ void report_end_print() {
 
 void report_printl(const char *data, uint16_t len) {
     report_start_print(len);
-//    _delay_ms(20);
     while (len > 0) {
         if (len >= MAX_FRAME_PAYLOAD_SIZE) {
             report_data_print((uint8_t*)data, MAX_FRAME_PAYLOAD_SIZE);
@@ -114,7 +110,7 @@ void report_prints(const char *data) {
 }
 
 void report_printf(const char *data, ...) {
-    cpu_irq_disable();
+    cpu_irq_enter_critical();
     char buf[128];
     va_list argptr;
     va_start(argptr, data);
@@ -122,17 +118,5 @@ void report_printf(const char *data, ...) {
     va_end(argptr);
 
     report_prints(buf);
-    cpu_irq_enable();
+    cpu_irq_leave_critical();
 }
-
-//void report_printf_P(const char *data, ...) {
-//    cpu_irq_disable();
-//    char buf[128];
-//    va_list argptr;
-//    va_start(argptr, data);
-//    vsprintf_P(buf, data, argptr);
-//    va_end(argptr);
-//
-//    report_prints(buf);
-//    cpu_irq_enable();
-//}

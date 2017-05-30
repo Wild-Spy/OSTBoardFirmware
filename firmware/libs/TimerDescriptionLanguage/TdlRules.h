@@ -16,8 +16,6 @@
 #include <helpers/compile_time_sizeof.h>
 #include "exception/CException.h"
 
-#define MAX_RULES   2
-
 class TdlRules {
 public:
     TdlRules(uint8_t max_rules, NvmRuleManager& ruleWriter);

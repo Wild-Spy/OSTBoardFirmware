@@ -5,9 +5,9 @@
 #ifndef WS_OST_TDLACTION_H
 #define WS_OST_TDLACTION_H
 
-
-#include "TdlActivator.h"
 #include "TdlRuleState.h"
+#include "TdlActivator.h"
+
 
 typedef enum ActionState_enum {
     TDLACTIONSTATE_ACTIVE,
