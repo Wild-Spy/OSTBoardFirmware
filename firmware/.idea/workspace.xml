@@ -16,36 +16,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2516cac1-c2f1-4838-8f27-aca0fa00286e" name="Default" comment="">
+    <list default="true" id="2516cac1-c2f1-4838-8f27-aca0fa00286e" name="Default" comment="Simple rule is working (test mode -&gt; ch1 is currently linked to LED)">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/ws-ost.hex" afterPath="$PROJECT_DIR$/bin/ws-ost.hex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/DS3232SN/DS3232SN.cpp" afterPath="$PROJECT_DIR$/libs/DS3232SN/DS3232SN.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlAction.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlAction.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlAction.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlAction.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlActivator.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlActivator.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlActivator.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlActivator.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannel.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannel.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannels.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannels.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannels.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlChannels.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRule.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRule.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRule.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRule.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRuleRunner.cpp" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRuleRunner.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRuleRunner.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRuleRunner.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRules.h" afterPath="$PROJECT_DIR$/libs/TimerDescriptionLanguage/TdlRules.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/datetime/Period.cpp" afterPath="$PROJECT_DIR$/libs/datetime/Period.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/datetime/Period.h" afterPath="$PROJECT_DIR$/libs/datetime/Period.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/exception/CException.c" afterPath="$PROJECT_DIR$/libs/exception/CException.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/hal/Pin.cpp" afterPath="$PROJECT_DIR$/libs/hal/Pin.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/memory/CppNewDeleteOps.h" afterPath="$PROJECT_DIR$/libs/memory/CppNewDeleteOps.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/min/min_received_cmds.cpp" afterPath="$PROJECT_DIR$/libs/min/min_received_cmds.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/min/min_received_cmds.h" afterPath="$PROJECT_DIR$/libs/min/min_received_cmds.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/min/min_transmit_cmds.cpp" afterPath="$PROJECT_DIR$/libs/min/min_transmit_cmds.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/nvm/NvmRuleManager.cpp" afterPath="$PROJECT_DIR$/libs/nvm/NvmRuleManager.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/nvm/SamdEmulatedEepromDriver.cpp" afterPath="$PROJECT_DIR$/libs/nvm/SamdEmulatedEepromDriver.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/simplib/array.h" afterPath="$PROJECT_DIR$/libs/simplib/array.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main1.cpp" afterPath="$PROJECT_DIR$/main1.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/startup_samd21.c" afterPath="$PROJECT_DIR$/startup_samd21.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/CMakeFiles/" />
@@ -953,7 +925,7 @@
       <workItem from="1493553723406" duration="71000" />
       <workItem from="1495518070843" duration="19591000" />
       <workItem from="1495695780204" duration="88300000" />
-      <workItem from="1496043326513" duration="54335000" />
+      <workItem from="1496043326513" duration="54989000" />
     </task>
     <task id="LOCAL-00001" summary="USB stuff is getting there.&#10;Pretty much have the scaffolding setup.">
       <created>1480554537124</created>
@@ -990,11 +962,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496136329171</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Simple rule is working (test mode -&gt; ch1 is currently linked to LED)">
+      <created>1496184480883</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1496184480883</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="503083000" />
+    <option name="totallyTimeSpent" value="503737000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1084,7 +1063,8 @@
     <MESSAGE value="Work on DS3232 library.  I2C is working.  Pesky enable clock in main required." />
     <MESSAGE value="Cexception now working!" />
     <MESSAGE value="I2c and DS3232 working." />
-    <option name="LAST_COMMIT_MESSAGE" value="I2c and DS3232 working." />
+    <MESSAGE value="Simple rule is working (test mode -&gt; ch1 is currently linked to LED)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Simple rule is working (test mode -&gt; ch1 is currently linked to LED)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
