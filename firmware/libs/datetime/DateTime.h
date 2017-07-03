@@ -133,8 +133,8 @@ public:
 
      * @return the string (length is always 19)
      */
-    void isotime(char* s);
-    char* isotime();
+    void isotime(char* s) const;
+    char* isotime() const;
 
     dt_tm* toGmtime() const;
     void toGmtimeR(dt_tm* time_ptr) const;

@@ -214,10 +214,10 @@ void DateTime::toGmtimeR(dt_tm *time_ptr) const {
 //    return ::strftime(s, maxsize, format, toGmtime());
 //}
 //
-void DateTime::isotime(char *s) {
+void DateTime::isotime(char *s) const {
     ::isotime_r(toGmtime(), s);
 }
 //
-char* DateTime::isotime() {
+char* DateTime::isotime() const {
     return ::isotime1(toGmtime());
 }

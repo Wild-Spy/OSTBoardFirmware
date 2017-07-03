@@ -31,6 +31,11 @@
 
 class NvmDriverMock : public NvmDriverInterface {
 public:
+    NvmDriverMock()
+        : NvmDriverInterface(10000)
+    {};
+
+
     MOCK_METHOD3(read, void(nvm_data_t* data, nvm_size_t length, nvm_address_t address));
     MOCK_METHOD3(write, void(nvm_data_t* data, nvm_size_t length, nvm_address_t address));
     MOCK_METHOD0(flush, void(void));

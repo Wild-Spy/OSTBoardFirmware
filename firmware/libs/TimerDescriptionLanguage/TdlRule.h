@@ -12,7 +12,12 @@
 #include <simplib/array.h>
 #include "TdlRuleState.h"
 #include "TdlEvent.h"
+
+#if defined(RULETESTING)
+#include <TdlActionMock.h>
+#else
 #include "TdlAction.h"
+#endif
 
 //class TdlAction;
 
@@ -23,11 +28,17 @@ typedef int rule_id_t;
 
 class TdlRule {
 public:
-    TdlRule() {};
+//    TdlRule() {};
 
     TdlRule(uint8_t* data, uint8_t len);
 
-    TdlRule(rule_id_t id);
+//    TdlRule(rule_id_t id, bool enabled_on_start, TdlAction& action, Period period,
+//            sl::Array<PeriodInterval, RULE_MAX_INTERVALS>& intervals, DateTime start_of_first_period,
+//            Period start_of_first_period_event_delay, event_id_t start_of_first_period_event_id);
+
+    TdlRule(rule_id_t id, bool enabled_on_start, Period period,
+            sl::Array<PeriodInterval, RULE_MAX_INTERVALS>& intervals, DateTime start_of_first_period,
+            Period start_of_first_period_event_delay, event_id_t start_of_first_period_event_id);
 
     bool isEnabled() { return enabled_; };
 
@@ -48,6 +59,7 @@ public:
 
     static TdlRule Decompile(uint8_t *data, uint8_t len);
     static void Decompile(uint8_t *data, uint8_t len, TdlRule* addressToStoreAt);
+    TdlAction& getAction() { return action_; };
 
 private:
     DateTime getLastStateChangeTimeNoEvents();
@@ -71,7 +83,6 @@ private:
     void updateInitialStartOfCurrentPeriod(DateTime now);
 
 protected:
-    TdlAction& getAction() { return action_; };
     sl::Array<PeriodInterval, RULE_MAX_INTERVALS>& getIntervals() { return intervals_; };
     Period& getPeriod() { return period_; };
     DateTime getStartOfFirstPeriod() { return start_of_first_period_; };

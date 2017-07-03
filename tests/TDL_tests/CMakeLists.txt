@@ -39,6 +39,6 @@ add_executable(runTdlTests
         tdl_action_decompile_tests.cpp
         channels_tests.cpp
         rules_tests.cpp
-        )
+        ../mocks/TdlRulesMock.cpp ../mocks/TdlRulesMock.h ../mocks/TdlEventsMock.cpp ../mocks/TdlEventsMock.h)
 
 target_link_libraries(runTdlTests gmock gtest gtest_main)

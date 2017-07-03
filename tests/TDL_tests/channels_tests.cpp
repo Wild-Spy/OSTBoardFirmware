@@ -13,16 +13,23 @@
 using ::testing::Return;
 using ::testing::Sequence;
 
-static Pin pins[] = {0, 1, 2, 3};
+#define PIN_COUNT 4
+static Pin* pins[PIN_COUNT];
 
 class TdlChannelsTestFixture : public ::testing::Test {
 protected:
     virtual void SetUp() {
+        for (uint8_t i = 0; i < PIN_COUNT; i++) {
+            pins[i] = new Pin(i);
+        }
         TdlChannels_Init(4, TDLCHANNELSTATE_DISABLED, pins);
     }
 
     virtual void TearDown() {
         TdlChannels_Destroy();
+        for (uint8_t i = 0; i < PIN_COUNT; i++) {
+            delete pins[i];
+        }
     }
 };
 
@@ -62,7 +69,7 @@ TEST_F(TdlChannelsTestFixture, get_instance) {
 TEST_F(TdlChannelsTestFixture, get) {
     TdlChannels &chans = TdlChannels_GetInstance();
     EXPECT_EQ(chans.get(0).getId(), 0);
-    EXPECT_EQ(chans.get(0).getPin(), (Pin*)(pins+0));
+    EXPECT_EQ(chans.get(0).getPin(), pins[0]);
 }
 
 TEST_F(TdlChannelsTestFixture, get_out_of_range_throws_exception) {

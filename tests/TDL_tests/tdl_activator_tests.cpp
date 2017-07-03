@@ -8,6 +8,7 @@
 
 using ::testing::Return;
 using ::testing::Sequence;
+using ::testing::_;
 
 TEST(TdlActivatorTestFixture, default_constructor_is_empty) {
     TdlActivator activator = TdlActivator();
@@ -58,18 +59,18 @@ TEST(TdlActivatorTestFixture, channel_activator_change_state) {
 TEST(TdlActivatorTestFixture, rule_activator_change_state) {
     Sequence seq;
     TdlRule rule(111, true);
-    TdlActivator activator = TdlActivator(&rule, TDLACTIVATORSTATE_DISABLED);
+    TdlActivator activator(&rule, TDLACTIVATORSTATE_DISABLED);
 
     EXPECT_CALL(rule, enableCalled())
             .Times(1)
             .InSequence(seq);
-    EXPECT_CALL(rule, updateThisRuleAndParentsIfNecessary(DateTime(777)))
+    EXPECT_CALL(rule, updateThisRuleAndParentsIfNecessary(DateTime(222)))
             .Times(1);
     EXPECT_CALL(rule, disableCalled())
             .Times(1)
             .InSequence(seq);
 
-    activator.enable(DateTime(777));
+    activator.enable(DateTime(222));
     activator.disable();
 }
 

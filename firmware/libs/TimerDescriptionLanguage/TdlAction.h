@@ -43,6 +43,7 @@ public:
     TdlActivator& getActivator() { return activator_; };
 
     static TdlAction Decompile(uint8_t* data) { return TdlAction(data); }
+    static void Decompile(uint8_t* data, TdlAction* address_to_store) { new (address_to_store) TdlAction(data); }
 
     bool isEmpty() { return activator_.isEmpty(); };
 

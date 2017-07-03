@@ -6,9 +6,18 @@
 #include <stdint-gcc.h>
 #include <min/min_transmit_cmds.h>
 #include "TdlRule.h"
+
+
+#if defined(TESTING)
+#include <delayMock.h>
+#include "TdlRulesMock.h"
+#include "TdlEventsMock.h"
+#else
+#include <delay.h>
 #include "TdlRules.h"
 #include "TdlEvents.h"
-#include <delay.h>
+#endif
+
 #include <exception/CException.h>
 #include <memory/CppNewDeleteOps.h>
 
@@ -35,9 +44,11 @@ TdlRuleState_t TdlRule::getOutputState() {
     return TDLRULESTATE_INACTIVE;
 }
 
+#ifndef TESTING
 TdlRule TdlRule::Decompile(uint8_t *data, uint8_t len) {
     return TdlRule(data, len);
 }
+#endif
 
 void TdlRule::Decompile(uint8_t *data, uint8_t len, TdlRule *addressToStoreAt) {
     new (addressToStoreAt) TdlRule(data, len);
@@ -57,7 +68,8 @@ TdlRule::TdlRule(uint8_t *data, uint8_t len) {
     if (len_so_far > len) Throw(EX_BUFFER_OVERRUN);
 
     // Decompile action
-    action_ = TdlAction::Decompile(data+len_so_far);
+//    action_ = TdlAction::Decompile(data+len_so_far);
+    TdlAction::Decompile(data+len_so_far, &action_);
     len_so_far += TdlAction::ACTION_COMPILED_LENGTH;
     if (len_so_far > len) Throw(EX_BUFFER_OVERRUN);
 
@@ -105,6 +117,57 @@ TdlRule::TdlRule(uint8_t *data, uint8_t len) {
     if (len_so_far != len) {
         Throw(EX_INVALID_INPUT_VALUE);
     }
+
+    enabled_ = enabled_on_start_;
+}
+
+//TdlRule::TdlRule(rule_id_t id, bool enabled_on_start, TdlAction &action, Period period,
+//                 sl::Array<PeriodInterval, RULE_MAX_INTERVALS> &intervals, DateTime start_of_first_period,
+//                 Period start_of_first_period_event_delay, event_id_t start_of_first_period_event_id) {
+//    id_ = id;
+//    enabled_on_start_ = enabled_on_start;
+//
+////    #ifdef TESTING
+////    for (int i = 0; i < sizeof(TdlAction); i++) {
+////        *(((uint8_t*)&action_)+i) = *(((uint8_t*)&action)+i);
+////    }
+////    #else
+//    action_ = action;
+////    #endif
+//
+//    period_ = period;
+//
+//    intervals_.clear();
+//    for (uint8_t i = 0; i < intervals.getCount(); i++) {
+//        intervals_.append(intervals.get(i));
+//    }
+//
+//    start_of_first_period_ = start_of_first_period;
+//    start_of_first_period_event_delay_ = start_of_first_period_event_delay;
+//    start_of_first_period_event_id_ = start_of_first_period_event_id;
+//
+//    enabled_ = enabled_on_start_;
+//}
+
+TdlRule::TdlRule(rule_id_t id, bool enabled_on_start, Period period,
+                 sl::Array<PeriodInterval, RULE_MAX_INTERVALS> &intervals, DateTime start_of_first_period,
+                 Period start_of_first_period_event_delay, event_id_t start_of_first_period_event_id) {
+    id_ = id;
+    enabled_on_start_ = enabled_on_start;
+
+    // For testing, no action provided, it's created on init
+    // action_ = action;
+
+    period_ = period;
+
+    intervals_.clear();
+    for (uint8_t i = 0; i < intervals.getCount(); i++) {
+        intervals_.append(intervals.get(i));
+    }
+
+    start_of_first_period_ = start_of_first_period;
+    start_of_first_period_event_delay_ = start_of_first_period_event_delay;
+    start_of_first_period_event_id_ = start_of_first_period_event_id;
 
     enabled_ = enabled_on_start_;
 }
@@ -367,6 +430,7 @@ void TdlRule::reset() {
     resetInternalTimeKeepingVariables();
     action_.stop(DateTime::Empty());
     enabled_ = enabled_on_start_;
+    has_been_run_this_step_ = false;
 }
 
 void TdlRule::findParentRules(sl::Array<TdlRule *, 4> *parent_rules) {
@@ -487,4 +551,3 @@ DateTime TdlRule::getStartOfPreviousPeriodForEvent(DateTime now) {
     // 'simulated event list'.  Here they get generated asynchronously.
     return DateTime::Empty();
 }
-

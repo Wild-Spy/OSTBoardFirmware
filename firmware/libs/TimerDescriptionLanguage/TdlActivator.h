@@ -9,8 +9,8 @@
 #include "TdlActivatorState.h"
 
 #ifdef TESTING
-#include "TdlChannelMock.h"
 #include <DateTimeSimpleMock.h>
+#include "TdlChannelMock.h"
 #else
 #include "TdlChannel.h"
 #include <datetime/DateTime.h>

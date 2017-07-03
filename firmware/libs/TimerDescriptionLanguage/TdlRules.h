@@ -23,9 +23,9 @@ public:
 //    void disableAll();
 
     /**
-     * Gets a channel from it's index
-     * @param index     the channel's index
-     * @return  a reference to the channel
+     * Gets a rule from it's index
+     * @param index     the rule's index
+     * @return  a reference to the rule
      * @throws  EX_OUT_OF_RANGE if the index is out of range
      */
     TdlRule& get(int index);

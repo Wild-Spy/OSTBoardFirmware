@@ -13,14 +13,15 @@
 #define EXTERNC
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 #include <stdint.h>
-#include <time_avr.h>
-#ifdef __cplusplus
-}
-#endif
+#include <datetime/DateTime.h>
+//#ifdef TESTING
+//#include <time_test.h>
+//#else
+//#include <time_avr.h>
+//#endif
+
+
 
 /* Report messages to the host */
 #define MIN_ID_DEADBEEF					    (0x0eU)			/* Layer 1 frame; Payload always 4 bytes = 0xdeadbeef */
@@ -42,7 +43,7 @@ EXTERNC void report_motor(uint8_t status, uint32_t position);
 EXTERNC void report_deadbeef(uint32_t deadbeef);
 EXTERNC void report_receive_rule_response();
 EXTERNC void report_rule_count();
-EXTERNC void report_rtc_time(time_t_avr time);
+EXTERNC void report_rtc_time(dt_time_t time);
 EXTERNC void report_response_ack();
 EXTERNC void report_response_nak();
 

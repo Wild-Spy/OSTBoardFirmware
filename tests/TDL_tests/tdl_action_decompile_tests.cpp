@@ -12,9 +12,10 @@
 using ::testing::Return;
 using ::testing::Sequence;
 
-static Pin pins[] = {0, 1, 2, 3};
-static TdlRule* rules;
 #define RULE_COUNT 4
+#define PIN_COUNT 4
+static Pin* pins[PIN_COUNT];
+static TdlRule* rules;
 
 /**
  * Format:
@@ -28,6 +29,10 @@ static TdlRule* rules;
 class TdlActionDecompileTestFixture : public ::testing::Test {
 protected:
     virtual void SetUp() {
+        for (uint8_t i = 0; i < PIN_COUNT; i++) {
+            pins[i] = new Pin(i);
+        }
+
         TdlChannels_Init(4, TDLCHANNELSTATE_DISABLED, pins);
 
         rules = (TdlRule*)malloc(sizeof(TdlRule)*RULE_COUNT);
@@ -44,6 +49,9 @@ protected:
     virtual void TearDown() {
         TdlRules_Destroy();
         TdlChannels_Destroy();
+        for (uint8_t i = 0; i < PIN_COUNT; i++) {
+            delete pins[i];
+        }
     }
 };
 

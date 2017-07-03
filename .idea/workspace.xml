@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
       <config projectName="OSTBoardFirmware" targetName="nvmRuleManagerTests" />
       <config projectName="OSTBoardFirmware" targetName="Nightly" />
+      <config projectName="OSTBoardFirmware" targetName="ContinuousTest" />
       <config projectName="OSTBoardFirmware" targetName="ContinuousConfigure" />
       <config projectName="OSTBoardFirmware" targetName="ExperimentalUpdate" />
       <config projectName="OSTBoardFirmware" targetName="runUnitTests" />
       <config projectName="OSTBoardFirmware" targetName="NightlyConfigure" />
       <config projectName="OSTBoardFirmware" targetName="ExperimentalTest" />
-      <config projectName="OSTBoardFirmware" targetName="NightlyMemCheck" />
+      <config projectName="OSTBoardFirmware" targetName="runTdlRuleTests" />
       <config projectName="OSTBoardFirmware" targetName="gmock" />
       <config projectName="OSTBoardFirmware" targetName="ExperimentalCoverage" />
       <config projectName="OSTBoardFirmware" targetName="runMinTests" />
+      <config projectName="OSTBoardFirmware" targetName="gtest" />
       <config projectName="OSTBoardFirmware" targetName="NightlyCoverage" />
       <config projectName="OSTBoardFirmware" targetName="Continuous" />
-      <config projectName="OSTBoardFirmware" targetName="runRuleWriterTests" />
+      <config projectName="OSTBoardFirmware" targetName="ExperimentalStart" />
       <config projectName="OSTBoardFirmware" targetName="ContinuousCoverage" />
       <config projectName="OSTBoardFirmware" targetName="Experimental" />
       <config projectName="OSTBoardFirmware" targetName="ContinuousBuild" />
       <config projectName="OSTBoardFirmware" targetName="runDateTimeTests" />
-      <config projectName="OSTBoardFirmware" targetName="NightlyTest" />
-      <config projectName="OSTBoardFirmware" targetName="OSTBoardFirmware" />
-      <config projectName="OSTBoardFirmware" targetName="ExperimentalStart" />
+      <config projectName="OSTBoardFirmware" targetName="NightlyMemCheck" />
       <config projectName="OSTBoardFirmware" targetName="timeTestLib" />
-      <config projectName="OSTBoardFirmware" targetName="ContinuousTest" />
+      <config projectName="OSTBoardFirmware" targetName="ContinuousUpdate" />
       <config projectName="OSTBoardFirmware" targetName="ExperimentalSubmit" />
-      <config projectName="OSTBoardFirmware" targetName="ws-ost" />
-      <config projectName="OSTBoardFirmware" targetName="NightlyStart" />
+      <config projectName="OSTBoardFirmware" targetName="NightlyTest" />
       <config projectName="OSTBoardFirmware" targetName="NightlyUpdate" />
       <config projectName="OSTBoardFirmware" targetName="runTdlTests" />
       <config projectName="OSTBoardFirmware" targetName="runSimplibTests" />
       <config projectName="OSTBoardFirmware" targetName="gmock_main" />
       <config projectName="OSTBoardFirmware" targetName="runBasicTests" />
       <config projectName="OSTBoardFirmware" targetName="NightlyMemoryCheck" />
-      <config projectName="OSTBoardFirmware" targetName="gtest" />
+      <config projectName="OSTBoardFirmware" targetName="NightlyStart" />
       <config projectName="OSTBoardFirmware" targetName="gtest_main" />
       <config projectName="OSTBoardFirmware" targetName="NightlySubmit" />
       <config projectName="OSTBoardFirmware" targetName="ContinuousSubmit" />
@@ -43,7 +42,6 @@
       <config projectName="OSTBoardFirmware" targetName="ContinuousStart" />
       <config projectName="OSTBoardFirmware" targetName="ExperimentalBuild" />
       <config projectName="OSTBoardFirmware" targetName="runRuleWriterRuleTests" />
-      <config projectName="OSTBoardFirmware" targetName="ContinuousUpdate" />
       <config projectName="OSTBoardFirmware" targetName="NightlyBuild" />
       <config projectName="OSTBoardFirmware" targetName="ContinuousMemCheck" />
     </generated>
@@ -55,201 +53,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b65923c-51d5-4d26-9594-05ed4041738e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/CMSIS_END_USER_LICENCE_AGREEMENT.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Lib/GCC/libarm_cortexM0l_math.a" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/extint/extint.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/extint/extint_callback.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/extint/extint_callback.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/extint/extint_sam_d_r/extint.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/port/port.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/port/port.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/port/quick_start/qs_port_basic.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/clock_samd21_r21_da/clock.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/clock_samd21_r21_da/clock_config_check.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/clock_samd21_r21_da/clock_feature.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/clock_samd21_r21_da/gclk.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/gclk.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/interrupt/system_interrupt.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/interrupt/system_interrupt.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/interrupt/system_interrupt_samd21/system_interrupt_features.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/pinmux/pinmux.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/pinmux/pinmux.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/pinmux/quick_start/qs_pinmux_basic.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/power/power_sam_d_r/power.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/reset/reset_sam_d_r/reset.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/system.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/system.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/usb/stack_interface/usb_device_udd.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/usb/stack_interface/usb_dual.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/usb/usb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/usb/usb_sam_d_r/usb.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/ac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/adc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/dac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/dmac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/dsu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/eic.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/evsys.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/gclk.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/hmatrixb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/i2s.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/mtb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/nvmctrl.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/pac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/pm.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/port.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/rtc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/sercom.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/sysctrl.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/tc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/tcc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/tcc_lighting.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/usb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/component/wdt.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/ac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/ac1.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/adc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/dac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/dmac.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/dsu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/eic.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/evsys.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/gclk.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/i2s.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/mtb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/nvmctrl.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/pac0.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/pac1.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/pac2.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/pm.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/port.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/rtc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sbmatrix.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom0.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom1.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom2.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom3.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom4.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sercom5.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/sysctrl.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tc3.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tc4.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tc5.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tc6.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tc7.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tcc0.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tcc1.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/tcc2.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/usb.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/instance/wdt.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e15bu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e15l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e16bu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e16l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21e18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g15l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g16l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g17au.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21g18au.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/pio/samd21j18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e15bu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e15l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e16bu.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e16l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21e18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g15l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g16l.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g17au.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21g18au.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j15a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j15b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j16a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j16b.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j17a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/include/samd21j18a.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/source/gcc/startup_samd21.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/source/system_samd21.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/cmsis/samd21/source/system_samd21.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/compiler.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/header_files/io.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/linker_scripts/samd21/gcc/samd21e18a_flash.ld" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/make/Makefile.sam.in" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/preprocessor/mrecursion.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/preprocessor/mrepeat.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/syscalls/gcc/syscalls.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/ATMEL-disclaimer.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Include/arm_math.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Include/core_cm0plus.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Include/core_cmFunc.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Include/core_cmInstr.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/Lib/license.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/asf/thirdparty/CMSIS/README.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/libs/hw/hal_gpio.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/linker/samd21e18a_flash.ld" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/linker/samd21e18a_sram.ld" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/linker/samd21j18.ld" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/startup_samd21.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/firmware/system_samd21.c" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/cpu/ccp.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/cpu/ccp.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/cpu/xmega_reset_cause.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/nvm/nvm.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/nvm/nvm.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/nvm/nvm_asm.s" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/sleep/sleep.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/usb/usb_device.c" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/drivers/usb/usb_device.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/assembler.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/assembler/gas.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/assembler/iar.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/bit_handling/clz_ctz.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/compiler.h" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/preprocessor/mrepeat.h" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/common/services/sleepmgr/xmega/module_config/conf_sleepmgr.h" afterPath="$PROJECT_DIR$/firmware/asf/common/services/sleepmgr/samd/sleepmgr.c" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/common/services/sleepmgr/xmega/sleepmgr.c" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/system/clock/clock.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/common/services/sleepmgr/xmega/sleepmgr.h" afterPath="$PROJECT_DIR$/firmware/asf/common/services/sleepmgr/samd/sleepmgr.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/preprocessor/preprocessor.h" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/preprocessor/preprocessor.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/preprocessor/stringz.h" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/preprocessor/stringz.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/preprocessor/tpaste.h" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/preprocessor/tpaste.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/progmem.h" afterPath="$PROJECT_DIR$/firmware/asf/sam0/drivers/usb/stack_interface/usb_dual.h" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/firmware/asf/xmega/utils/status_codes.h" afterPath="$PROJECT_DIR$/firmware/asf/sam0/utils/status_codes.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/mocks/TdlActionMock.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/mocks/TdlEventsMock.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/mocks/TdlEventsMock.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/mocks/TdlRulesMock.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/mocks/TdlRulesMock.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/tdl_rule_tests/CMakeLists.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/.idea/workspace.xml" afterPath="$PROJECT_DIR$/firmware/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/CMakeLists.txt" afterPath="$PROJECT_DIR$/firmware/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/asf/common/utils/interrupt/interrupt_sam_nvic.c" afterPath="$PROJECT_DIR$/firmware/asf/common/utils/interrupt/interrupt_sam_nvic.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/asf/common/utils/interrupt/interrupt_sam_nvic.h" afterPath="$PROJECT_DIR$/firmware/asf/common/utils/interrupt/interrupt_sam_nvic.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/bin/ws-ost.hex" afterPath="$PROJECT_DIR$/firmware/bin/ws-ost.hex" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/hal/Pin.cpp" afterPath="$PROJECT_DIR$/firmware/libs/hal/Pin.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/hal/Pin.h" afterPath="$PROJECT_DIR$/firmware/libs/hal/Pin.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/min/layer1.c" afterPath="$PROJECT_DIR$/firmware/libs/min/layer1.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlAction.h" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlAction.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.cpp" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.h" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.cpp" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.h" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h" afterPath="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/datetime/DateTime.cpp" afterPath="$PROJECT_DIR$/firmware/libs/datetime/DateTime.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/datetime/DateTime.h" afterPath="$PROJECT_DIR$/firmware/libs/datetime/DateTime.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/memory/CppNewDeleteOps.h" afterPath="$PROJECT_DIR$/firmware/libs/memory/CppNewDeleteOps.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/firmware/libs/min/min_transmit_cmds.h" afterPath="$PROJECT_DIR$/firmware/libs/min/min_transmit_cmds.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/CMakeLists.txt" afterPath="$PROJECT_DIR$/tests/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TDL_tests/CMakeLists.txt" afterPath="$PROJECT_DIR$/tests/TDL_tests/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp" afterPath="$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp" afterPath="$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/TDL_tests/tdl_activator_tests.cpp" afterPath="$PROJECT_DIR$/tests/TDL_tests/tdl_activator_tests.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/basic_tests/basic_check.cpp" afterPath="$PROJECT_DIR$/tests/basic_tests/basic_check.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/mocks/DateTimeSimpleMock.h" afterPath="$PROJECT_DIR$/tests/mocks/DateTimeSimpleMock.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/mocks/NvmDriverMock.h" afterPath="$PROJECT_DIR$/tests/mocks/NvmDriverMock.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/mocks/TdlRuleMock.h" afterPath="$PROJECT_DIR$/tests/mocks/TdlRuleMock.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="tests/lib/avr-libc-2.0.0.tar.bz2" />
@@ -266,61 +96,118 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file leaf-file-name="NvmRuleManager.cpp" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleManager.cpp">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="924">
-                    <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
-                    <folding>
-                      <element signature="e#43#70#0" expanded="true" />
-                    </folding>
-                  </state>
-                </provider>
-              </entry>
-            </file>
-            <file leaf-file-name="NvmRuleManager.h" pinned="false" current-in-tab="false">
-              <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleManager.h">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="1872">
-                    <caret line="104" column="18" lean-forward="false" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NvmRuleLoader.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleLoader.cpp">
+      <file leaf-file-name="rule_tests.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="936">
-              <caret line="52" column="4" lean-forward="false" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+            <state relative-caret-position="433">
+              <caret line="294" column="79" lean-forward="true" selection-start-line="294" selection-start-column="79" selection-end-line="294" selection-end-column="79" />
               <folding>
-                <marker date="1495506521244" expanded="true" signature="491:494" ph="{...}" />
+                <element signature="e#45#69#0" expanded="true" />
+                <marker date="1499124731674" expanded="true" signature="3858:4658" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NvmRuleLoader.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleLoader.h">
+      <file leaf-file-name="TdlRule.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1350">
-              <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
+            <state relative-caret-position="290">
+              <caret line="472" column="0" lean-forward="false" selection-start-line="472" selection-start-column="0" selection-end-line="472" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TdlActionMock.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/mocks/TdlActionMock.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-135">
+              <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="array" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/include/c++/6/array">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3115">
+              <caret line="89" column="11" lean-forward="false" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
               <folding>
-                <marker date="1495506521256" expanded="true" signature="217:1994" ph="{...}" />
+                <element signature="e#2596#2627#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stl_map.h" pinned="false" current-in-tab="false">
+        <entry file="file:///usr/include/c++/6/bits/stl_map.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="786">
+              <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+              <folding>
+                <element signature="e#3686#3828#0" expanded="true" />
+                <marker date="1475650916000" expanded="false" signature="2468:2512" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="6461:6526" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="7188:9345" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="11485:12127" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="14646:15791" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="17183:17316" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="17456:17911" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="18864:21282" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="27133:27398" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="27440:27824" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="28979:29035" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="29198:29491" ph="..." />
+                <marker date="1475650916000" expanded="false" signature="34913:35927" ph="..." />
+                <marker date="1475650916000" expanded="true" signature="35940:36416" ph="/**...*/" />
+                <marker date="1475650916000" expanded="false" signature="37136:37998" ph="..." />
+                <marker date="1475650916000" expanded="true" signature="38011:38615" ph="/**...*/" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateTime.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/DateTime.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4725">
+              <caret line="135" column="25" lean-forward="false" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DateTime.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/DateTime.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="7700">
+              <caret line="220" column="31" lean-forward="false" selection-start-line="220" selection-start-column="31" selection-end-line="220" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gmock-generated-matchers.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-matchers.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="47040">
+              <caret line="1344" column="3" lean-forward="false" selection-start-line="1344" selection-start-column="3" selection-end-line="1344" selection-end-column="3" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/tdl_rule_tests/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -328,28 +215,8 @@
       <file leaf-file-name="nvm_rule_manager_tests.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/nvm_rule_manager_tests/nvm_rule_manager_tests.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5436">
-              <caret line="302" column="29" lean-forward="false" selection-start-line="302" selection-start-column="29" selection-end-line="302" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uart.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/firmware/libs/usb/uart.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="uart_xmega.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/firmware/libs/usb/uart_xmega.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="26" column="2" lean-forward="true" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
+            <state relative-caret-position="805">
+              <caret line="23" column="7" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -359,13 +226,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>struct tm</find>
-      <find>struct</find>
-      <find>asc_store</find>
-      <find>difftime_test</find>
-      <find>isotime_test</find>
-      <find>main</find>
-      <find>gtest_main</find>
       <find>gtest_SOURCE_DIR</find>
       <find>epoch</find>
       <find>addWeeks</find>
@@ -389,6 +249,13 @@
       <find>start)</find>
       <find>flush</find>
       <find>eeprom</find>
+      <find>pointer</find>
+      <find>R</find>
+      <find>Rule.cpp</find>
+      <find>TdlRule.cpp:</find>
+      <find>TESTING</find>
+      <find>Decompile</find>
+      <find>runthisste</find>
     </findStrings>
     <replaceStrings>
       <replace>dt_tm</replace>
@@ -403,41 +270,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp" />
-        <option value="$PROJECT_DIR$/tests/mocks/TdlRuleMock.h" />
-        <option value="$PROJECT_DIR$/tests/TDL_tests/rules_tests.cpp" />
-        <option value="$PROJECT_DIR$/tests/mocks/EepromDriverMock.h.h" />
-        <option value="$PROJECT_DIR$/tests/mocks/EeprimDriverMock.cpp" />
-        <option value="$PROJECT_DIR$/tests/TDL_tests/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/tests/mocks/EepromDriverMock.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/ruler_writer.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/rule_writer.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/RuleWriter.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/RuleWriterRule.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/RuleWriterRule.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/RuleLoader.h" />
-        <option value="$PROJECT_DIR$/tests/mocks/RuleWriterMock.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/RulerWriter.h" />
-        <option value="$PROJECT_DIR$/tests/mocks/NvmRuleManager.cpp" />
-        <option value="$PROJECT_DIR$/tests/mocks/NvmRuleManager.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/NvmRuleManager.cpp" />
-        <option value="$PROJECT_DIR$/firmware/libs/config_comms/NvmRuleManager.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/exception/CException.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/eeprom/EepromDriver.h" />
-        <option value="$PROJECT_DIR$/firmware/libs/eeprom/eeprom_driver.c" />
-        <option value="$PROJECT_DIR$/tests/rule_writer_tests/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/firmware/libs/exception/ExceptionValues.h" />
         <option value="$PROJECT_DIR$/tests/mocks/EepromDriverMock.h" />
         <option value="$PROJECT_DIR$/firmware/libs/eeprom/XmegaEepromDriver.h" />
         <option value="$PROJECT_DIR$/firmware/libs/eeprom/XmegaEepromDriver.cpp" />
         <option value="$PROJECT_DIR$/firmware/libs/nvm/NvmDriverInterface.h" />
-        <option value="$PROJECT_DIR$/tests/mocks/NvmDriverMock.h" />
         <option value="$PROJECT_DIR$/tests/mocks/NvmDriverMock.cpp" />
         <option value="$PROJECT_DIR$/tests/rule_writer_tests/rule_writer_tests.cpp" />
         <option value="$PROJECT_DIR$/tests/rule_writer_rule_tests/rule_writer_rule_tests.cpp" />
         <option value="$PROJECT_DIR$/tests/rule_writer_tests/nvm_rule_manager_tests.cpp" />
-        <option value="$PROJECT_DIR$/tests/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h" />
         <option value="$PROJECT_DIR$/firmware/libs/simplib/array.h" />
         <option value="$PROJECT_DIR$/tests/simplib_tests/array_tests.cpp" />
         <option value="$PROJECT_DIR$/tests/mocks/RuleLoaderMock.h" />
@@ -454,14 +295,45 @@
         <option value="$PROJECT_DIR$/firmware/libs/nvm/NvmRuleLoader.cpp" />
         <option value="$PROJECT_DIR$/tests/nvm_rule_manager_tests/nvm_rule_manager_tests.cpp" />
         <option value="$PROJECT_DIR$/firmware/libs/nvm/NvmRuleManager.cpp" />
+        <option value="$PROJECT_DIR$/tests/basic_tests/basic_check.cpp" />
+        <option value="$PROJECT_DIR$/firmware/libs/min/min_transmit_cmds.h" />
+        <option value="$PROJECT_DIR$/tests/mocks/NvmDriverMock.h" />
+        <option value="$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlActivator.cpp" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlRuleMock.h" />
+        <option value="$PROJECT_DIR$/tests/mocks/DateTimeSimpleMock.h" />
+        <option value="$PROJECT_DIR$/tests/TDL_tests/tdl_activator_tests.cpp" />
+        <option value="$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp" />
+        <option value="$PROJECT_DIR$/tests/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlAction.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/memory/CppNewDeleteOps.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlRulesMock.cpp" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlEventsMock.h" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlEventsMock.cpp" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlActionMock.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.h" />
+        <option value="$PROJECT_DIR$/tests/mocks/TdlRulesMock.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.cpp" />
+        <option value="$PROJECT_DIR$/tests/tdl_rule_tests/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-matchers.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/datetime/DateTime.h" />
+        <option value="$PROJECT_DIR$/firmware/libs/datetime/DateTime.cpp" />
+        <option value="$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp" />
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="y" value="1024" />
-    <option name="width" value="1920" />
-    <option name="height" value="1044" />
+    <option name="width" value="3200" />
+    <option name="height" value="1704" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -536,25 +408,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="simplib_tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSTBoardFirmware" />
-              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="OSTBoardFirmware" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="rule_writer_rule_tests" />
+              <option name="myItemId" value="tdl_rule_tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -662,7 +516,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="usb" />
+              <option name="myItemId" value="TimerDescriptionLanguage" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -674,40 +528,59 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/firmware" />
-    <property name="SearchEverywhereHistoryKey" value="nvmruleman&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvmrule&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;nvmrcpp&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;nvmr&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvmcpp&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;rulemanager&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvm&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/tests/mocks/NvmRuleManager.h&#10;rule&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/tests/mocks/RuleWriterMock.h&#10;channels&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlChannels.h&#10;channelmo&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/tests/mocks/TdlChannelMock.h&#10;Period&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/datetime/Period.h&#10;Date&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/datetime/DateTime.h" />
+    <property name="SearchEverywhereHistoryKey" value="DateTime&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/datetime/DateTime.h&#10;TdlRuleRunner&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlRuleRunner.cpp&#10;rulerunner&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlRuleRunner.h&#10;TdlAction&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlAction.h&#10;rule&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlRule.h&#10;testing::internal::Function&#9;null&#9;null&#10;nvmruleman&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvmrule&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;nvmrcpp&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;nvmr&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvmcpp&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.cpp&#10;rulemanager&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/nvm/NvmRuleManager.h&#10;nvm&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/tests/mocks/NvmRuleManager.h&#10;channels&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/TimerDescriptionLanguage/TdlChannels.h&#10;channelmo&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/tests/mocks/TdlChannelMock.h&#10;Period&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/datetime/Period.h&#10;Date&#9;FILE&#9;file:///home/mcochrane/build/OSTBoardFirmware/firmware/libs/datetime/DateTime.h" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$/tests/TDL_tests" />
-      <recent name="$PROJECT_DIR$/tests/mocks" />
-      <recent name="$PROJECT_DIR$/tests/min_tests" />
-      <recent name="$PROJECT_DIR$/tests/mocks/time_test" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/tests/mocks" />
       <recent name="$PROJECT_DIR$/tests/includes" />
       <recent name="$PROJECT_DIR$/tests" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tests/mocks" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/tests/TDL_tests" />
+      <recent name="$PROJECT_DIR$/tests/min_tests" />
+      <recent name="$PROJECT_DIR$/tests/mocks/time_test" />
+    </key>
   </component>
-  <component name="RunManager" selected="Google Test.nvmRuleManagerTests">
-    <configuration default="false" name="All in TdlRulesTestNoFixture" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlTests" TEST_CLASS="TdlRulesTestNoFixture" TEST_MODE="SUITE_TEST">
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Google Test.TdlRuleTestFixture.rule_transition_times_offest_interval">
+    <configuration default="false" name="TdlChannelsTestFixture.get" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlTests" TEST_CLASS="TdlChannelsTestFixture" TEST_METHOD="get" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="All in TdlChannelsTestNoFixture" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlTests" TEST_CLASS="TdlChannelsTestNoFixture" TEST_MODE="SUITE_TEST">
+    <configuration default="false" name="TdlRulesTestFixture.create_rule" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlRuleTests" TEST_CLASS="TdlRulesTestFixture" TEST_METHOD="create_rule" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="All in RuleWriterTestFixture" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runRuleWriterTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runRuleWriterTests" TEST_CLASS="RuleWriterTestFixture" TEST_MODE="SUITE_TEST">
+    <configuration default="false" name="All in TdlRulesTestFixture" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlRuleTests" TEST_CLASS="TdlRulesTestFixture" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="NvmRuleManagerTestFixture.clear_rules" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runRuleWriterTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runRuleWriterTests" TEST_CLASS="NvmRuleManagerTestFixture" TEST_METHOD="clear_rules" TEST_MODE="SUITE_TEST">
+    <configuration default="false" name="TdlRulesTestFixture.simple_rule_transition_times2" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlRuleTests" TEST_CLASS="TdlRulesTestFixture" TEST_METHOD="simple_rule_transition_times2" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="All in NvmRuleManagerTestFixture" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="nvmRuleManagerTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="nvmRuleManagerTests" TEST_CLASS="NvmRuleManagerTestFixture" TEST_MODE="SUITE_TEST">
+    <configuration default="false" name="TdlRuleTestFixture.rule_transition_times_offest_interval" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlRuleTests" TEST_CLASS="TdlRuleTestFixture" TEST_METHOD="rule_transition_times_offest_interval" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CLion_Remote" factoryName="GDB Remote Debug" remoteCommand="" symbolFile="" sysroot="">
+      <method />
+    </configuration>
+    <configuration default="true" type="CMakeCatchTestRunConfigurationType" factoryName="Catch Test" PASS_PARENT_ENVS_2="true" TEST_MODE="SUITE_TEST">
       <envs />
       <method />
     </configuration>
@@ -719,7 +592,32 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="ChromiumRemoteDebugType" factoryName="Chromium Remote">
+      <method />
+    </configuration>
     <configuration default="true" type="CompoundRunConfigurationType" factoryName="Compound Run Configuration">
+      <method />
+    </configuration>
+    <configuration default="true" type="FirefoxRemoteDebugType" factoryName="Firefox Remote">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="NodeWebKit" factoryName="NW.js">
       <method />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -737,6 +635,13 @@
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="ReactNative" factoryName="React Native">
+      <node-interpreter value="project" />
+      <platform value="ANDROID" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
@@ -751,23 +656,41 @@
       <module name="OSTBoardFirmware" />
       <method />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Attests">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
+    <configuration default="true" type="XSLT" factoryName="XSLT">
+      <option name="myOutputFile" />
+      <option name="myOpenOutputFile" value="false" />
+      <option name="myOpenInBrowser" value="false" />
+      <option name="mySmartErrorHandling" value="true" />
+      <option name="myRunnerPort" value="34873" />
+      <option name="myVmArguments" />
+      <option name="myWorkingDirectory" />
+      <option name="myModule" />
+      <option name="myJdk" />
+      <parameters />
+      <OutputType value="CONSOLE" save-to-file="false" />
+      <FileType name="XML" />
+      <JdkChoice value="FROM_MODULE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
+      <node-interpreter value="project" />
       <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="OSTBoardFirmware" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -799,15 +722,10 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="OSTBoardFirmware" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
+      <option name="_new_regexPattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -820,19 +738,114 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="OSTBoardFirmware" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="OSTBoardFirmware" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="RunAllTests" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runBasicTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runBasicTests">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="RunMinTests" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runMinTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runMinTests">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="RunDateTimeTests" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runDateTimeTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runDateTimeTests">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="gmock" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gmock" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="gmock_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gmock_main" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="gtest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gtest" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="timeTestLib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="timeTestLib" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="runRuleWriterRuleTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runRuleWriterRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runRuleWriterRuleTests" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="runSimplibTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runSimplibTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runSimplibTests" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="runTdlRuleTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlRuleTests" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="runTdlTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlTests" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="runNvmRuleManagerTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="nvmRuleManagerTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="nvmRuleManagerTests" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <list size="19">
+      <item index="0" class="java.lang.String" itemvalue="Application.RunAllTests" />
+      <item index="1" class="java.lang.String" itemvalue="Application.RunMinTests" />
+      <item index="2" class="java.lang.String" itemvalue="Application.RunDateTimeTests" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Build All" />
+      <item index="4" class="java.lang.String" itemvalue="Application.gmock" />
+      <item index="5" class="java.lang.String" itemvalue="Application.gmock_main" />
+      <item index="6" class="java.lang.String" itemvalue="Application.gtest" />
+      <item index="7" class="java.lang.String" itemvalue="Application.gtest_main" />
+      <item index="8" class="java.lang.String" itemvalue="Application.timeTestLib" />
+      <item index="9" class="java.lang.String" itemvalue="Google Test.runRuleWriterRuleTests" />
+      <item index="10" class="java.lang.String" itemvalue="Google Test.runSimplibTests" />
+      <item index="11" class="java.lang.String" itemvalue="Google Test.runTdlRuleTests" />
+      <item index="12" class="java.lang.String" itemvalue="Google Test.runTdlTests" />
+      <item index="13" class="java.lang.String" itemvalue="Google Test.runNvmRuleManagerTests" />
+      <item index="14" class="java.lang.String" itemvalue="Google Test.TdlChannelsTestFixture.get" />
+      <item index="15" class="java.lang.String" itemvalue="Google Test.TdlRulesTestFixture.create_rule" />
+      <item index="16" class="java.lang.String" itemvalue="Google Test.All in TdlRulesTestFixture" />
+      <item index="17" class="java.lang.String" itemvalue="Google Test.TdlRulesTestFixture.simple_rule_transition_times2" />
+      <item index="18" class="java.lang.String" itemvalue="Google Test.TdlRuleTestFixture.rule_transition_times_offest_interval" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Google Test.TdlRuleTestFixture.rule_transition_times_offest_interval" />
+        <item index="1" class="java.lang.String" itemvalue="Google Test.TdlRulesTestFixture.simple_rule_transition_times2" />
+        <item index="2" class="java.lang.String" itemvalue="Google Test.All in TdlRulesTestFixture" />
+        <item index="3" class="java.lang.String" itemvalue="Google Test.TdlRulesTestFixture.create_rule" />
+        <item index="4" class="java.lang.String" itemvalue="Google Test.TdlChannelsTestFixture.get" />
+      </list>
+    </recent_temporary>
+    <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -849,129 +862,8 @@
       <option name="TEST_TYPE" value="TEST_SCRIPT" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
-      <option name="testToRun" value="" />
-      <option name="keywords" value="" />
-      <option name="params" value="" />
-      <option name="USE_PARAM" value="false" />
-      <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="RunAllTests" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runBasicTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runBasicTests">
-      <envs />
-      <method>
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="runDateTimeTests" run_configuration_type="CMakeGoogleTestRunConfigurationType" />
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="runMinTests" run_configuration_type="CMakeGoogleTestRunConfigurationType" />
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="runSimplibTests" run_configuration_type="CMakeGoogleTestRunConfigurationType" />
-        <option name="RunConfigurationTask" enabled="true" run_configuration_name="runTdlTests" run_configuration_type="CMakeGoogleTestRunConfigurationType" />
-      </method>
-    </configuration>
-    <configuration default="false" name="RunMinTests" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runMinTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runMinTests">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="RunDateTimeTests" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runDateTimeTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runDateTimeTests">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="Build All" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="OSTBoardFirmware" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="OSTBoardFirmware" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="OSTBoardFirmware">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="ws-ost" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="ws-ost" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="ws-ost">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="gtest" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gtest" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="gmock" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gmock" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="gmock_main" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="gmock_main" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="timeTestLib" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="timeTestLib" CONFIG_NAME="Debug">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runBasicTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runBasicTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runBasicTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runDateTimeTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runDateTimeTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runDateTimeTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runMinTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runMinTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runMinTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runSimplibTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runSimplibTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runSimplibTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runTdlTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runTdlTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runTdlTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runRuleWriterTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="nvmRuleManagerTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="nvmRuleManagerTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="runRuleWriterRuleTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="runRuleWriterRuleTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="runRuleWriterRuleTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="nvmRuleManagerTests" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="OSTBoardFirmware" TARGET_NAME="nvmRuleManagerTests" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="OSTBoardFirmware" RUN_TARGET_NAME="nvmRuleManagerTests" TEST_MODE="SUITE_TEST">
-      <envs />
-      <method />
-    </configuration>
-    <list size="24">
-      <item index="0" class="java.lang.String" itemvalue="Application.RunAllTests" />
-      <item index="1" class="java.lang.String" itemvalue="Application.RunMinTests" />
-      <item index="2" class="java.lang.String" itemvalue="Application.RunDateTimeTests" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Build All" />
-      <item index="4" class="java.lang.String" itemvalue="Application.OSTBoardFirmware" />
-      <item index="5" class="java.lang.String" itemvalue="Application.ws-ost" />
-      <item index="6" class="java.lang.String" itemvalue="Application.gtest" />
-      <item index="7" class="java.lang.String" itemvalue="Application.gtest_main" />
-      <item index="8" class="java.lang.String" itemvalue="Application.gmock" />
-      <item index="9" class="java.lang.String" itemvalue="Application.gmock_main" />
-      <item index="10" class="java.lang.String" itemvalue="Application.timeTestLib" />
-      <item index="11" class="java.lang.String" itemvalue="Google Test.runBasicTests" />
-      <item index="12" class="java.lang.String" itemvalue="Google Test.runDateTimeTests" />
-      <item index="13" class="java.lang.String" itemvalue="Google Test.runMinTests" />
-      <item index="14" class="java.lang.String" itemvalue="Google Test.runSimplibTests" />
-      <item index="15" class="java.lang.String" itemvalue="Google Test.runTdlTests" />
-      <item index="16" class="java.lang.String" itemvalue="Google Test.runRuleWriterTests" />
-      <item index="17" class="java.lang.String" itemvalue="Google Test.runRuleWriterRuleTests" />
-      <item index="18" class="java.lang.String" itemvalue="Google Test.nvmRuleManagerTests" />
-      <item index="19" class="java.lang.String" itemvalue="Google Test.All in TdlRulesTestNoFixture" />
-      <item index="20" class="java.lang.String" itemvalue="Google Test.All in TdlChannelsTestNoFixture" />
-      <item index="21" class="java.lang.String" itemvalue="Google Test.All in RuleWriterTestFixture" />
-      <item index="22" class="java.lang.String" itemvalue="Google Test.NvmRuleManagerTestFixture.clear_rules" />
-      <item index="23" class="java.lang.String" itemvalue="Google Test.All in NvmRuleManagerTestFixture" />
-    </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Google Test.All in NvmRuleManagerTestFixture" />
-        <item index="1" class="java.lang.String" itemvalue="Google Test.NvmRuleManagerTestFixture.clear_rules" />
-        <item index="2" class="java.lang.String" itemvalue="Google Test.All in RuleWriterTestFixture" />
-        <item index="3" class="java.lang.String" itemvalue="Google Test.All in TdlRulesTestNoFixture" />
-        <item index="4" class="java.lang.String" itemvalue="Google Test.All in TdlChannelsTestNoFixture" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
@@ -994,6 +886,10 @@
       <workItem from="1495253907616" duration="21675000" />
       <workItem from="1495321633499" duration="72978000" />
       <workItem from="1495695059040" duration="619000" />
+      <workItem from="1496281189317" duration="5000000" />
+      <workItem from="1496502977267" duration="1372000" />
+      <workItem from="1496475549654" duration="30780000" />
+      <workItem from="1499093274232" duration="2975000" />
     </task>
     <task id="LOCAL-00001" summary="Good progress writing unit tests.  Done most files in TDL but still need to do TdlRule and RuleRunner.&#10;Still need to do RuleWriter.&#10;Made a lot of breaking changes.  The code under test definitely does't compiler any more.">
       <created>1495351885091</created>
@@ -1013,62 +909,62 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 12m 16s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 12m 00s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 13m 15s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 12m 07s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 15m 01s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 13m 50s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 16m 49s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 14m 57s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 17m 10s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 18m 14s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 22m 10s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 31m 04s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 24m 02s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 32m 03s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 24m 06s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="TdlRuleTestFixture_rule_transition_times_offest_interval - 2017.07.04 at 09h 32m 14s.xml">
+      <configuration name="TdlRuleTestFixture.rule_transition_times_offest_interval" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="All_in_NvmRuleManagerTestFixture - 2017.05.23 at 13h 28m 24s.xml">
-      <configuration name="All in NvmRuleManagerTestFixture" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="runTdlRuleTests - 2017.07.04 at 00h 50m 25s.xml">
+      <configuration name="runTdlRuleTests" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
-    <history-entry file="nvmRuleManagerTests - 2017.05.23 at 13h 28m 33s.xml">
-      <configuration name="nvmRuleManagerTests" configurationId="CMakeGoogleTestRunConfigurationType" />
+    <history-entry file="runTdlRuleTests - 2017.07.04 at 09h 10m 02s.xml">
+      <configuration name="runTdlRuleTests" configurationId="CMakeGoogleTestRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132155000" />
+    <option name="totallyTimeSpent" value="172282000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="1024" width="1920" height="1044" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="0" width="3200" height="1704" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20084344" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18178894" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26842684" sideWeight="0.501845" order="10" side_tool="false" content_ui="tabs" x="370" y="1478" width="1033" height="548" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31683168" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42637214" sideWeight="0.501845" order="10" side_tool="false" content_ui="tabs" x="370" y="1478" width="1033" height="548" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31659973" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32872927" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4088398" sideWeight="0.49815497" order="2" side_tool="false" content_ui="tabs" x="1014" y="608" width="1673" height="919" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29042906" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38554215" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="0.3817382" sideWeight="0.49815497" order="2" side_tool="false" content_ui="tabs" x="0" y="37" width="1280" height="939" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32893288" sideWeight="0.49815497" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286479" sideWeight="0.49815497" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31133112" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1090,6 +986,9 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31133112" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -1126,408 +1025,449 @@
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp</url>
-          <line>31</line>
+          <line>38</line>
           <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/tests/TDL_tests/rules_tests.cpp</url>
-          <line>26</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.cpp</url>
-          <line>91</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.cpp</url>
-          <line>97</line>
-          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/tests/nvm_rule_manager_tests/nvm_rule_manager_tests.cpp</url>
           <line>154</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp</url>
+          <line>24</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlChannels.cpp</url>
+          <line>20</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp</url>
+          <line>215</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp</url>
+          <line>87</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp</url>
+          <line>305</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp</url>
+          <line>82</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="49" />
+      <option name="time" value="75" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/src/gmock-spec-builders.cc">
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlChannels.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="473" column="0" lean-forward="false" selection-start-line="473" selection-start-column="0" selection-end-line="473" selection-end-column="0" />
+        <state relative-caret-position="417">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding>
+            <element signature="e#43#67#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googletest/include/gtest/internal/gtest-linked_ptr.h">
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlChannelMock.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="181" column="0" lean-forward="false" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-function-mockers.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="41" column="8" lean-forward="false" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-more-actions.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="232" column="0" lean-forward="false" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/PinMock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/min/min_transmit_cmds.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/string.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmDriverInterface.cpp" />
-    <entry file="file://$PROJECT_DIR$/firmware/libs/exception/CException.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="62" column="18" lean-forward="true" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/eeprom/eeprom_driver.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1376">
-          <caret line="139" column="0" lean-forward="false" selection-start-line="139" selection-start-column="0" selection-end-line="150" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/avr-libc-2.0.0/avr/lib/avr5/atmega32/Makefile.in">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="289" column="2" lean-forward="false" selection-start-line="289" selection-start-column="2" selection-end-line="289" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/eeprom/eeprom_driver.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1282">
-          <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/exception/ExceptionValues.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="50" column="5" lean-forward="false" selection-start-line="50" selection-start-column="5" selection-end-line="56" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/eeprom/XmegaEepromDriver.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="38" column="7" lean-forward="false" selection-start-line="38" selection-start-column="7" selection-end-line="38" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/eeprom/XmegaEepromDriver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-spec-builders.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="1843" column="0" lean-forward="false" selection-start-line="1843" selection-start-column="0" selection-end-line="1843" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/exception/CException.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/NvmDriverMock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
-          <caret line="31" column="6" lean-forward="false" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googletest/src/gtest.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="2403" column="0" lean-forward="false" selection-start-line="2403" selection-start-column="0" selection-end-line="2403" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/c++/5/tr1/tuple">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-matchers.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="123">
-          <caret line="1479" column="8" lean-forward="false" selection-start-line="1479" selection-start-column="8" selection-end-line="1479" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/rules_tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-82">
-          <caret line="41" column="40" lean-forward="true" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/simplib/array.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/NvmDriverMock.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="19" lean-forward="false" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state relative-caret-position="290">
+          <caret line="59" column="9" lean-forward="false" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/rule_writer_rule_tests/rule_loader_tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11">
-          <caret line="29" column="58" lean-forward="false" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/simplib_tests/array_tests.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmDriverInterface.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="37" column="72" lean-forward="false" selection-start-line="37" selection-start-column="59" selection-end-line="37" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-actions.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="57" column="24" lean-forward="true" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlRuleMock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="135" column="8" lean-forward="false" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlChannels.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlChannels.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/NvmRuleManagerMock.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="29" column="32" lean-forward="true" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/NvmRuleManagerMock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="872">
-          <caret line="124" column="79" lean-forward="false" selection-start-line="124" selection-start-column="79" selection-end-line="124" selection-end-column="79" />
-          <folding>
-            <element signature="e#105#129#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/mocks/RuleLoaderMock.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="56" column="47" lean-forward="false" selection-start-line="56" selection-start-column="47" selection-end-line="56" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/rule_writer_rule_tests/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
+        <state relative-caret-position="560">
+          <caret line="19" column="26" lean-forward="false" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/nvm_rule_manager_tests/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
+        <state relative-caret-position="630">
           <caret line="18" column="35" lean-forward="false" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/rule_writer_rule_tests/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="17" column="35" lean-forward="false" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="10" column="39" lean-forward="false" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        <state relative-caret-position="140">
+          <caret line="4" column="50" lean-forward="false" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleLoader.h">
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlEvent.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1350">
-          <caret line="75" column="8" lean-forward="false" selection-start-line="75" selection-start-column="8" selection-end-line="75" selection-end-column="8" />
-          <folding>
-            <marker date="1495506521256" expanded="true" signature="217:1994" ph="{...}" />
-          </folding>
+        <state relative-caret-position="285">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleLoader.cpp">
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlAction.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="936">
-          <caret line="52" column="4" lean-forward="false" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
-          <folding>
-            <marker date="1495506521244" expanded="true" signature="491:494" ph="{...}" />
-          </folding>
+        <state relative-caret-position="35">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-spec-builders.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="1783" column="34" lean-forward="false" selection-start-line="1783" selection-start-column="34" selection-end-line="1783" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="6" column="18" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/datetime_tests/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="5" column="36" lean-forward="false" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/memory/CppNewDeleteOps.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="21" column="6" lean-forward="false" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/PeriodInterval.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="63" column="0" lean-forward="false" selection-start-line="63" selection-start-column="0" selection-end-line="64" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/exception/CException.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="154" column="8" lean-forward="false" selection-start-line="154" selection-start-column="8" selection-end-line="154" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlEvents.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="13" column="4" lean-forward="false" selection-start-line="13" selection-start-column="4" selection-end-line="25" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlEventsMock.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlEventsMock.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="700">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/PeriodField.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/Period.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googletest/include/gtest/internal/gtest-linked_ptr.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-matchers.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="293" column="0" lean-forward="false" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRules.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="522">
+          <caret line="101" column="33" lean-forward="false" selection-start-line="101" selection-start-column="33" selection-end-line="101" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-function-mockers.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="84" column="0" lean-forward="false" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlRulesMock.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlRulesMock.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/6/bits/stl_vector.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="780" column="0" lean-forward="false" selection-start-line="780" selection-start-column="0" selection-end-line="780" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googletest/src/gtest.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="2170" column="0" lean-forward="false" selection-start-line="2170" selection-start-column="0" selection-end-line="2170" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googletest/include/gtest/gtest.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="1421" column="0" lean-forward="false" selection-start-line="1421" selection-start-column="0" selection-end-line="1421" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRuleRunner.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRuleRunner.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="51" column="12" lean-forward="false" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/x86_64-linux-gnu/c++/6/bits/c++config.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="287" column="9" lean-forward="false" selection-start-line="287" selection-start-column="9" selection-end-line="287" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/6/backward/hash_map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/tdl_action_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/tdl_activator_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2520">
+          <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/tdl_channel_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1155">
+          <caret line="34" column="21" lean-forward="false" selection-start-line="34" selection-start-column="21" selection-end-line="34" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/tdl_action_decompile_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="12" column="22" lean-forward="false" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/channels_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3535">
+          <caret line="101" column="44" lean-forward="false" selection-start-line="101" selection-start-column="44" selection-end-line="101" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/TDL_tests/rules_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="910">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/nvm_rule_manager_tests/nvm_rule_manager_tests.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5436">
-          <caret line="302" column="29" lean-forward="false" selection-start-line="302" selection-start-column="29" selection-end-line="302" selection-end-column="29" />
+        <state relative-caret-position="805">
+          <caret line="23" column="7" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/usb/uart.h">
+    <entry file="file://$PROJECT_DIR$/tests/tdl_rule_tests/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="70">
+          <caret line="2" column="26" lean-forward="false" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleManager.h">
+    <entry file="file://$PROJECT_DIR$/tests/lib/gtest-1.8.0/googlemock/include/gmock/gmock-generated-matchers.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="104" column="18" lean-forward="false" selection-start-line="104" selection-start-column="18" selection-end-line="104" selection-end-column="18" />
+        <state relative-caret-position="47040">
+          <caret line="1344" column="3" lean-forward="false" selection-start-line="1344" selection-start-column="3" selection-end-line="1344" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/nvm/NvmRuleManager.cpp">
+    <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/DateTime.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="110" column="0" lean-forward="true" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state relative-caret-position="4725">
+          <caret line="135" column="25" lean-forward="false" selection-start-line="135" selection-start-column="25" selection-end-line="135" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/datetime/DateTime.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7700">
+          <caret line="220" column="31" lean-forward="false" selection-start-line="220" selection-start-column="31" selection-end-line="220" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/6/array">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3115">
+          <caret line="89" column="11" lean-forward="false" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
           <folding>
-            <element signature="e#43#70#0" expanded="true" />
+            <element signature="e#2596#2627#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/firmware/libs/usb/uart_xmega.c">
+    <entry file="file://$PROJECT_DIR$/tests/mocks/TdlActionMock.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="26" column="2" lean-forward="true" selection-start-line="26" selection-start-column="2" selection-end-line="26" selection-end-column="2" />
+        <state relative-caret-position="-135">
+          <caret line="16" column="6" lean-forward="false" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/6/bits/stl_map.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="786">
+          <caret line="185" column="0" lean-forward="false" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
+          <folding>
+            <element signature="e#3686#3828#0" expanded="true" />
+            <marker date="1475650916000" expanded="false" signature="2468:2512" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="6461:6526" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="7188:9345" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="11485:12127" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="14646:15791" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="17183:17316" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="17456:17911" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="18864:21282" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="27133:27398" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="27440:27824" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="28979:29035" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="29198:29491" ph="..." />
+            <marker date="1475650916000" expanded="false" signature="34913:35927" ph="..." />
+            <marker date="1475650916000" expanded="true" signature="35940:36416" ph="/**...*/" />
+            <marker date="1475650916000" expanded="false" signature="37136:37998" ph="..." />
+            <marker date="1475650916000" expanded="true" signature="38011:38615" ph="/**...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/firmware/libs/TimerDescriptionLanguage/TdlRule.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="472" column="0" lean-forward="false" selection-start-line="472" selection-start-column="0" selection-end-line="472" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/tdl_rule_tests/rule_tests.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="294" column="79" lean-forward="true" selection-start-line="294" selection-start-column="79" selection-end-line="294" selection-end-column="79" />
+          <folding>
+            <element signature="e#45#69#0" expanded="true" />
+            <marker date="1499124731674" expanded="true" signature="3858:4658" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -10,9 +10,9 @@ public:
     DateTime() : val(0) {};
     DateTime(int v) : val(v) {};
 
-    DateTime( const DateTime &obj) : val(obj.val) {};
+//    DateTime( const DateTime &obj ) : val(obj.val) {};
 
-    bool operator==(const DateTime& rhs) const { return val == rhs.val; };
+    bool operator==(const DateTime& rhs) const { return this->val == rhs.val; };
 
     int val;
 };
