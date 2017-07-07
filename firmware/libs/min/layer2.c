@@ -65,6 +65,9 @@ void min_frame_received(uint8_t buf[], uint8_t control, uint8_t id)
         case MIN_ID_SAVE_RULES:
             handle_save_rules(id, buf, control);
             break;
+        case MIN_ID_GET_DEVICE_TYPE:
+            handle_get_device_type(id, buf, control);
+            break;
     }
 }
 

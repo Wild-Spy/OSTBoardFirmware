@@ -120,3 +120,9 @@ void report_printf(const char *data, ...) {
     report_prints(buf);
     cpu_irq_leave_critical();
 }
+
+void report_device_type() {
+    DECLARE_BUF(4);
+    PACK32(0x00000001);
+    SEND_FRAME(MIN_ID_RESPONSE_GET_DEVICE_TYPE);
+}

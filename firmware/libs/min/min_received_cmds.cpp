@@ -160,3 +160,11 @@ void handle_set_rtc_time(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
 //    TdlRules_Init();
 //    report_response_ack();
 }
+
+void handle_get_device_type(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
+    report_device_type();
+}
+
+//void handle_get_device_id(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
+//
+//}

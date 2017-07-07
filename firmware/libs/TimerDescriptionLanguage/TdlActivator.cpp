@@ -32,10 +32,11 @@ void TdlActivator::enable(DateTime now) {
 int TdlActivator::getTargetId() {
     if (target_ == NULL) return -2;
     if (act_type_ == ACTIVATOR_TYPE_CHANNEL) {
-        getChannel()->getId();
+        return getChannel()->getId();
     } else if (act_type_ == ACTIVATOR_TYPE_RULE) {
-        getRule()->getId();
+        return getRule()->getId();
     }
+    return -2;
 }
 
 bool TdlActivator::operator==(const TdlActivator &rhs) const {

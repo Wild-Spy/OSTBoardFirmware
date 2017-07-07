@@ -177,11 +177,11 @@ TEST_F(TdlRuleTestFixture, simple_rule_transition_times) {
 
     map<DateTime, bool> map;
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 0, 30, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2,  0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2,  0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2, 30, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4,  0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4,  0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4, 30, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6,  0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6,  0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6, 30, 0), false));
 
     test_transitions(rule, start_time, true, map);
@@ -205,13 +205,13 @@ TEST_F(TdlRuleTestFixture, simple_rule_transition_times2) {
 
     map<DateTime, bool> map;
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1,  6, 0, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 11, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 11, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 16, 0, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 21, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 21, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 26, 0, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 31, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 31, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 05, 0, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 10, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 10, 0, 0, 0),  true));
 
     test_transitions(rule, start_time, true, map);
 }
@@ -234,13 +234,13 @@ TEST_F(TdlRuleTestFixture, rule_transition_times_overflow_interval) {
 
     map<DateTime, bool> map;
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 0, 2, 5), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 1, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 1, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 1, 0, 2, 5), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 3, 1, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 3, 1, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 3, 1, 0, 2, 5), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 4, 1, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 4, 1, 0, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 4, 1, 0, 2, 5), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 5, 1, 0, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 5, 1, 0, 0, 0),  true));
 
     test_transitions(rule, start_time, true, map);
 }
@@ -263,27 +263,27 @@ TEST_F(TdlRuleTestFixture, rule_transition_times_overflow_period) {
 
     map<DateTime, bool> map;
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 1,  0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2,  5, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2,  5, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 3,  5, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4, 10, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4, 10, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 5, 10, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6, 15, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6, 15, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 7, 15, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 8, 20, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 8, 20, 0),  true));
 
     test_transitions(rule, start_time, true, map);
 }
 
 /**
  * Test a rule where the interval doesn't get enabled at the start of the period.
- * In this rule, the period is 5 hours and the rule is enabled between the end of the 1st hour and the start of the
+ * In this rule, the period is 3 hours and the rule is enabled between the end of the 1st hour and the start of the
  * second hour.
  */
 TEST_F(TdlRuleTestFixture, rule_transition_times_offest_interval) {
     Sequence seq;
     Array<PeriodInterval, 5> intervals;
     intervals.append(PeriodInterval(Period::MakeCustomPeriod(1, PERIODFIELD_HOURS), Period::MakeCustomPeriod(2, PERIODFIELD_HOURS)));
-    TdlRule rule(0, true, Period::MakeCustomPeriod(5, PERIODFIELD_HOURS), intervals, DateTime(), Period(), EVENT_ID_NULL);
+    TdlRule rule(0, true, Period::MakeCustomPeriod(3, PERIODFIELD_HOURS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
     TdlAction &action = rule.getAction();
 
@@ -291,20 +291,53 @@ TEST_F(TdlRuleTestFixture, rule_transition_times_offest_interval) {
     DateTime start_time = DateTime(2000, 1, 1, 0, 0, 0);
 
     map<DateTime, bool> map;
-//    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 0, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 1, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 1, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 2, 0, 0), false));
 
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 3, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 4, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 5, 0, 0), false));
-
+//
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 6, 0, 0), false));
-    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 7, 0, 0), true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 7, 0, 0),  true));
     map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 8, 0, 0), false));
 
     test_transitions(rule, start_time, false, map);
 }
+
+
+/**
+ * Test a rule with multiple intervals
+ * In this rule, the period is 1 day and the rule is enabled between 9am and 11am, and also between 6pm and 10pm.
+ */
+TEST_F(TdlRuleTestFixture, rule_transition_times_multiple_intervals) {
+    Sequence seq;
+    Array<PeriodInterval, 5> intervals;
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod( 9, PERIODFIELD_HOURS), Period::MakeCustomPeriod(11, PERIODFIELD_HOURS)));
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod(18, PERIODFIELD_HOURS), Period::MakeCustomPeriod(22, PERIODFIELD_HOURS)));
+    TdlRule rule(0, true, Period::MakeCustomPeriod(1, PERIODFIELD_DAYS), intervals, DateTime(), Period(), EVENT_ID_NULL);
+
+    TdlAction &action = rule.getAction();
+
+    // Transition times
+    DateTime start_time = DateTime(2000, 1, 1, 0, 0, 0);
+
+    map<DateTime, bool> map;
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1,  9, 0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 11, 0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 18, 0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 22, 0, 0), false));
+//
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2,  0, 0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2,  9, 0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 11, 0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 18, 0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 22, 0, 0), false));
+
+    test_transitions(rule, start_time, false, map);
+}
+
+
 
 //TEST_F(TdlRulesDefaultInitTestFixture, get_out_of_range_throws_exception) {
 //    CEXCEPTION_T e;

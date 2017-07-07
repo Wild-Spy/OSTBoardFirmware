@@ -100,6 +100,7 @@ SET(CMAKE_EXE_LINKER_FLAGS "${STRIP_DEBUG_SYMBOLS} \
         -Xlinker --defsym=HEAP_SIZE=${HEAP_SIZE} \
         -Xlinker --defsym=STACK_SIZE=${STACK_SIZE} \
         -Wl,--start-group -Wl,--end-group -Wl,--gc-sections \
+        -Wl,--section-start=.text=0x2000\
         -Wl,--script=${LDFILE} ")
 
 

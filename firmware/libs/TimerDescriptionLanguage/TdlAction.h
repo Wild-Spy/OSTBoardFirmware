@@ -5,6 +5,7 @@
 #ifndef WS_OST_TDLACTION_H
 #define WS_OST_TDLACTION_H
 
+#include <memory/CppNewDeleteOps.h>
 #include "TdlRuleState.h"
 #include "TdlActivator.h"
 
