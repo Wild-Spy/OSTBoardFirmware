@@ -4,6 +4,8 @@
 
 #include "TdlChannels.h"
 #include <new>
+//#include <cmocka.h>
+#include <asf/common2/delay/delay.h>
 
 static TdlChannels* tdl_channels = NULL;
 
@@ -19,7 +21,6 @@ TdlChannels::TdlChannels(uint8_t channel_count, TdlChannelState_t default_state,
         : channel_count_(channel_count)
 {
     channels_ = (TdlChannel*)malloc(sizeof(TdlChannel)*channel_count);
-
     for (uint8_t i = 0; i < channel_count_; i++) {
         // Creating these in-place with the placement new operator
         new (channels_+i) TdlChannel(i, default_state, pinList[i]);
@@ -43,7 +44,7 @@ void TdlChannels::resetStates() {
     }
 }
 
-#if defined(TESTING)
+#if defined(TESTING) || defined(MCU_TESTING)
 TdlChannels::~TdlChannels() {
     for (uint8_t i = 0; i < channel_count_; i++) {
         // These were created in-place with the placement new operator so
@@ -65,7 +66,7 @@ void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin* pi
     tdl_channels = new TdlChannels(channels, default_state, pins);
 }
 
-#ifdef TESTING
+#if defined(TESTING) || defined(MCU_TESTING)
 void TdlChannels_Destroy() {
     delete tdl_channels;
     tdl_channels = NULL;

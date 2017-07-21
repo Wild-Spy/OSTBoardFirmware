@@ -4,7 +4,11 @@
 
 #define __STDC_LIMIT_MACROS
 #include <stdint-gcc.h>
+
+#if !defined(TESTING)
 #include <min/min_transmit_cmds.h>
+#endif
+
 #include "TdlRule.h"
 
 
@@ -20,6 +24,10 @@
 
 #include <exception/CException.h>
 #include <memory/CppNewDeleteOps.h>
+
+#if defined(MCU_TESTING)
+#include <cmocka.h>
+#endif
 
 void TdlRule::enable() {
     enabled_ = true;
@@ -347,17 +355,21 @@ void TdlRule::updateInternalTimeKeepingVariables(DateTime now) {
     } else {
         if (isTriggeredByEvent()) {
             DateTime start_of_next = getStartOfNextPeriodForEvent(last_update_time_);
-            while (now >= start_of_next) {
+//            while (now >= start_of_next) {
+//                start_of_current_period_ = start_of_next;
+//                if (start_of_next.isEmpty()) break;
+//                start_of_next = getStartOfNextPeriodForEvent(start_of_next);
+//            }
+            if (!start_of_next.isEmpty())
                 start_of_current_period_ = start_of_next;
-                if (start_of_next.isEmpty()) break;
-                start_of_next = getStartOfNextPeriodForEvent(start_of_next);
-            }
             updateCurrentPeriodIntervals();
         }
         DateTime end_of_current_period = getEndOfCurrentPeriod();
         if (!start_of_first_period_.isEmpty() && now < start_of_first_period_) {
             action_.stop(now);
         } else if (now < start_of_current_period_) {
+            // ie there's a delay
+            return;
             //should this really be possible???
             //if (startOfCurrentPeriod.getYear() >= 1000000) return;
             //TODO: handle this!
@@ -382,7 +394,8 @@ void TdlRule::updateInitialStartOfCurrentPeriod(DateTime now) {
     }
 
     if (isTriggeredByEvent()) {
-        start_of_current_period_ = getStartOfPreviousPeriodForEvent(now);
+//        start_of_current_period_ = getStartOfPreviousPeriodForEvent(now);
+        start_of_current_period_ = getStartOfNextPeriodForEvent(now);
         return;
     }
 
@@ -453,8 +466,10 @@ void TdlRule::findParentRules(sl::Array<TdlRule *, 4> *parent_rules) {
 void TdlRule::runParentRulesIfNecessary(DateTime now) {
     sl::Array<TdlRule*, 4> parent_rules;
     findParentRules(&parent_rules);
-    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2 && !defined(MCU_TESTING)
     report_printf("Parent Rules(%u): %u", this->id_, parent_rules.getCount());
+    #elif defined(MCU_TESTING) && defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    print_message("Parent Rules(%u): %u\n", this->id_, parent_rules.getCount());
     #endif
     for (uint8_t i = 0; i < parent_rules.getCount(); i++) {
         TdlRule& rule = *parent_rules.get(i);
@@ -463,8 +478,10 @@ void TdlRule::runParentRulesIfNecessary(DateTime now) {
 }
 
 void TdlRule::update(DateTime now) {
-    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 2 && !defined(MCU_TESTING)
     report_printf("Update Rule %u (%senabled)", this->id_, isEnabled()?"":"not ");
+    #elif defined(MCU_TESTING) && defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    print_message("Update Rule %u (%senabled)\n", this->id_, isEnabled()?"":"not ");
     #endif
     if (isEnabled() && !has_been_run_this_step_) {
         runParentRulesIfNecessary(now);
@@ -479,8 +496,10 @@ void TdlRule::updateThisRuleAndParentsIfNecessary(DateTime now) {
 
 void TdlRule::updateThisRuleOnly(DateTime now) {
     bool is_active = false;
-    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1
+    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1 && !defined(MCU_TESTING)
     report_printf("Run Rule %u", this->id_);
+    #elif defined(MCU_TESTING) && defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    print_message("Run Rule %u\n", this->id_);
     #endif
 //    char nts[20];
 //    now.isotime(nts);
@@ -497,8 +516,10 @@ void TdlRule::updateThisRuleOnly(DateTime now) {
             break;
         }
     }
-    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1
+    #if defined(DEBUGPRINTS) && DEBUGPRINTS > 1 && !defined(MCU_TESTING)
     report_printf("Rule %u is %sactive.", id_, is_active?"":"not ");
+    #elif defined(MCU_TESTING) && defined(DEBUGPRINTS) && DEBUGPRINTS > 2
+    print_message("Rule %u is %sactive.\n", id_, is_active?"":"not ");
     #endif
     if (is_active) {
         action_.start(now);
@@ -510,7 +531,7 @@ void TdlRule::updateThisRuleOnly(DateTime now) {
 }
 
 DateTime TdlRule::getStartOfNextPeriodForEvent(DateTime now) {
-    if (TdlEvents_GetInstance().getCurrentEvent().isEmpty() ||
+    if (!TdlEvents_GetInstance().isUnprocessedEvent() ||
             TdlEvents_GetInstance().getCurrentEvent().getId() != start_of_first_period_event_id_) {
         //There are no unprocessed events for this rule!
         return DateTime::Empty();
@@ -541,8 +562,6 @@ DateTime TdlRule::getStartOfPreviousPeriodForEvent(DateTime now) {
     } else {
         return TdlEvents_GetInstance().getLastEvent().getTime();
     }
-
-
 
     // find next event
     // TODO: did an event just get triggered???

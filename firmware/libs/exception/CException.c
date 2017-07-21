@@ -12,7 +12,7 @@ void ThrowFunc(CEXCEPTION_T ExceptionID, const char* File, uint16_t Line )
 {
     unsigned int MY_ID = CEXCEPTION_GET_ID;
 
-    while(1) {};
+//    while(1) {};
 
     CExceptionFrames[MY_ID].Exception = ExceptionID;
 

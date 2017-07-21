@@ -9,3 +9,7 @@ TdlEvents events;
 TdlEvents &TdlEvents_GetInstance() {
     return events;
 }
+
+void TdlEvents_ResetInstance() {
+    events = TdlEvents();
+}

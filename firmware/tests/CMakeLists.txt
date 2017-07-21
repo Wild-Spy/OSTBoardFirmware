@@ -53,7 +53,12 @@ SET(DEFINES "-DEXTINT_CALLBACK_MODE=true \
         -DMCU_TESTING \
         -DHEAP_SIZE=${HEAP_SIZE} \
         -DSTACK_SIZE=${STACK_SIZE} \
+        -DSYSTICK_MODE \
+        -DTC_ASYNC \
+        -DSAVE_FILE_AND_LINE \
         ")
+#ADD_DEFINITIONS(-DDEBUGPRINTS=3)
+
 # Flags
 SET(CFLAGS "--specs=nosys.specs \
             -lm -larm_cortexM4l_math \
@@ -84,7 +89,16 @@ SET(CPPFLAGS "--specs=nosys.specs \
 SET(CMAKE_C_FLAGS  "${CFLAGS}")
 SET(CMAKE_CXX_FLAGS "${CPPFLAGS}")
 SET(ASM_FLAGS "-mthumb -Os -mcpu=${DEVICE} ${DEFINES} -Wa,-g")
-SET(CMAKE_EXE_LINKER_FLAGS "-Xlinker --defsym=HEAP_SIZE=${HEAP_SIZE}  -Xlinker --defsym=STACK_SIZE=${STACK_SIZE} -Wl,--start-group -Wl,--end-group -Wl,--gc-sections -Wl,--script=${LDFILE} ")
+SET(CMAKE_EXE_LINKER_FLAGS "-Xlinker \
+        --defsym=HEAP_SIZE=${HEAP_SIZE}  \
+        -Xlinker \
+        --defsym=STACK_SIZE=${STACK_SIZE} \
+        -Wl,--start-group -Wl,--end-group \
+        -Wl,--gc-sections \
+        -Wl,--script=${LDFILE} ")
+
+# Add the following to CMAKE_EXE_LINKER_FLAGS TO MAKE UPLOADABLE WITH BOOTLOADER
+#-Wl,--section-start=.text=0x2000 \
 
 SET(ASM_OPTIONS "-x assembler-with-cpp")
 SET(CMAKE_ASM_FLAGS "${ASM_FLAGS} ${ASM_OPTIONS}" )
@@ -97,7 +111,10 @@ include_directories(
 
         libs/cmocka
 
+        ../
+
         ../libs
+        ../libs/time
         ../libs/conf
         ../libs/usb
 
@@ -113,6 +130,10 @@ include_directories(
         ../asf/sam0/drivers/system/reset/reset_sam_d_r
         ../asf/sam0/drivers/extint
         ../asf/sam0/drivers/port
+        ../asf/sam0/drivers/sercom
+        ../asf/sam0/drivers/sercom/i2c
+        ../asf/sam0/drivers/tc/
+
         ../asf/sam0/utils/preprocessor
         ../asf/sam0/utils/header_files
         ../asf/common/utils
@@ -131,6 +152,9 @@ include_directories(
         ../asf/common/services/usb/udc
         ../asf/common/services/usb/class/cdc
         ../asf/common/services/usb/class/cdc/device
+#
+        ../asf/common2/delay
+        ../asf/common2/delay/sam0
 #
         ../asf/common/services/clock
         ../asf/sam0/drivers/nvm
@@ -151,7 +175,19 @@ SET(SOURCE_FILES
 
         tests_main.cpp
         ../startup_samd21.c
-#        ../libs/hal/Pin.cpp
+        ../libs/hal/Pin.cpp
+        ../libs/hal/I2c.cpp
+        ../libs/DS3232SN/DS3232SN.cpp
+        ../libs/datetime/DateTime.cpp
+        ../libs/datetime/Period.cpp
+        ../libs/datetime/PeriodInterval.cpp
+        ../libs/TimerDescriptionLanguage/TdlRule.cpp
+        ../libs/TimerDescriptionLanguage/TdlRuleRunner.cpp
+        ../libs/TimerDescriptionLanguage/TdlAction.cpp
+        ../libs/TimerDescriptionLanguage/TdlActivator.cpp
+        ../libs/TimerDescriptionLanguage/TdlChannels.cpp
+        ../libs/TimerDescriptionLanguage/TdlEvents.cpp
+        mocks/TdlRules.cpp
 
         libs/cmocka/cmocka.c
         libs/stdio/read.c
@@ -173,9 +209,15 @@ SET(SOURCE_FILES
         ../asf/sam0/drivers/system/clock/clock_samd21_r21_da/gclk.c
         ../asf/sam0/drivers/system/interrupt/system_interrupt.c
         ../asf/sam0/drivers/system/pinmux/pinmux.c
+        ../asf/sam0/drivers/sercom/sercom.c
+        ../asf/sam0/drivers/sercom/i2c/i2c_sam0/i2c_master.c
+        ../asf/sam0/drivers/port/port.c
+        ../asf/sam0/drivers/tc/tc_interrupt.c
+        ../asf/sam0/drivers/tc/tc_sam_d_r/tc.c
 
         ../asf/common/utils/interrupt/interrupt_sam_nvic.c
         ../asf/common/services/sleepmgr/samd/sleepmgr.c
+        ../asf/common2/delay/sam0/systick_counter.c
 
         ../asf/sam0/drivers/nvm/nvm.c
 
@@ -251,11 +293,19 @@ SET(SOURCE_FILES
         ../libs/nvm/SamdEmulatedEepromDriver.cpp
 
         mem_tests.cpp
-        nvm_tests.cpp)
+        DS3232SN_tests.cpp
+        rule_runner_tests.cpp
+        nvm_tests.cpp
+
+        ../libs/time_tick/time_tick_sam.c
+        ../libs/time_tick/time_tick.h
+        mocks/TdlChannel.cpp
+        )
 
 #============================================================================================
 
 ADD_EXECUTABLE(${PROJECT_NAME}.elf ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME}.elf timeAvrLib)
 
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}.elf POST_BUILD COMMAND ${OBJCOPY} -O ihex ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.elf ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.hex)
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}.elf POST_BUILD COMMAND ${OBJCOPY} -O binary ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.elf ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.bin)
@@ -291,3 +341,4 @@ ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}.elf POST_BUILD COMMAND ${RUN_CMD})
 #ram size 0x8000 /* 32k */
 
 ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}.elf POST_BUILD COMMAND cp ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.elf /media/WorkRed/${PROJECT_NAME}.elf)
+ADD_CUSTOM_COMMAND(TARGET ${PROJECT_NAME}.elf POST_BUILD COMMAND cp ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.bin ~/${PROJECT_NAME}.bin)

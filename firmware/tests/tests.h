@@ -14,8 +14,10 @@
 
 //#define RUN_TESTS()   run_mem_tests();
 
-
 void run_mem_tests();
 void run_nvm_tests();
+void run_ds3232sn_tests();
+void run_rule_runner_tests();
 
-#define RUN_TESTS()   FOR_EACH(RUN_TEST_GROUP, mem_tests, nvm_tests)
+//#define RUN_TESTS()   FOR_EACH(RUN_TEST_GROUP, rule_runner_tests)
+#define RUN_TESTS()   FOR_EACH(RUN_TEST_GROUP, mem_tests, nvm_tests, ds3232sn_tests, rule_runner_tests)

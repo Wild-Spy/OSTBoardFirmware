@@ -11,6 +11,9 @@
 #ifdef TESTING
 #include <DateTimeSimpleMock.h>
 #include "TdlChannelMock.h"
+#elif MCU_TESTING
+#include <tests/mocks/TdlChannel.h>
+#include <datetime/DateTime.h>
 #else
 #include "TdlChannel.h"
 #include <datetime/DateTime.h>

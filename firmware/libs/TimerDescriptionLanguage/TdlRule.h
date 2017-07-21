@@ -60,6 +60,7 @@ public:
     static TdlRule Decompile(uint8_t *data, uint8_t len);
     static void Decompile(uint8_t *data, uint8_t len, TdlRule* addressToStoreAt);
     TdlAction& getAction() { return action_; };
+    void setAction(TdlAction action) { action_ = action; };
 
 private:
     DateTime getLastStateChangeTimeNoEvents();

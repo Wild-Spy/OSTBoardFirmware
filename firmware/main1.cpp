@@ -34,7 +34,7 @@ Pin led(HAL_GPIO_PORTA, 27);
 
 Pin* channel_pins[CHANNEL_COUNT];
 
-void i2cInit() {
+static void i2cInit() {
     struct i2c_master_config i2c_cfg;
     i2c_master_get_config_defaults(&i2c_cfg);
     i2c_cfg.baud_rate = I2C_MASTER_BAUD_RATE_100KHZ;

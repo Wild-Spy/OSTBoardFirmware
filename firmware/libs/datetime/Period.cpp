@@ -4,7 +4,9 @@
 
 #define __STDC_LIMIT_MACROS
 #include <stdint.h>
+#if !defined(TESTING)
 #include <min/min_transmit_cmds.h>
+#endif
 
 #include <exception/ExceptionValues.h>
 

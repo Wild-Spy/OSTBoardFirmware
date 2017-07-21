@@ -14,7 +14,7 @@
 //Alarm masks
 enum ALARM_TYPES_t {
     ALM1_EVERY_SECOND = 0x0F,
-    ALM1_MATCH_SECONDS = 0x0E,
+    ALM1_MATCH_SECONDS = 0x0E,     //match seconds
     ALM1_MATCH_MINUTES = 0x0C,     //match minutes *and* seconds
     ALM1_MATCH_HOURS = 0x08,       //match hours *and* minutes, seconds
     ALM1_MATCH_DATE = 0x00,        //match date *and* hours, minutes, seconds
@@ -42,7 +42,7 @@ public:
              extint_callback_t int_callback);
 
     void init();
-    void reset();
+//    void reset();
     DateTime get();
     void set(DateTime dt);
     bool oscStopped(bool clearOSF);
@@ -62,6 +62,9 @@ public:
     DateTime getNextAlarm() { return next_alarm_; };
 
     bool busy();
+    bool conv();
+
+    void forceTemperatureConversion();
 
     void enablePower();
     void disablePower();
@@ -81,19 +84,27 @@ public:
     void enablePinInterrupt() { nint_pin_.registerCallback(int_callback_); }
 
 private:
+    uint8_t dec2bcd(uint8_t n);
+    static uint8_t bcd2dec(uint8_t n);
+    uint8_t readTime(dt_tm* dt);
+    uint8_t writeTime(dt_tm* tm);
+
+#if defined(MCU_TESTING)
+public:
+#else
+private:
+#endif
     //uint8_t testi2c();
     void i2cWriteByte(uint8_t subAddress, uint8_t data);
     uint8_t i2cReadByte(uint8_t subAddress);
 //    void i2cReadBytes(uint8_t subAddress, uint8_t *dest, uint8_t count);
 //    void i2cWriteBytes(uint8_t subAddress, uint8_t *data, uint8_t count);
 
+#if defined(MCU_TESTING)
+public:
+#else
 private:
-    uint8_t dec2bcd(uint8_t n);
-    static uint8_t bcd2dec(uint8_t n);
-    uint8_t readTime(dt_tm* dt);
-    uint8_t writeTime(dt_tm* tm);
-
-private:
+#endif
     I2c& i2c_;
 //    Pin nreset_pin_;
     Pin npen_pin_; //active low power_enable_pin

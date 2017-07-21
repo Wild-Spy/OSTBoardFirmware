@@ -2,7 +2,7 @@
 // Created by mcochrane on 8/04/17.
 //
 
-#include <libs/exception/CException.h>
+#include <exception/CException.h>
 #include "Pin.h"
 
 void Pin::setDirOutput() {
@@ -21,9 +21,9 @@ void Pin::setDirInput() {
 
 bool Pin::getValue() const {
     if (config_.direction == PORT_PIN_DIR_OUTPUT) {
-        return port_pin_get_input_level(pin_);
-    } else {
         return port_pin_get_output_level(pin_);
+    } else {
+        return port_pin_get_input_level(pin_);
     }
 }
 
@@ -85,9 +85,11 @@ void Pin::setupInterrupt(enum extint_detect detection_criteria,
                          bool filter_input_signal) {
     extint_chan_get_config_defaults(&config_extint_chan_);
     config_extint_chan_.gpio_pin = pin_;
-//    config_extint_chan.gpio_pin_mux = SYSTEM_PINMUX_GPIO; //default anyway
-    config_extint_chan_.gpio_pin_pull = EXTINT_PULL_UP;
-    config_extint_chan_.detection_criteria = EXTINT_DETECT_LOW;
+//    config_extint_chan.gpio_pin_mux = SYSTEM_PINMUX_GPIO; //it's the default anyway
+    config_extint_chan_.gpio_pin_pull = gpio_pin_pull;
+    config_extint_chan_.detection_criteria = detection_criteria;
+    config_extint_chan_.wake_if_sleeping = wake_if_sleeping;
+    config_extint_chan_.filter_input_signal = filter_input_signal;
     extint_chan_set_config(pin_, &config_extint_chan_);
 }
 
@@ -100,6 +102,7 @@ void Pin::registerCallback(extint_callback_t callback) {
         unregisterCallback();
     }; //Throw(EX_ALREADY_INITIALISED);
     callback_ = callback;
+    extint_chan_clear_detected(pin_);
     enum status_code result = extint_register_callback(callback_, pin_, EXTINT_CALLBACK_TYPE_DETECT);
     if (result == STATUS_ERR_ALREADY_INITIALIZED) {
         Throw(EX_ALREADY_INITIALISED);

@@ -9,7 +9,7 @@
 #include "TdlRuleMock.h"
 #include "NvmRuleManagerMock.h"
 #else
-#include "TdlRule.h"
+#include <TimerDescriptionLanguage/TdlRule.h>
 #include "nvm/NvmRuleManager.h"
 #endif
 
@@ -36,16 +36,15 @@ public:
 
     void loadFromEeprom();
 
-    #ifdef TESTING
-    TdlRules(TdlRule rules[], uint8_t count);
+    int loadInRule(TdlRule &rule);
+
     ~TdlRules();
-    #endif
 
 private:
     uint8_t max_rules_;
     uint8_t rule_count_;
     TdlRule* rules_;//[MAX_RULES];
-    NvmRuleManager& rule_manager;
+
 };
 
 //COMPILE_TIME_SIZEOF(TdlRule);
@@ -60,10 +59,7 @@ private:
 EXTERNC void TdlRules_Init(uint8_t max_rules, NvmRuleManager& ruleWriter);
 EXTERNC TdlRules& TdlRules_GetInstance();
 
-#ifdef TESTING
-EXTERNC void TdlRules_Init_Test(TdlRule rules[], uint8_t count);
 EXTERNC void TdlRules_Destroy();
-#endif
 
 #undef EXTERNC
 

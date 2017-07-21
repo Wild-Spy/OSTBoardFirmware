@@ -7,6 +7,9 @@
 
 #ifdef TESTING
 #include "TdlChannelMock.h"
+#elif MCU_TESTING
+#include <tests/mocks/TdlChannel.h>
+#include <cmocka.h>
 #else
 #include "TdlChannel.h"
 #endif
@@ -36,7 +39,7 @@ public:
      */
     void resetStates();
 
-    #ifdef TESTING
+    #if defined(TESTING) || defined(MCU_TESTING)
     ~TdlChannels();
     #endif
 
@@ -55,7 +58,7 @@ private:
 EXTERNC TdlChannels& TdlChannels_GetInstance();
 EXTERNC void TdlChannels_Init(uint8_t channels, TdlChannelState_t default_state, Pin* pins[]);
 
-#ifdef TESTING
+#if defined(TESTING) || defined(MCU_TESTING)
 EXTERNC void TdlChannels_Destroy();
 #endif
 

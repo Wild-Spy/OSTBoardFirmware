@@ -4,9 +4,8 @@
 
 #include "DS3232SN.h"
 #include <delay.h>
-#include <libs/exception/ExceptionValues.h>
-#include <libs/exception/CException.h>
-#include <libs/hw/hal_gpio.h>
+#include <exception/CException.h>
+#include <hw/hal_gpio.h>
 
 //extern "C" {
 //#include <parts.h>
@@ -20,7 +19,7 @@
 #include "min/min_transmit_cmds.h"
 
 
-DS3232SN* rtc = NULL;
+static DS3232SN* rtc = NULL;
 
 //DS3232SN::DS3232SN(I2c& i2c, uint8_t nreset_port, uint8_t nreset_pin, uint8_t npen_port, uint8_t npen_pin)
 //        : nreset_pin_(nreset_port, nreset_pin),
@@ -42,50 +41,76 @@ DS3232SN::DS3232SN(I2c& i2c,
       nint_pin_(ninterrupt_port, ninterrupt_pin),
       power_enabled_(true),
       int_callback_(int_callback)
-{
-//    i2cCreate(&i2c_, twi);
+{}
 
-//#if XMEGA_C4
-//    if (twi == &TWIE) {
-//        twi_sda_pin_ = Pin(&PORTE, 0);
-//        twi_scl_pin_ = Pin(&PORTE, 1);
-//    } else if (twi == &TWIC) {
-//        twi_sda_pin_ = Pin(&PORTC, 0);
-//        twi_scl_pin_ = Pin(&PORTC, 1);
-//    } else {
-//        Throw(EX_OUT_OF_RANGE);
-//    }
-//#else
-//    #error Please define TWI Pins for your MCU
-//#endif
-
-}
-
+/**
+ * Initialises the DS3232SN and puts it in a predefined state.
+ * The chip doesn't have a 'reset' line so we need to program it's values to put it in a reset state manually.
+ * Note: the reset line on the chip is an output and is meant as a reset signal for an MCU.
+ *
+ * MCU Configuration:
+ *  - mcu npen pin is set to an output with low level. ie power is enabled to the rtc, it is not in battery backup mode.
+ *  - mcu nint pin is set to an input with a pullup and triggers an interrupt if a low signal level is detected.
+ *  - pin interrupt is ENABLED by default!
+ *  - the i2c is enabled.
+ *
+ * DS3232SN Configuration:
+ * - disable alarm1 interrupt
+ * - disable alarm2 interrupt
+ * - reset alarm 1 flag
+ * - reset alarm 2 flag
+ * - oscillator stop flag cleared - ie the oscillator is enabled and running
+ * - set the RTC time to 1/1/2000 00:00:00
+ * - disables the square wave output, enables interrupt output
+ * - nEOSC bit in control register cleared -> osc runs when powered from battery
+ * - BB32kHz cleared - no 32kHz output in battery backup mode -> the output is pulled low
+ * - EN32kHz cleared - no 32kHz output in Vcc powered mode -> the output is pulled low
+ * - conversion rate set to 64 seconds (CRATE1 == CRATE0 == 0)
+ * - BBSQW cleared - set to POR value
+ *
+ * Some registers in the DS3232N memory are undefined after calling init().  These are:
+ * - Alarm 1 time (sec/min/hr/day/date)
+ * - Alarm 2 time (min/hr/day/date)
+ * - RS1/RS2 bits in Control Register (0x0E) - these control the square wave frequency, though it's not enabled after init
+ */
 void DS3232SN::init() {
-//    nreset_pin_.setDirInput();
     npen_pin_.setDirOutput();
-
     npen_pin_.setOutputLow(); // power is enabled
-//    nreset_pin_.setOutputHigh(); //not being reset
+    power_enabled_ = true;
 
     nint_pin_.setDirInput();
     nint_pin_.setupInterrupt(EXTINT_DETECT_LOW, EXTINT_PULL_UP, true, false);
 
-//    twi_sda_pin_.setDirInput();
-//    twi_scl_pin_.setDirInput();
-
     delay_ms(200);
 
-    reset();
     i2c_.enable();
 
-//    enablePinInterrupt();
-}
+    // disable interrupts
+    alarmInterrupt(1, false);
+    alarmInterrupt(2, false);
+    // reset alarm flags
+    alarm(1);
+    alarm(2);
 
-void DS3232SN::reset() {
-//    nreset_pin_.setOutputLow();
-//    _delay_ms(300);
-//    nreset_pin_.setOutputHigh();
+    // set the time to 1/1/2000 at midnight
+    set(DateTime(2000, 1, 1, 0, 0, 0));
+
+    // Set the control register
+    uint8_t c = i2cReadByte(DSRTC_CONTROL);
+    c = c & ~(1<<EOSC)
+          |  (1<<INTCN);
+    i2cWriteByte(DSRTC_CONTROL, c);
+
+    // Set the status register
+    uint8_t s = i2cReadByte(DSRTC_STATUS);
+    s = s & ~(1<<OSF)
+          & ~(1<<BB32KHZ)
+          & ~(1<<CRATE1)
+          & ~(1<<CRATE0)
+          & ~(1<<EN32KHZ);
+    i2cWriteByte(DSRTC_STATUS, s);
+
+    enablePinInterrupt();
 }
 
 DateTime DS3232SN::get(void) {
@@ -399,6 +424,9 @@ void DS3232SN::setAlarm(ALARM_TYPES_t alarm_type, DateTime date_time) {
 }
 
 void DS3232SN::enablePower() {
+    if (powerEnabled())
+        return;
+
     npen_pin_.setOutputLow(); // power is enabled
 
     //TODO: Should set pins to regular mode?
@@ -410,6 +438,9 @@ void DS3232SN::enablePower() {
 }
 
 void DS3232SN::disablePower() {
+    if (!powerEnabled())
+        return;
+
     i2c_.disable();
 
     //TODO: Should set pins to low power mode?
@@ -422,16 +453,48 @@ void DS3232SN::disablePower() {
     power_enabled_ = false;
 }
 
+/**
+ * Reads the value of the CONV bit in the CONTROL register.
+ * The CONV bit will be 1 if a user initiated temperature
+ * conversion is currently being performed and 0 otherwise.
+ * @return true if CONV is 1, false if CONV is 0
+ */
+bool DS3232SN::conv() {
+    uint8_t ctrl_reg;
+
+    ctrl_reg = i2cReadByte(DSRTC_CONTROL);
+    if (ctrl_reg & (1<<CONV)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Starts a user-initiated temperature conversion.
+ * A user-initiated temperature conversion does not affect
+ * the internal 64-second (default interval) update cycle.
+ * This function returns immediately.  The user should poll
+ * the DS3232SN::conv() function to check when the conversion
+ * is finished.
+ */
+void DS3232SN::forceTemperatureConversion() {
+    // Datasheet: The user should check the status bit BSY before
+    //            forcing the controller to start a new TCXO execution.
+    if (busy()) return;
+    uint8_t ctrl_reg;
+
+    ctrl_reg = i2cReadByte(DSRTC_CONTROL);
+    if (ctrl_reg & (1<<CONV)) return;
+
+    ctrl_reg |= (1<<CONV);
+    i2cWriteByte(DSRTC_CONTROL, ctrl_reg);
+}
+
 void initRtc(I2c& i2c, extint_callback_t interruptCallback) {
     rtc = new DS3232SN(i2c, HAL_GPIO_PORTA, 19, HAL_GPIO_PORTA, 6, interruptCallback);
 
     getRtc().init();
-    // disable interrupts
-    getRtc().alarmInterrupt(1, false);
-    getRtc().alarmInterrupt(2, false);
-    // reset alarm flags
-    getRtc().alarm(1);
-    getRtc().alarm(2);
 }
 
 DS3232SN &getRtc() {

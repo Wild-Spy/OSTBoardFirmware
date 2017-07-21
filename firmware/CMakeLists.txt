@@ -230,7 +230,7 @@ SET(SOURCE_FILES
         system_samd21.c
         libs/usb/usb_handlers.cpp
         libs/nvm/SamdEmulatedEepromDriver.cpp
-        libs/hal/I2c.cpp)
+        libs/hal/I2c.cpp libs/time_tick/time_tick_sam.c libs/time_tick/time_tick.h)
 
 #============================================================================================
 ADD_EXECUTABLE(${PROJECT_NAME}.elf ${SOURCE_FILES} )

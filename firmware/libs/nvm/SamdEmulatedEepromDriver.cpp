@@ -4,9 +4,12 @@
 
 #include "SamdEmulatedEepromDriver.h"
 #include <memory/MemoryWrapper.h>
-//#include <cmocka.h>
 #include <nvm.h>
+#ifdef MCU_TESTING
+#include <cmocka.h>
+#else
 #include <libs/min/min_transmit_cmds.h>
+#endif
 #include <cstring>
 
 SamdEmulatedEepromDriver::SamdEmulatedEepromDriver(enum nvm_eeprom_emulator_size eepromSize)
@@ -93,7 +96,12 @@ void SamdEmulatedEepromDriver::read(nvm_data_t *data, nvm_size_t length, nvm_add
             // Do the actual read
             enum status_code result = nvm_read_buffer(read_start, data, read_length);
 //        print_message("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
+            #ifdef MCU_TESTING
+            print_message("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
+            #else
             report_printf("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
+            #endif
+
             if (result != STATUS_OK) Throw(EX_NVM_READ_ERROR);
         }
 

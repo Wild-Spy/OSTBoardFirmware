@@ -2,7 +2,7 @@
 // Created by mcochrane on 29/05/17.
 //
 
-#include <libs/exception/CException.h>
+#include <exception/CException.h>
 #include "I2c.h"
 
 #define MAX_RETRIES 10
@@ -17,13 +17,13 @@
 I2c::I2c(Sercom *const hw,
          struct i2c_master_config *const config)
 {
-//    config->buffer_timeout = 10000;
+    config->buffer_timeout = 10000;
     enum status_code result = i2c_master_init(&module_, hw, config);
     if (result != STATUS_OK) Throw(EX_INVALID_INPUT_VALUE);
 }
 
 I2c::~I2c() {
-
+    disable();
 }
 
 void I2c::enable() {
@@ -50,13 +50,13 @@ uint8_t I2c::readByte(uint8_t slave_i2c_address, uint8_t slave_reg_address) {
     // Write slave_reg_address
     while (i2c_master_write_packet_wait_no_stop(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_READ_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_READ_ERROR);
     }
 
     // Read response
     while (i2c_master_read_packet_wait(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_READ_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_READ_ERROR);
     }
 
     return data;
@@ -77,7 +77,7 @@ void I2c::readBytes(uint8_t slave_i2c_address, uint8_t slave_reg_address, uint8_
     // Write slave_reg_address
     while (i2c_master_write_packet_wait_no_stop(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_READ_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_READ_ERROR);
     }
 
     // Response should go into buffer
@@ -87,7 +87,7 @@ void I2c::readBytes(uint8_t slave_i2c_address, uint8_t slave_reg_address, uint8_
     // Get data
     while (i2c_master_read_packet_wait(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_READ_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_READ_ERROR);
     }
 
 }
@@ -107,7 +107,7 @@ void I2c::writeByte(uint8_t slave_i2c_address, uint8_t slave_reg_address, uint8_
     // Write slave_reg_address
     while (i2c_master_write_packet_wait_no_stop(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_WRITE_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_WRITE_ERROR);
     }
 
     i2c_master_write_byte(&module_, data);
@@ -140,7 +140,7 @@ void I2c::writeBytes(uint8_t slave_i2c_address, uint8_t slave_reg_address, uint8
     // Write slave_reg_address
     while (i2c_master_write_packet_wait_no_stop(&module_, &packet) != STATUS_OK) {
         /* Increment timeout counter and check if timed out. */
-        if (timeout++ == MAX_RETRIES) Throw(EX_FLASH_WRITE_ERROR);
+        if (timeout++ == MAX_RETRIES) Throw(EX_WRITE_ERROR);
     }
 
     while (length--) {

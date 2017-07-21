@@ -63,6 +63,8 @@ public:
     inline void interruptCallback() {
         pin_interrupt_triggered_ = true;
         rtc_->disablePinInterrupt();
+        //note that the pin will stay low until rtc_->alarm(?) is called for the specified alarm
+        //ie you need to clear the interrupt flag on the rtc!!
     };
 
     /**

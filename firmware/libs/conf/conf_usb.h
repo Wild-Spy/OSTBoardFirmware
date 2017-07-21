@@ -130,9 +130,15 @@
 //! Interface callback definition
 #define  UDI_CDC_ENABLE_EXT(port)           main_cdc_enable(port)
 #define  UDI_CDC_DISABLE_EXT(port)          main_cdc_disable(port)
+#ifdef MCU_TESTING
+#define  UDI_CDC_RX_NOTIFY(port)
+////#define  UDI_CDC_RX_NOTIFY(port)            cdc_rx_notify(port)
+//#define  UDI_CDC_TX_EMPTY_NOTIFY(port)	    serial_isend(port)
+#else
 #define  UDI_CDC_RX_NOTIFY(port)            serial_ireceive(port)
 //#define  UDI_CDC_RX_NOTIFY(port)            cdc_rx_notify(port)
 #define  UDI_CDC_TX_EMPTY_NOTIFY(port)	    serial_isend(port)
+#endif
 #define  UDI_CDC_SET_CODING_EXT(port,cfg)   main_cdc_set_coding(port)
 #define  UDI_CDC_SET_DTR_EXT(port,set)      //main_cdc_set_dtr(port,set)
 #define  UDI_CDC_SET_RTS_EXT(port,set)

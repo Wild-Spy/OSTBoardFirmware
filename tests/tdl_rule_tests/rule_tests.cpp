@@ -19,6 +19,33 @@ using ::testing::SetArrayArgument;
 using ::sl::Array;
 using std::map;
 
+namespace testing
+{
+    namespace internal
+    {
+        enum GTestColor {
+            COLOR_DEFAULT,
+            COLOR_RED,
+            COLOR_GREEN,
+            COLOR_YELLOW
+        };
+
+        extern void ColoredPrintf(GTestColor color, const char* fmt, ...);
+    }
+}
+#define PRINTF(...)  do { testing::internal::ColoredPrintf(testing::internal::COLOR_GREEN, "[          ] "); testing::internal::ColoredPrintf(testing::internal::COLOR_YELLOW, __VA_ARGS__); } while(0)
+
+// C++ stream interface
+class TestCout : public std::stringstream
+{
+public:
+    ~TestCout()
+    {
+        PRINTF("%s",str().c_str());
+    }
+};
+
+#define TEST_COUT  TestCout()
 
 MATCHER_P(EqualsDate, date, "") {
 //    if (arg.toTimet() == date.toTimet()) return true;
@@ -81,11 +108,20 @@ void test_transitions(TdlRule& rule, DateTime start_time, bool enabled_on_start,
     }
 
     rule.reset();
+    TEST_COUT << "Rule reset" << std::endl;
 
     rule.update(start_time);
+    TEST_COUT << "Rule update to start time: " << start_time.isotime() << std::endl;
 
+    char nsctStr[20];
+    char iFirstStr[20];
     for (auto i : condition_map) {
-        EXPECT_THAT(rule.getNextStateChangeTime(), EqualsDate(i.first));
+        DateTime nextStateChangeTime = rule.getNextStateChangeTime();
+
+        nextStateChangeTime.isotime(nsctStr);
+        i.first.isotime(iFirstStr);
+        TEST_COUT << "Next state change time/expected time: " << nsctStr << " / " << iFirstStr << std::endl;
+        EXPECT_THAT(nextStateChangeTime, EqualsDate(i.first));
         rule.setHasNotBeenRunThisStep();
         rule.update(i.first);
     }
@@ -337,7 +373,83 @@ TEST_F(TdlRuleTestFixture, rule_transition_times_multiple_intervals) {
     test_transitions(rule, start_time, false, map);
 }
 
+/**
+ * Test a rule with three intervals
+ * In this rule, the period is 1 day and the rule is enabled between 9am and 11am, between 1pm and 2pm, and between
+ * 8:30pm and 9pm.
+ * Also note that the third interval has it's starting time expressed in minutes
+ */
+TEST_F(TdlRuleTestFixture, rule_transition_times_three_intervals) {
+    Sequence seq;
+    Array<PeriodInterval, 5> intervals;
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod( 9, PERIODFIELD_HOURS), Period::MakeCustomPeriod(11, PERIODFIELD_HOURS)));
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod(13, PERIODFIELD_HOURS), Period::MakeCustomPeriod(14, PERIODFIELD_HOURS)));
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod(20*60 + 30, PERIODFIELD_MINUTES), Period::MakeCustomPeriod(21, PERIODFIELD_HOURS)));
+    TdlRule rule(0, true, Period::MakeCustomPeriod(1, PERIODFIELD_DAYS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
+    TdlAction &action = rule.getAction();
+
+    // Transition times
+    DateTime start_time = DateTime(2000, 1, 1, 0, 0, 0);
+
+    map<DateTime, bool> map;
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1,  9,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 11,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 13,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 14,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 20, 30, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 1, 21,  0, 0), false));
+//
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2,  0,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2,  9,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 11,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 13,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 14,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 20, 30, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 2, 21,  0, 0), false));
+
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3,  0,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3,  9,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3, 11,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3, 13,  0, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3, 14,  0, 0), false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3, 20, 30, 0),  true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 1, 3, 21,  0, 0), false));
+
+    test_transitions(rule, start_time, false, map);
+}
+
+
+/**
+ * Test a rule with strange interval
+ * In this rule, the period is 3 months day and the rule is enabled between the second month (month 1) and
+ * 24*31 + 24*2 + 10 = 802 hours.
+ */
+TEST_F(TdlRuleTestFixture, rule_transition_times_strange_interval) {
+    Sequence seq;
+    Array<PeriodInterval, 5> intervals;
+    intervals.append(PeriodInterval(Period::MakeCustomPeriod( 1, PERIODFIELD_MONTHS), Period::MakeCustomPeriod(802, PERIODFIELD_HOURS)));
+    TdlRule rule(0, true, Period::MakeCustomPeriod(3, PERIODFIELD_MONTHS), intervals, DateTime(), Period(), EVENT_ID_NULL);
+
+    TdlAction &action = rule.getAction();
+
+    // Transition times
+    DateTime start_time = DateTime(2000, 1, 1, 0, 0, 0);
+
+    map<DateTime, bool> map;
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 1,  0, 0, 0),   true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 2, 3, 10, 0, 0),  false));
+
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 4, 1,  0, 0, 0),  false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 5, 1,  0, 0, 0),   true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 5, 4, 10, 0, 0),  false));
+
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 7, 1,  0, 0, 0),  false));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 8, 1,  0, 0, 0),   true));
+    map.insert(std::pair<DateTime, bool>(DateTime(2000, 8, 3, 10, 0, 0),  false));
+
+    test_transitions(rule, start_time, false, map);
+}
 
 //TEST_F(TdlRulesDefaultInitTestFixture, get_out_of_range_throws_exception) {
 //    CEXCEPTION_T e;
