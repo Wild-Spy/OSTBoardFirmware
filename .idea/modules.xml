@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/avr-clion.iml" filepath="$PROJECT_DIR$/.idea/avr-clion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/OSTBoardFirmware.iml" filepath="$PROJECT_DIR$/.idea/OSTBoardFirmware.iml" />
     </modules>
   </component>
 </project>

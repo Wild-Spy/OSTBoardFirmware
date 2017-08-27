@@ -3,14 +3,8 @@
   <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
   <component name="CidrRootsConfiguration">
     <sourceRoots>
-      <file path="$PROJECT_DIR$/libs" />
+      <file path="$PROJECT_DIR$/Firmware" />
+      <file path="$PROJECT_DIR$/Tests" />
     </sourceRoots>
-    <libraryRoots>
-      <file path="$PROJECT_DIR$/asf" />
-    </libraryRoots>
-    <excludeRoots>
-      <file path="$PROJECT_DIR$/bin" />
-      <file path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles" />
-    </excludeRoots>
   </component>
 </project>

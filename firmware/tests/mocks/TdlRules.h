@@ -1,0 +1,66 @@
+//
+// Created by mcochrane on 6/04/17.
+//
+
+#ifndef WS_OST_TDLRULES_H
+#define WS_OST_TDLRULES_H
+
+#ifdef TESTING
+#include "TdlRuleMock.h"
+#include "NvmRuleManagerMock.h"
+#else
+#include <TimerDescriptionLanguage/TdlRule.h>
+#include "nvm/NvmRuleManager.h"
+#endif
+
+#include <helpers/compile_time_sizeof.h>
+#include "exception/CException.h"
+
+class TdlRules {
+public:
+    TdlRules(uint8_t max_rules, NvmRuleManager& ruleWriter);
+
+//    void disableAll();
+
+    /**
+     * Gets a rule from it's index
+     * @param index     the rule's index
+     * @return  a reference to the rule
+     * @throws  EX_OUT_OF_RANGE if the index is out of range
+     */
+    TdlRule& get(int index);
+
+    uint8_t getMaxRules() { return max_rules_; };
+
+    uint8_t getCount() { return rule_count_; };
+
+    void loadFromEeprom();
+
+    int loadInRule(TdlRule &rule);
+
+    ~TdlRules();
+
+private:
+    uint8_t max_rules_;
+    uint8_t rule_count_;
+    TdlRule* rules_;//[MAX_RULES];
+
+};
+
+//COMPILE_TIME_SIZEOF(TdlRule);
+//COMPILE_TIME_SIZEOF(long);
+
+#ifdef __cplusplus
+#define EXTERNC extern "C"
+#else
+#define EXTERNC
+#endif
+
+EXTERNC void TdlRules_Init(uint8_t max_rules, NvmRuleManager& ruleWriter);
+EXTERNC TdlRules& TdlRules_GetInstance();
+
+EXTERNC void TdlRules_Destroy();
+
+#undef EXTERNC
+
+#endif //WS_OST_TDLRULES_H
