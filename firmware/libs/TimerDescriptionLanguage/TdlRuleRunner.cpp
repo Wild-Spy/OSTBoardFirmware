@@ -2,13 +2,19 @@
 // Created by mcochrane on 18/04/17.
 //
 
+#if defined(TESTING)
+
+#else
 #include <delay.h>
 #include <DS3232SN/DS3232SN.h>
+#endif
+
 #include <min/min_transmit_cmds.h>
 #include "TdlRuleRunner.h"
 #include "TdlRules.h"
 #include "TdlChannels.h"
 #include "TdlEvents.h"
+
 
 static TdlRuleRunner* rule_runner = NULL;
 

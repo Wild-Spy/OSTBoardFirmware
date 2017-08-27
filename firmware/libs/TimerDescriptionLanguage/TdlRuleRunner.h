@@ -9,7 +9,7 @@
 #include <datetime/DateTime.h>
 #include <libs/nvm/NvmRuleManager.h>
 
-#define MAX_RULES   3
+#define MAX_RULES   30
 
 class TdlRuleRunner {
 public:

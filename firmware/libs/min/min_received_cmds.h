@@ -37,6 +37,7 @@ extern "C" {
 #define MIN_ID_SAVE_RULES               (0x0cu)
 #define MIN_ID_PRINT_EEPROM 			(0x0du)
 #define MIN_ID_GET_DEVICE_TYPE 			(0x0eu)
+#define MIN_ID_GET_FIRMWARE_VERSION		(0x0fu)
 
 EXTERNC void handle_print_nvm(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_ping(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
@@ -49,6 +50,7 @@ EXTERNC void handle_get_rtc_time(uint8_t m_id, uint8_t *m_buf, uint8_t m_control
 EXTERNC void handle_set_rtc_time(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_save_rules(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 EXTERNC void handle_get_device_type(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
+EXTERNC void handle_get_firmware_version(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 //EXTERNC void handle_get_device_id(uint8_t m_id, uint8_t *m_buf, uint8_t m_control);
 
 #undef EXTERNC

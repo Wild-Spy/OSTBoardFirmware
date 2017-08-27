@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+void usb_vbus_config();
+
 void main_suspend_action(void);
 void main_resume_action(void);
 void main_sof_action(void);

@@ -9,9 +9,6 @@
 //#include <new>
 //#endif
 
-//#define RULE_ZERO_EEPROM_ADDRESS    1
-//#define RULE_COUNT_EEPROM_ADDRESS   0
-
 static NvmRuleManager* nvmRuleManager = NULL;
 
 /*

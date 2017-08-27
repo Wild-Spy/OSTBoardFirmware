@@ -99,7 +99,7 @@ void SamdEmulatedEepromDriver::read(nvm_data_t *data, nvm_size_t length, nvm_add
             #ifdef MCU_TESTING
             print_message("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
             #else
-            report_printf("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
+//            report_printf("rb(%lu, d, %u) = %d\n", read_start, read_length, result);
             #endif
 
             if (result != STATUS_OK) Throw(EX_NVM_READ_ERROR);

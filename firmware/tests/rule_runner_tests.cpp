@@ -104,7 +104,7 @@ static void simple_rule_next_wakeup_time(void** state) {
     (void) state; // unused
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule(0, true, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
@@ -143,14 +143,15 @@ static void run_simple_rule(void** state) {
     (void) state; // unused
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule(0, true, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
     // Setup the channel and rule action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    rule.setAction(TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction myAction = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    rule.setAction(myAction);
 
     // Load the rule
     TdlRules_GetInstance().loadInRule(rule);
@@ -377,14 +378,15 @@ static void run_rule_over_month_boundary(void** state) {
     (void) state; // unused
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS)));
     TdlRule rule(0, true, Period::MakeCustomPeriod(3, PERIODFIELD_SECONDS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
     // Setup the channel and rule action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    rule.setAction(TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction myAction = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    rule.setAction(myAction);
 
     // Load the rule
     TdlRules_GetInstance().loadInRule(rule);
@@ -414,14 +416,15 @@ static void run_rule_multiple_months_away(void** state) {
     (void) state; // unused
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(3, PERIODFIELD_MONTHS)));
     TdlRule rule(0, true, Period::MakeCustomPeriod(1, PERIODFIELD_YEARS), intervals, DateTime(), Period(), EVENT_ID_NULL);
 
     // Setup the channel and rule action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    rule.setAction(TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    rule.setAction(act);
 
     // Load the rule
     TdlRules_GetInstance().loadInRule(rule);
@@ -505,12 +508,12 @@ static void run_multi_level_rule(void** state) {
     (void) state; // unused
 
     // Build the first rule (on for 1 second every 2 seconds)
-    sl::Array<PeriodInterval, 5> intervals1;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals1;
     intervals1.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule0(0, false, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals1, DateTime(), Period(), EVENT_ID_NULL);
 
     //Build the second rule
-    sl::Array<PeriodInterval, 5> intervals2;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals2;
     intervals2.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(5, PERIODFIELD_SECONDS)));
     TdlRule rule1(1, true, Period::MakeCustomPeriod(10, PERIODFIELD_SECONDS), intervals2, DateTime(), Period(), EVENT_ID_NULL);
 
@@ -522,14 +525,15 @@ static void run_multi_level_rule(void** state) {
     // Setup the channel and rule0 action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
+    TdlAction act1 = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
     TdlRules_GetInstance().get(0)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+            .setAction(act1);
 
     // Setup rule1 action
+    TdlAction act2 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED));
     TdlRules_GetInstance().get(1)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED)));
+            .setAction(act2);
 
 
     const size_t item_count = 8;
@@ -568,6 +572,69 @@ static void run_multi_level_rule(void** state) {
 }
 
 /**
+ *  Run a multi level rule (2 levels)
+ *  The first rule has infinite period
+ *  A: enable channel 1 for 2 seconds
+ *  B: enable rule a on minute 20 every hour
+ *
+ *  Was having a problem with this kind of rule.  The channel would just stay on forever
+ *  after the first activation.  I think it's because it was adding the infinite period
+ *  which just overflows and the ends up in a different year/month so next alarm time is
+ *  set to the start of the next month.  I think.  It only seems to fail with certain
+ *  dates/times.  For example starting at 1/1/2017 didn't fail, then on 13/8/2017 did
+ *  fail.  Anyway, adding the line
+ *    if (period_.isInfinite()) return DateTime::Empty();
+ *  into the function TdlRule::getEndOfCurrentPeriod() fixed the problem and now this
+ *  test passes.
+ */
+static void run_multi_level_rule_first_rule_infinite(void** state) {
+    (void) state; // unused
+
+    // Build the first rule (on for 2 seconds)
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals1;
+    intervals1.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS)));
+    TdlRule rule0(0, false, Period::Infinite(), intervals1, DateTime(), Period(), EVENT_ID_NULL);
+
+    //Build the second rule
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals2;
+    intervals2.append(PeriodInterval(Period::MakeCustomPeriod(20, PERIODFIELD_MINUTES), Period::MakeCustomPeriod(21, PERIODFIELD_MINUTES)));
+    TdlRule rule1(1, true, Period::MakeCustomPeriod(1, PERIODFIELD_HOURS), intervals2, DateTime(), Period(), EVENT_ID_NULL);
+
+    // Load the rules
+    TdlRules_GetInstance().loadInRule(rule0);
+    TdlRules_GetInstance().loadInRule(rule1);
+    assert_int_equal(TdlRules_GetInstance().getCount(), 2);
+
+    // Setup the channel and rule0 action
+    TdlChannel& chan = TdlChannels_GetInstance().get(0);
+    chan.setStateChangeCallback(chanStateChangeCallback);
+    TdlAction act1 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(0).setAction(act1);
+
+    // Setup rule1 action
+    TdlAction act2 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(1).setAction(act2);
+
+
+    const size_t item_count = 3;
+    sl::Array<DateTime, item_count> times;
+    sl::Array<TdlChannelState_t, item_count> states;
+    // Start
+    times.append(DateTime(2017, 8, 13, 1, 19, 58));
+    states.append(TDLCHANNELSTATE_DISABLED);
+    // Transition 1
+    times.append(DateTime(2017, 8, 13, 1, 20, 0));
+    states.append(TDLCHANNELSTATE_ENABLED);
+    // Transition 2
+    times.append(DateTime(2017, 8, 13, 1, 20, 2));
+    states.append(TDLCHANNELSTATE_DISABLED);
+
+    runRules<item_count>(chan, times, states, 11500);
+}
+
+/**
  *  Run a multi level rule (3 levels)
  *  This is quite a long test! (18 seconds)
  *  Equivalent to the below rules in the Java App:
@@ -579,17 +646,17 @@ static void run_multi_level_rule_three_levels(void** state) {
     (void) state; // unused
 
     // Build the first rule (on for 1 second every 2 seconds)
-    sl::Array<PeriodInterval, 5> intervals1;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals1;
     intervals1.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule0(0, false, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals1, DateTime(), Period(), EVENT_ID_NULL);
 
     //Build the second rule
-    sl::Array<PeriodInterval, 5> intervals2;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals2;
     intervals2.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(4, PERIODFIELD_SECONDS)));
     TdlRule rule1(1, false, Period::MakeCustomPeriod(8, PERIODFIELD_SECONDS), intervals2, DateTime(), Period(), EVENT_ID_NULL);
 
     //Build the second rule
-    sl::Array<PeriodInterval, 5> intervals3;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals3;
     intervals3.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(12, PERIODFIELD_SECONDS)));
     TdlRule rule2(2, true, Period::MakeCustomPeriod(15, PERIODFIELD_SECONDS), intervals3, DateTime(), Period(), EVENT_ID_NULL);
 
@@ -602,19 +669,19 @@ static void run_multi_level_rule_three_levels(void** state) {
     // Setup the channel and rule0 action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    TdlRules_GetInstance().get(0)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act1 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(0).setAction(act1);
 
     // Setup rule1 action
-    TdlRules_GetInstance().get(1)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act2 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(1).setAction(act2);
 
     // Setup rule2 action
-    TdlRules_GetInstance().get(2)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&TdlRules_GetInstance().get(1), TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act3 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&TdlRules_GetInstance().get(1), TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(2).setAction(act3);
 
 
     const size_t item_count = 12;
@@ -676,14 +743,15 @@ static void event_triggered_rule(void** state) {
     const uint8_t EVENT_ID = 1;
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS)));
     TdlRule rule(0, true, Period::Infinite(), intervals, DateTime(), Period(), EVENT_ID);
 
     // Setup the channel and rule action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    rule.setAction(TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    rule.setAction(act);
 
     // Load the rule
     TdlRules_GetInstance().loadInRule(rule);
@@ -730,14 +798,15 @@ static void event_triggered_rule_with_delay(void** state) {
     const uint8_t EVENT_ID = 1;
 
     // Build the rule
-    sl::Array<PeriodInterval, 5> intervals;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals;
     intervals.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS)));
     TdlRule rule(0, true, Period::Infinite(), intervals, DateTime(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS), EVENT_ID);
 
     // Setup the channel and rule action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    rule.setAction(TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act = TdlAction(TDLACTIVATORSTATE_ENABLED, TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    rule.setAction(act);
 
     // Load the rule
     TdlRules_GetInstance().loadInRule(rule);
@@ -785,12 +854,12 @@ static void event_triggered_multi_level_rule(void** state) {
     const uint8_t EVENT_ID = 1;
 
     // Build the first rule (on for 1 second every 2 seconds)
-    sl::Array<PeriodInterval, 5> intervals1;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals1;
     intervals1.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule0(0, false, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals1, DateTime(), Period(), EVENT_ID_NULL);
 
     //Build the second rule
-    sl::Array<PeriodInterval, 5> intervals2;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals2;
     intervals2.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(5, PERIODFIELD_SECONDS)));
     TdlRule rule1(1, true, Period::MakeCustomPeriod(10, PERIODFIELD_SECONDS), intervals2, DateTime(), Period(), EVENT_ID);
 
@@ -802,14 +871,14 @@ static void event_triggered_multi_level_rule(void** state) {
     // Setup the channel and rule0 action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    TdlRules_GetInstance().get(0)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act1 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(0).setAction(act1);
 
     // Setup rule1 action
-    TdlRules_GetInstance().get(1)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act2 = TdlAction(TDLACTIVATORSTATE_ENABLED,
+                               TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(1).setAction(act2);
 
 
     const size_t event_count = 2;
@@ -880,12 +949,12 @@ static void overlapping_event_triggered_multi_level_rules(void** state) {
     const uint8_t EVENT_ID = 1;
 
     // Build the first rule (on for 1 second every 2 seconds)
-    sl::Array<PeriodInterval, 5> intervals1;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals1;
     intervals1.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(1, PERIODFIELD_SECONDS)));
     TdlRule rule0(0, false, Period::MakeCustomPeriod(2, PERIODFIELD_SECONDS), intervals1, DateTime(), Period(), EVENT_ID_NULL);
 
     //Build the second rule
-    sl::Array<PeriodInterval, 5> intervals2;
+    sl::Array<PeriodInterval, RULE_MAX_INTERVALS> intervals2;
     intervals2.append(PeriodInterval(Period::Empty(), Period::MakeCustomPeriod(5, PERIODFIELD_SECONDS)));
     TdlRule rule1(1, true, Period::MakeCustomPeriod(10, PERIODFIELD_SECONDS), intervals2, DateTime(), Period(), EVENT_ID);
 
@@ -897,14 +966,14 @@ static void overlapping_event_triggered_multi_level_rules(void** state) {
     // Setup the channel and rule0 action
     TdlChannel& chan = TdlChannels_GetInstance().get(0);
     chan.setStateChangeCallback(chanStateChangeCallback);
-    TdlRules_GetInstance().get(0)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act1(TDLACTIVATORSTATE_ENABLED,
+              TdlActivator(&chan, TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(0).setAction(act1);
 
     // Setup rule1 action
-    TdlRules_GetInstance().get(1)
-            .setAction(TdlAction(TDLACTIVATORSTATE_ENABLED,
-                                 TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED)));
+    TdlAction act2(TDLACTIVATORSTATE_ENABLED,
+              TdlActivator(&TdlRules_GetInstance().get(0), TDLACTIVATORSTATE_DISABLED));
+    TdlRules_GetInstance().get(1).setAction(act2);
 
 
     const size_t event_count = 2;
@@ -960,6 +1029,7 @@ const struct CMUnitTest rule_runner_tests[] = {
         cmocka_unit_test_setup_teardown(run_rule_over_month_boundary, setup, teardown),
         cmocka_unit_test_setup_teardown(run_rule_multiple_months_away, setup, teardown),
         cmocka_unit_test_setup_teardown(run_multi_level_rule, setup, teardown),
+        cmocka_unit_test_setup_teardown(run_multi_level_rule_first_rule_infinite, setup, teardown),
         cmocka_unit_test_setup_teardown(run_multi_level_rule_three_levels, setup, teardown),
         cmocka_unit_test_setup_teardown(event_triggered_rule, setup, teardown),
         cmocka_unit_test_setup_teardown(event_triggered_rule_with_delay, setup, teardown),
@@ -968,7 +1038,7 @@ const struct CMUnitTest rule_runner_tests[] = {
 };
 
 const struct CMUnitTest rule_runner_tests_last[] = {
-        cmocka_unit_test_setup_teardown(overlapping_event_triggered_multi_level_rules, setup, teardown),
+        cmocka_unit_test_setup_teardown(run_multi_level_rule_first_rule_infinite, setup, teardown),
 };
 
 void run_rule_runner_tests() {

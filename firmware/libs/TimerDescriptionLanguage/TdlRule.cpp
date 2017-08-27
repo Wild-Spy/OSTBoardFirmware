@@ -336,6 +336,7 @@ DateTime TdlRule::getNextStateChangeTime() {
 
 DateTime TdlRule::getEndOfCurrentPeriod() {
     if (start_of_current_period_.isEmpty()) return DateTime::Empty();
+    if (period_.isInfinite()) return DateTime::Empty();
     return start_of_current_period_ + period_;
 }
 
@@ -521,6 +522,11 @@ void TdlRule::updateThisRuleOnly(DateTime now) {
     #elif defined(MCU_TESTING) && defined(DEBUGPRINTS) && DEBUGPRINTS > 2
     print_message("Rule %u is %sactive.\n", id_, is_active?"":"not ");
     #endif
+    // TODO: shouldn't last_update_time_ and has_been_run_this_step_ be updated before setting the action?
+    //       The reason for this is, we might otherwise run the rule twice. If the action is a rule then
+    //       you will update that rul when you start/stop the action!  If that rule has this rule as a parent
+    //       then this rule will be run twice.
+
     if (is_active) {
         action_.start(now);
     } else {

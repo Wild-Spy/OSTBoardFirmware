@@ -28,6 +28,7 @@ public:
     MOCK_METHOD1(setCurrentEvent, void(TdlEvent));
     MOCK_METHOD0(getLastEvent, TdlEvent&(void));
     MOCK_METHOD0(getCurrentEvent, TdlEvent&(void));
+    MOCK_METHOD0(isUnprocessedEvent, bool(void));
 
 };
 

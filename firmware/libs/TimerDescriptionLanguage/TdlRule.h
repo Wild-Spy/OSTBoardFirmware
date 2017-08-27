@@ -24,7 +24,7 @@
 typedef int rule_id_t;
 
 #define RULE_ID_NULL        -1
-#define RULE_MAX_INTERVALS  5
+#define RULE_MAX_INTERVALS  8
 
 class TdlRule {
 public:
@@ -60,7 +60,10 @@ public:
     static TdlRule Decompile(uint8_t *data, uint8_t len);
     static void Decompile(uint8_t *data, uint8_t len, TdlRule* addressToStoreAt);
     TdlAction& getAction() { return action_; };
-    void setAction(TdlAction action) { action_ = action; };
+
+    #if defined(MCU_TESTING)
+    void setAction(TdlAction& action) { action_ = action; };
+    #endif
 
 private:
     DateTime getLastStateChangeTimeNoEvents();

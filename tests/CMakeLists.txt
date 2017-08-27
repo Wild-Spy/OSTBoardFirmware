@@ -11,6 +11,7 @@ add_subdirectory(TDL_tests)
 add_subdirectory(tdl_rule_tests)
 add_subdirectory(nvm_rule_manager_tests)
 add_subdirectory(rule_writer_rule_tests)
+add_subdirectory(rule_runner_tests)
 add_subdirectory(mocks/time_test)
 
 #set(googletest_SOURCE_DIR lib/gtest-1.8.0/googletest/)

@@ -11,7 +11,7 @@
 #include <libs/TimerDescriptionLanguage/TdlRules.h>
 #include "layer2_helper.h"
 #include "min.h"
-
+#include <version.h>
 /* Report the current state of the environment */
 void report_environment(uint16_t temperature, uint16_t humidity)
 {
@@ -122,7 +122,15 @@ void report_printf(const char *data, ...) {
 }
 
 void report_device_type() {
-    DECLARE_BUF(4);
-    PACK32(0x00000001);
-    SEND_FRAME(MIN_ID_RESPONSE_GET_DEVICE_TYPE);
+    char buf[100] = OST_HARDWARE_NAME;
+    uint8_t buf_len = strlen(buf);
+
+    min_tx_frame(MIN_ID_RESPONSE_GET_DEVICE_TYPE, (uint8_t*)buf, buf_len);
+}
+
+void report_firmware_version() {
+    char buf[100] = OST_FIRMWARE_VERSION;
+    uint8_t buf_len = strlen(buf);
+
+    min_tx_frame(MIN_ID_RESPONSE_GET_FIRMWARE_VERSION, (uint8_t*)buf, buf_len);
 }

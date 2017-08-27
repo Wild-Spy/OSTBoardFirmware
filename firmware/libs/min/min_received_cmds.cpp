@@ -165,6 +165,10 @@ void handle_get_device_type(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
     report_device_type();
 }
 
+void handle_get_firmware_version(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
+    report_firmware_version();
+}
+
 //void handle_get_device_id(uint8_t m_id, uint8_t *m_buf, uint8_t m_control) {
 //
 //}

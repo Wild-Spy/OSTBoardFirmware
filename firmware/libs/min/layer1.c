@@ -8,6 +8,7 @@
 //#include <avr/io.h>
 //#include <avr/interrupt.h>
 #include <interrupt.h>
+#include <libs/conf/conf_usb.h>
 #include "min.h"
 #include "min_transmit_cmds.h"
 
@@ -238,6 +239,8 @@ static void stuffed_tx_byte(uint8_t byte)
  */
 void min_tx_frame(uint8_t id, uint8_t payload[], uint8_t control)
 {
+    if (!get_cdc_enumerated()) return;
+
     cpu_irq_disable();
     uint8_t n, i;
     uint16_t checksum;
@@ -249,6 +252,7 @@ void min_tx_frame(uint8_t id, uint8_t payload[], uint8_t control)
 
     /* Don't even bother trying to send if there's not guaranteed to be enough space for the frame */
     if(tx_space < MAX_FRAME_SIZE) {
+        cpu_irq_enable();
         return;
     }
 

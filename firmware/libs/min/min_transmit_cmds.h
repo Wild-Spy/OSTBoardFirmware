@@ -40,6 +40,7 @@ typedef time_t_avr dt_time_t;
 #define MIN_ID_PRINT_DATA                   (0x31u)
 #define MIN_ID_PRINT_END                    (0x32u)
 #define MIN_ID_RESPONSE_GET_DEVICE_TYPE     (0x33u)
+#define MIN_ID_RESPONSE_GET_FIRMWARE_VERSION    (0x34u)
 
 /* Functions to take application data and send to host */
 EXTERNC void report_environment(uint16_t temperature, uint16_t humidity);
@@ -51,6 +52,7 @@ EXTERNC void report_rtc_time(dt_time_t time);
 EXTERNC void report_response_ack();
 EXTERNC void report_response_nak();
 EXTERNC void report_device_type();
+EXTERNC void report_firmware_version();
 
 EXTERNC void report_start_print();
 EXTERNC void report_data_print();

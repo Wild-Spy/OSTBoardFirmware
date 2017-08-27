@@ -31,6 +31,7 @@
 NvmDriverInterface* eepromDriver = NULL;
 I2c* i2c = NULL;
 Pin led(HAL_GPIO_PORTA, 27);
+Pin nBatMeasureEn(HAL_GPIO_PORTA, 11);
 
 Pin* channel_pins[CHANNEL_COUNT];
 
@@ -48,23 +49,27 @@ static void i2cInit() {
 void channelInit() {
     channel_pins[0] = new Pin(HAL_GPIO_PORTA, 27);
 
-//    channel_pins[0] = new Pin(HAL_GPIO_PORTA, 1);
-    channel_pins[1] = new Pin(HAL_GPIO_PORTA, 2);
-    channel_pins[2] = new Pin(HAL_GPIO_PORTA, 3);
-    channel_pins[3] = new Pin(HAL_GPIO_PORTA, 4);
+//    channel_pins[0] = new Pin(HAL_GPIO_PORTA, 0);
+    channel_pins[1] = new Pin(HAL_GPIO_PORTA, 1);
+    channel_pins[2] = new Pin(HAL_GPIO_PORTA, 2);
+    channel_pins[3] = new Pin(HAL_GPIO_PORTA, 3);
 }
 
 void init() {
     sleepmgr_init();
     system_init();
     delay_init();
-    udc_start();
-    udc_attach();
+    usb_vbus_config();
+//    udc_start();
+//    udc_attach();
 
-    init_min();
+//    init_min();
 
     led.setDirOutput();
     led.setOutputLow();
+
+    nBatMeasureEn.setDirOutput();
+    nBatMeasureEn.setOutputLow();
 
     eepromDriver = new SamdEmulatedEepromDriver(NVM_EEPROM_EMULATOR_SIZE_16384);
     NvmRuleManager_Init(0, eepromDriver->getRegionSize(), *eepromDriver);
@@ -86,6 +91,9 @@ void loop() {
         poll_rx_bytes();
     }
 
+//    report_printf("max sleep mode: %u", sleepmgr_get_sleep_mode());
+
+//    cpu_irq_enable();
     sleepmgr_enter_sleep();
 }
 

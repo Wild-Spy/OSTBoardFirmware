@@ -6,6 +6,7 @@
 #include <gmock/gmock.h>
 #include <nvm/NvmRuleLoader.h>
 #include <NvmDriverMock.h>
+#include <nvm/NvmRuleManager.h>
 
 using ::testing::_;
 using ::testing::Return;
@@ -13,6 +14,8 @@ using ::testing::Sequence;
 using ::testing::DoAll;
 using ::testing::SetArgPointee;
 using ::testing::SetArrayArgument;
+
+NvmDriverMock nvmdriver();
 
 void cleanup() {
     CEXCEPTION_T e;
@@ -23,7 +26,8 @@ void cleanup() {
 }
 
 TEST(RuleWriterTestNoFixture, init) {
-    NvmRuleManager_Init();
+
+    NvmRuleManager_Init(0, 10000, nvmdriver);
     cleanup();
 }
 
@@ -44,7 +48,7 @@ class RuleWriterTestFixture : public ::testing::Test {
 protected:
     virtual void SetUp() {
         Sequence seq;
-        EEPROMDriverMock_Init();
+        NvmDriverMock_Init();
 
         // Number of rules
         EXPECT_CALL(EEPROMDriverMock_Get(), ReadEEPROM(_, 1, 0))

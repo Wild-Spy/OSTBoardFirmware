@@ -29,6 +29,8 @@
 
 #include "iosamd21.h"
 
+extern uint32_t _estack;
+
 void __iar_program_start(void);
 int __low_level_init(void);
 
@@ -119,18 +121,19 @@ void I2S_Handler              ( void );
 #pragma weak I2S_Handler              = Dummy_Handler
 
 /* Exception Table */
-#pragma language=extended
-#pragma segment="CSTACK"
+//#pragma language=extended
+//#pragma segment="CSTACK"
 
 /* The name "__vector_table" has special meaning for C-SPY: */
 /* it is where the SP start value is found, and the NVIC vector */
 /* table register (VTOR) is initialized to this address if != 0 */
 
-#pragma section = ".intvec"
-#pragma location = ".intvec"
+//#pragma section = ".intvec"
+//#pragma location = ".intvec"
 //! [startup_vector_table]
+__attribute__ ((section(".vectors")))
 const DeviceVectors __vector_table[] = {
-        __sfe("CSTACK"),
+        (void*) (&_estack),
         (void*) Reset_Handler,
         (void*) NMI_Handler,
         (void*) HardFault_Handler,
